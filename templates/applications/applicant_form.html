@@ -1,0 +1,162 @@
+{% extends "layout_unauth_2.html" %}
+{% load mathfilters %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block guest_content %}
+<div class="container">   
+  <div class="content-section-card">
+    <div class="d-flex justify-content-center mt-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="container">
+                  {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                      <div class="alert alert-danger">
+                     {% else %}
+                    <div class="alert alert-{{ message.tags }}">
+                    {% endif %}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    {{ message }}
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="container">                    
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {% if  title == 'Apply' %}
+                            <legend class="border-bottom mb-4">Apply For Bursary</legend>
+                            {% elif title == 'Edit Application Details' %}
+                            <legend class="border-bottom mb-4">Edit details
+                            </legend>
+                            {% else %}
+                            <legend class="border-bottom mb-4"></legend>
+                            {% endif %}
+                            <div>
+                                <div>
+                                    <h6 class="border-bottom mb-4">PART 1 : Personal Details</h6>
+                                    <div class="">                                    
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                {{ form.first_name|as_crispy_field }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ form.last_name|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                {{ form.gender|as_crispy_field }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ form.family_status|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="div_select_dead_parent">
+                                            <label for="select_dead_parent">Which parent is alive?</label>
+                                            <select class="form-control" id="select_dead_parent" onchange="checkParent()">
+                                                <option value="">---------</option>
+                                                <option value="father">Father</option>
+                                                <option value="mother">Mother</option>
+                                            </select>
+                                        </div>
+                                        <div class="row" id="death_certs">
+                                            <div class="col-md-6" id="div_death_cert_father">
+                                                {{ form.death_cert_father|as_crispy_field }}
+                                            </div>
+                                            <div class="col-md-6" id="div_death_cert_mother">
+                                                {{ form.death_cert_mother|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                {{ form.name_of_gurdian|as_crispy_field }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ form.contact_of_gurdian|as_crispy_field }}
+                                            </div>
+                                        </div> 
+                                        {{ form.disability_status|as_crispy_field }}                                
+                                        {{ form.disability_desc|as_crispy_field }}                      
+                                    
+                                    </div>
+                                </div>
+                                <div>                                    
+                                    <h6 class="border-bottom border-top pt-2 pb-2 mt-4 mb-4">Part 2 : School Details</h6>
+                                    {{ form.school_type|as_crispy_field }}
+                                    {{ form.school_name|as_crispy_field }}
+                                    {{ form.school_email|as_crispy_field }}
+                                    <div class="row">
+                                        <div class="col-md-6">                                            
+                                            {{form.adm_number|as_crispy_field}}
+                                        </div>
+                                        <div class="col-md-6">                                            
+                                            {{form.class_of_study|as_crispy_field}}
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div>                                    
+                                    <h6 class="border-bottom border-top pt-2 pb-2 mt-4 mb-4">PART 3: Location Details</h6>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            
+                                            {{ form.subcounty|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            
+                                            {{ form.ward|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            
+                                            {{ form.sublocation|as_crispy_field }}
+                                        </div>
+                                    </div>
+
+                                    {% if title == 'Edit Application Details' %}
+                                    <div class="money_details border-bottom border-top pt-2 pb-2"> 
+                                    <small class="text-muted">Amount remaining to be awarded in this applicant's sublocation: 
+                                        <span class="{% if money_per_ward|div:sublocations_count|sub:amount_so_far.total < 10000 %}
+                                            badge badge-danger
+                                            {% else %}
+                                            badge badge-success
+                                        {% endif %}">
+                                            {{money_per_ward|div:sublocations_count|sub:amount_so_far.total|intword|intcomma}}
+                                        </span>
+                                    </small>
+                                    </div>
+                                    {% endif %}
+                                    
+
+                                </div>
+                            </div>
+                            
+                        </fieldset>
+                        <div class="">
+                            <button class="btn btn-block btn-outline-info" name="submit" type="submit">
+                                {% if title == 'Apply' %}
+                                Submit Application
+                                {% else %}
+                                Update Details
+                                {% endif %}
+                            </button>
+                        </div>
+                    </form>
+                </div>                
+            </div>
+        </div>
+    </div>          
+  </div>
+
+  <script>
+    document.getElementById("applications").className += " active";
+    $(document).ready(function() {
+        
+        
+    });
+  </script>
+</div>
+
+{% endblock %}

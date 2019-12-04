@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+{% load mathfilters %}
+{% load humanize %}
+
+{% block content %}
+    <div class="modal modal-lg fade" tabindex="-1" role="dialog" id="modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+
+	<nav aria-label="breadcrumb">
+	    <ol class="breadcrumb">
+	      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+	      <li class="breadcrumb-item"><a href="{% url 'disbursements-home' %}">Disbursements</a></li>
+	      <li class="breadcrumb-item active">Disbursements Per Sublocation</li>      
+	    </ol>
+	</nav>
+    <div class="card">
+        <div class="card-body">            
+            <div class="container">
+                <div class="row">
+                    {% if not request.session.current_ward %}
+                        <div class="col-md-12">
+                            <h6 class="text-center">Select a ward below</h6>
+                            <div class="d-flex justify-content-center">                            
+                                <form method="GET" class="form-inline">
+                                    <div class="form-group">                           
+                                        <select name="wards_select" class="form-control wards_select">
+                                            <option>
+                                                {% if request.session.current_ward %}
+                                                {{request.session.current_ward}}
+                                                {% else %}
+                                                ----Select Ward----
+                                                {% endif %}
+                                            </option>
+                                            
+                                            {% for ward in wards %}
+                                            <option value="{{ward.id}}">{{ward.name}}</option>
+                                            {% endfor %}
+                                        </select>                        
+                                    </div>
+                                        
+                                    <button type="submit" name="action" value="get_details" class="btn btn-outline-info btn-sm ">Get Sublocations With Applicants</button>                    
+                                </form>
+                            </div>
+                        </div>
+                    {% else %}                        
+                        <div class="col-md-6">
+                            <h6>Please select a ward below</h6>
+                            <form method="GET" class="form-inline">
+                                <div class="form-group">                           
+                                    <select name="wards_select" class="form-control wards_select">
+                                        <option>
+                                            {% if request.session.current_ward %}
+                                            {{request.session.current_ward}}
+                                            {% else %}
+                                            ----Select Ward----
+                                            {% endif %}
+                                        </option>
+                                        {% if request.session.current_ward %}
+                                        <option value="">----Select Ward----</option>
+                                            
+                                        {% endif %}
+                                        {% for ward in wards %}
+                                        <option value="{{ward.id}}">{{ward.name}}</option>
+                                        {% endfor %}
+                                    </select>                        
+                                </div>
+                                    
+                                <button type="submit" name="action" value="get_details" class="btn btn-outline-info btn-sm ">Get Sublocations</button>                    
+                            </form>
+                        </div>
+                        <div class="col-md-6" align="center">
+                            <h6>                            
+                                Amount Received by Each Sublocation in <span class="border-bottom">{{request.session.current_ward}}</span> ward:                                                   
+                            </h6>
+                            <span>
+                                {% if sublocation_count %}
+                                    <div class="btn btn-info">                                
+                                        <h6>{{money_per_ward|div:sublocation_count|intword|intcomma}}</h6>
+                                    </div>
+                                {% endif %}
+                            </span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="card">
+		<div class="card-header">
+			<h5 class="card-title border-bottom">
+            {% if request.session.current_ward %}
+                Disbuserments per sublocation in <b>{{selected_ward}}</b> ward
+                {% else %}
+                Disbuserments per sublocation
+            {% endif %}
+            </h5>                
+		</div>
+		<div class="card-body">            
+            <table class="table table-hover" id="users_table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Sublocation</th>
+                        <th>Number of Applicants</th>
+                        <th>Total Amount to Applicants In This Sublocation</th>
+                        <th>Amount Remaining</th>                        
+                    </tr>
+                </thead>
+                <tbody>                    
+                    {% for sublocation in sublocations %}
+                    <tr class="clickabe-row" data-target="">
+                        <td>{{ forloop.counter}}</td>
+                        <td>{{ sublocation.name }}</td>
+                        <td>{{ sublocation.no_of_applicants }}</td>
+                        {% if sublocation.total %}
+                            <td>{{sublocation.total|intcomma}}</td>
+                            <td>{{money_per_ward|div:sublocation_count|sub:sublocation.total|intword|intcomma}}</td>
+                        {% else %}
+                        <td>0</td>
+                        <td>0</td>
+                        {% endif %}
+                        
+                    </tr>
+                    {% endfor %}                                            
+                </tbody>
+            </table>
+        </div>
+	</div>
+
+    <script>
+        $('#disbursements').addClass("active");
+        
+    </script>
+{% endblock content %}

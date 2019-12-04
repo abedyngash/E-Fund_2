@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'school-applicants-list' %}">Applicants</a></li>
+      <li class="breadcrumb-item active">Review Applications</li>      
+    </ol>
+  </nav>
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="border-bottom">Review applicants from your school</h5>
+      <div class="card">
+        <div class="card-body">
+          <form method="POST">
+            {% csrf_token %}
+              {{formset.management_form|crispy}}
+              {% for form in formset %}
+               {{ form.id }}
+              <div class="row">
+                <div class="col-md-1 pt-5">
+                  {{forloop.counter}}
+                </div>
+                <div class="col-md-4">
+                  {{form.first_name|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                  {{form.last_name|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                  {{form.discipline|as_crispy_field}}
+                </div>
+                
+              </div>
+              {% endfor %}
+              
+            <button type="submit" class="btn btn-outline-info btn-block">Update Records</button>
+          </form>
+        </div>
+      </div>
+    </div>          
+  </div>
+
+  <script>
+    document.getElementById("applications").className += " active";
+    
+  </script>
+{% endblock %}
+
+                

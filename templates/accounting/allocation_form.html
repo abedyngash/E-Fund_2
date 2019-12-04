@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<nav aria-label="breadcrumb">
+	    <ol class="breadcrumb">
+	      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+	      <li class="breadcrumb-item"><a href="{% url 'allocation-details' %}">Accounting</a></li>
+	      <li class="breadcrumb-item active">Edit Allocation Details</li>      
+	    </ol>
+	</nav>
+	<div class="row">		
+		<div class="col-md-5">			
+			<div class="card">
+				<div class="card-header">
+					<h5 class="card-title border-bottom text-center">Allocation Details for 
+					{{financial_year}}</h5>
+				</div>
+				<div class="card-body">
+					<div class="card-body">
+						<form method="POST">
+							{% csrf_token %}
+							<div class="card card-stats">
+					          <div class="card-body ">
+					            <div class="row">
+					              <div class="col-5 col-md-4">
+					                <div class="icon-big text-center icon-warning">
+					                  <i class="fa fa-check-square-o text-success"></i>
+					                </div>
+					              </div>
+					              <div class="col-7 col-md-8">
+					                {{a_form.award_period|as_crispy_field}}
+					              </div>
+					            </div>
+					          </div>			          
+						    </div>							
+				        	<div class="card card-stats">
+					          <div class="card-body ">
+					            <div class="row">
+					              <div class="col-5 col-md-4">
+					                <div class="icon-big text-center icon-warning">
+					                  <i class="fa fa-money text-secondary"></i>
+					                </div>
+					              </div>
+					              <div class="col-7 col-md-8">
+					                {{a_form.amount_allocated|as_crispy_field}}
+					              </div>
+					            </div>
+					          </div>			          
+						    </div>						    
+					        <div class="card card-stats">
+					          <div class="card-body ">
+					            <div class="row">
+					              <div class="col-5 col-md-4">
+					                <div class="icon-big text-center icon-warning">
+					                  <i class="fa fa-clock-o text-warning"></i>
+					                </div>
+					              </div>
+					              <div class="col-7 col-md-8">
+					                {{a_form.application_start_date|as_crispy_field}}
+					              </div>
+					            </div>
+					          </div>			          
+					        </div>
+							<div class="card card-stats">
+					          <div class="card-body ">
+					            <div class="row">
+					              <div class="col-5 col-md-4">
+					                <div class="icon-big text-center icon-warning">
+					                  <i class="fa fa-clock-o text-success"></i>
+					                </div>
+					              </div>
+					              <div class="col-7 col-md-8">
+					                {{a_form.application_end_date|as_crispy_field}}
+					              </div>
+					            </div>
+					          </div>			          
+					        </div>
+					        <button type="submit" class="btn btn-outline-info btn-block">Update Records</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-7">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="card-title border-bottom text-center">School Types Allocations</h5>
+				</div>
+				<div class="card-body">
+					<form method="POST">
+						{% csrf_token %}
+							{{formset.management_form}}
+							{% for form in formset %}
+								{{form.id}}
+								<div class="card">
+									<div class="card-body">
+										
+										<div class="row">
+											<div class="col-md-1 pt-5">
+												 <div class="icon-big text-center icon-warning">
+								                  <i class="fa fa-graduation-cap text-info"></i>
+								                </div>
+											</div>
+											<div class="col-md-5">
+												{{form.name|as_crispy_field}}
+											</div>
+											<div class="col-md-6">
+												{{form.amount_allocated|as_crispy_field}}
+											</div>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+							
+						<button type="submit" class="btn btn-outline-info btn-block">Update Records</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+    	document.getElementById("allocation").className += " active";    
+  	</script>
+{% endblock %}

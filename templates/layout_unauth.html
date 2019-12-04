@@ -1,0 +1,202 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+
+    <title>
+      {% if title %}
+        Elimu Fund | {{title}}
+      {% else %}
+        Elimu Fund
+      {% endif %}
+    </title>
+
+    <link rel="apple-touch-icon" sizes="76x76" href="">
+    <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" href="{% static 'css/Montserrat/fonts/webfonts/Montserrat.css' %}">
+    <link href="{% static 'css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/paper-dashboard.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/background.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/select.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+    <script src="js/wow.min.js"></script>
+              <script>
+              new WOW().init();
+              </script>
+    <script src=" {% static 'js/jquery.min.js' %}"></script>
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="main-panel">
+        <nav class="navbar navbar-expand-lg fixed-top">
+          <div class="container-fluid">
+                <div class="navbar-wrapper">
+                  <div class="navbar-toggle">
+                    <button type="button" class="navbar-toggler">
+                      <span class="navbar-toggler-bar bar1"></span>
+                      <span class="navbar-toggler-bar bar2"></span>
+                      <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                  </div>
+                  <a class="navbar-brand" href="{% url 'home' %}">Elimu Fund</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-bar navbar-kebab"></span>
+                  <span class="navbar-toggler-bar navbar-kebab"></span>
+                  <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                  <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                      
+                    <li class="nav-item">
+                      <a class="nav-link btn-magnify" href="#pablo">
+                        <i class="fa fa-sliders"></i>
+                        <p>
+                          <span class="d-md-block">Stats</span>
+                        </p>
+                      </a>
+                    </li>
+                    {% endif %}
+
+                    {% if user.is_anonymous %}
+                      
+                    <li class="nav-item" data-toggle="tooltip" title="Staff Login">
+                      <a class="nav-link btn-magnify" href="{% url 'login' %}">
+                        <i class="fa fa-sign-in"></i>
+                        <p>
+                          <span class="d-md-block">Staff Login</span>
+                        </p>
+                      </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" title="Staff Login">
+                      <a class="nav-link btn-magnify" href="{% url 'login' %}">
+                        <i class="fa fa-graduation-cap"></i>
+                        <p>
+                          <span class="d-md-block">Login as School Entity</span>
+                        </p>
+                      </a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+        </nav>
+      </div>
+
+    <div class="content guest">
+      {% block guest_content %}
+        
+      {% endblock %}
+    </div>
+     <!--   Core JS Files   -->
+
+      <script src=" {% static 'js/popper.min.js' %}"></script>
+      <script src=" {% static 'js/bootstrap.min.js' %}"></script>
+      <script src=" {% static 'js/perfect-scrollbar.jquery.min.js' %}"></script>
+      <!--  Google Maps Plugin    -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+      <!-- Chart JS -->
+      <script src=" {% static 'js/chartjs.min.js' %}"></script>
+      <!--  Notifications Plugin    -->
+      <script src=" {% static 'js/bootstrap-notify.js' %}"></script>
+      <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+      <script src=" {% static 'js/paper-dashboard.js' %}" type="text/javascript"></script>
+
+      <script src="{% static 'js/select2.min.js' %}"></script>
+      <script src="{% static 'js/django_select2.js' %}"></script>
+  <script>
+    $(document).ready(function() {
+        $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+              $(".alert").slideUp(500);
+          });
+        // $('#div_id_disability_desc').hide();
+        $("#id_family_status").change(function() {
+          if ($(this).val() == "orphan") {
+            $('#death_certs').show();
+            $('#div_select_dead_parent').hide();
+            $('#id_death_cert_father').attr('required', '');
+            $('#id_death_cert_father').attr('data-error', 'Please upload your father\'s death certificate.');
+            $('#id_death_cert_mother').attr('required', '');
+            $('#id_death_cert_mother').attr('data-error', 'Please upload your mother\'s death certificate.');
+          }
+          else if ($(this).val() == "partial_orphan") {
+            $('#death_certs').hide();
+            $('#div_select_dead_parent').show();
+            $('#div_select_dead_parent').attr('required', '');
+            $('#div_select_dead_parent').attr('data-error', 'Please select an option on this field')
+
+          }
+          else {
+            
+            $('#death_certs').hide();
+            $('#div_select_dead_parent').hide();
+            $('#id_death_cert_father').removeAttr('required');
+            $('#id_death_cert_father').removeAttr('data-error');
+            $('#id_death_cert_mother').removeAttr('required');
+            $('#id_death_cert_mother').removeAttr('data-error');
+          }
+        });
+        $("#id_family_status").trigger("change");
+
+        $("input[name=disability_status]").change(function(){
+            $('#div_id_disability_desc').hide();
+            // alert($(this).val());
+            if ($(this).val() == "True") {
+              // alert("I am for true");
+              $('#div_id_disability_desc').show();
+            }
+            else if ($(this).val() == "False"){
+              $('#div_id_disability_desc').hide();
+            }
+
+            else {
+              $('#div_id_disability_desc').hide();
+            }
+        });
+        $("input[name=disability_status]").trigger("change");
+
+    });
+  </script>
+
+  <script>
+      function checkParent(){
+
+        var value = $("#select_dead_parent").val();
+
+        if ( value == "father") {
+          $('#death_certs').show();
+          $('#div_death_cert_father').hide();
+          $('#div_death_cert_mother').show();
+          // $('#div_death_cert_mother').removeClass("col-md-6");
+          // $('#div_death_cert_mother').addClass("col-md-12");
+          $('#id_death_cert_mother').attr('required', '');
+        }
+        else if(value == "mother"){
+          $('#death_certs').show();
+          $('#div_death_cert_mother').hide();
+          $('#div_death_cert_father').show();
+          // $('#div_death_cert_father').removeClass("col-md-6");
+          // $('#div_death_cert_father').addClass("col-md-12");
+          $('#id_death_cert_father').attr('required', '');
+        }
+        else {
+          $('#death_certs').hide();
+        }
+
+        $("#select_dead_parent").trigger("change")
+        
+      }
+    </script>
+
+  </body>
+</html>

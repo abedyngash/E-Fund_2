@@ -1,0 +1,87 @@
+{% load widget_tweaks %}
+
+<div class="modal-header">
+  <a href="{% url 'applicants-update' applicant.id %}" class="btn btn-primary">Edit Details</a>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div class="row form-group">
+    <div class="col-md-6">
+      <h6>First Name</h6>
+      <span class="form-control">{{ applicant.first_name }}</span>
+    </div>
+    <div class="col-md-6">
+      <h6>Last Name</h6>
+      <span class="form-control">{% if applicant.last_name %}{{applicant.last_name}}{% endif %}</span>      
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-md-6">
+      <h6>Gurdian's Name </h6>
+      <span class="form-control">{{ applicant.name_of_gurdian }}</span>
+    </div>
+    <div class="col-md-6">
+      <h6>Gurdian's Contact</h6>
+      <span class="form-control">{{ applicant.contact_of_gurdian }}</span>      
+    </div>
+  </div>
+
+  <div>    
+    <h6>School Category</h6>
+    <span class="form-control">{{ applicant.school_type }}</span>
+  </div>
+  <div class="mt-2">    
+    <h6>School Name</h6>
+    <span class="form-control">{{ applicant.school_name }}</span>
+  </div>
+  <div class="mt-2">    
+    <h6>School Email</h6>
+    <span class="form-control">{{ applicant.school_email }}</span>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-md-6">
+      <h6>Adm Number</h6>
+      <span class="form-control">{{ applicant.adm_number }}</span>
+    </div>
+    <div class="col-md-6">
+      <h6>Year/Class of Study</h6>
+      <span class="form-control">{{ applicant.class_of_study }}</span>      
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-md-4">
+      <h6>SubCounty</h6>
+      <span class="form-control">{{ applicant.subcounty }}</span>
+    </div>
+    <div class="col-md-4">
+      <h6>Ward</h6>
+      <span class="form-control">{{ applicant.ward }}</span>      
+    </div>
+    <div class="col-md-4">
+      <h6>Sublocation</h6>
+      <span class="form-control">{{ applicant.sublocation }}</span>      
+    </div>
+  </div>
+  
+  {% if applicant.death_cert_father and applicant.death_cert_mother %}    
+  <div class="row mt-2">
+    <div class="col-md-6">
+      <h6>Father's Death Certificate</h6>
+      <a class="btn btn-primary" href="{{ applicant.death_cert_father.url }}"> View File</a>
+    </div>
+    <div class="col-md-6">
+      <h6>Mother's Death Certificate</h6>
+      <a class="btn btn-primary" href="{{ applicant.death_cert_mother.url }}"> View File</a>      
+    </div>
+  </div>  
+  {% endif %}
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>

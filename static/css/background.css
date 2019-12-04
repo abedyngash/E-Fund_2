@@ -1,0 +1,89 @@
+body {
+	background-image: linear-gradient(to left, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.73)), url('/static/img/typing.jpg');
+	background-size: cover;
+	background-position: center;
+	/*color: #333333;
+	background: #ebe6e6;*/
+	font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+	-moz-osx-font-smoothing: grayscale;
+  	-webkit-font-smoothing: antialiased;
+	color: #2c2c2c;
+	font-size: 14px;
+}
+
+.content-section {
+  background: #ebe6e6;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+  margin-top: 10%;
+ 
+}
+
+.content-section-card {
+	 margin-top: 7%;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+
+.navbar .navbar-collapse .nav-item a:hover{
+	color: #FFF;
+
+}
+
+.navbar a:not(.btn):not(.dropdown-item):hover {
+    color: #FFFFFF;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 25px;
+}
+
+.card {
+  width: 75%;
+  border-radius: 12px;
+  box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+  /*background-color: #FFFFFF;*/
+  color: #252422;
+  margin-bottom: 20px;
+  position: relative;
+  border: 0 none;
+  -webkit-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+  -moz-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+  -o-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+  -ms-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+  transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+}
+
+.asteriskField {
+  visibility: visible;
+  color: red;
+}
+
+.asteriskField:hover {
+  visibility: visible;
+  color: red;
+}
+
+@media only screen and (max-width: 600px) {
+  .content-section-card {
+   margin-top: 20%;
+}
+  .card {
+    width: 200%;
+  }
+}

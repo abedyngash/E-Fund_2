@@ -1,0 +1,63 @@
+{% extends "layout_unauth_2.html" %}
+{% block guest_content %}  
+    <div class="container content-section bg-overlay">
+      <div class="text-center">
+        <h1 class="wow fadeInDown" data-wow-duration="1s">Welcome To Elimu Fund</h1>
+        <div class="container">
+          {% for message in messages %}
+            {% if message.tags == 'error' %}
+              <div class="alert alert-danger">
+             {% else %}
+            <div class="alert alert-{{ message.tags }}">
+            {% endif %}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+        <h4 class="wow fadeInLeft" data-wow-duration="2s" data-wow-delay="1s">Where you can apply for your county bursary in 3 simple steps as follows</h4>
+
+        </div>
+        <div class="row wow fadeInLeft" data-wow-duration="2s" data-wow-delay="1s">
+          <div class="col-md-4">
+            <h6>1. Personal Details</h6>
+            <ul>
+              <li>Full Name</li>
+              <li>Gender</li>
+              <li>Your Parent's Name</li>
+              <li>Your Contact</li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6>2. School specific Details</h6>
+            <ul>
+              <li>Your School Category</li>
+              <li>The name of your school</li>
+              <li>Your Admission / Registration Number</li>
+              <li>Year of study</li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6>3. Location specific Details</h6>
+            <ul>
+              <li>Your Sub County</li>
+              <li>Your Ward</li>
+              <li>Your Sub Location</li>
+            </ul>
+          </div>
+        </div>
+        <div class="text-center">
+          {% if application_period_is_active %}            
+            <a href="{% url 'apply' %}" class="mt-5 btn btn-primary btn-lg wow fadeIn" data-wow-duration="3s" data-wow-delay="2s">Apply For Bursary</a>
+          {% else %}
+            <span class="mt-5 btn btn-danger btn-lg">Applications are closed for now</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+{% endblock %}
+   
+
+

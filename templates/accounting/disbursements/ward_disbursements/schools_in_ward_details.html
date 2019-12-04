@@ -1,0 +1,107 @@
+{# {% load widget_tweaks %} #}
+{% extends "layout.html" %}
+{% load humanize %}
+
+{% block content %}
+{% include "_modal.html" %}
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'disbursements-home' %}">Disbursements</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'disbursements-home' %}">Disbursements Per Ward</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'ward-disbursements-details' ward.id %}">{{ward.name}}</a></li>       
+        <li class="breadcrumb-item active">{{school_name}}</li>      
+      </ol>
+  </nav>
+  {% if not uni_or_college %}  
+    {% if cheque_number|first == None %}
+    <h5 class="text-danger">Cheque Number Not Set!</h5>
+    <a href="" class="btn btn-success" disabled>Generate Cover Letter For <b>{{school_name}}</b></a>
+      {% else %}
+    <a href="{% url 'generate-cover-letter' ward.id school_name cheque_number|first %}" class="btn btn-success" >Generate Cover Letter For <b>{{school_name}}</b></a>
+    {% endif %}
+  {% endif %}
+  <div class="card">
+    <div class="card-header border-bottom">
+      <h5 class="card-title">
+        {{school_name}}
+        <span class="float-right">
+          {% if not uni_or_college %}            
+            Cheque Number: <button class="badge badge-success">{{cheque_number|first}}</button>
+              {% if cheque_number|first == None %}
+              <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" name="button" data-id="{% url 'add-cheque-for-ward' ward.id school_name %}" data-toggle="tooltip" data-placement="auto" title="Add Cheque Number">
+                <span class="fa fa-pencil mr-2"></span>                                
+              </button>          
+              {% endif %}
+            {% endif %}          
+        </span>
+      </h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover" id="disbursement_table">
+          <thead>
+              <tr>
+                <th>#</th>
+                <th>School</th>
+                <th>Name of Applicant</th>
+                <th>Adm/Reg Number</th>
+                <th>Amount</th>
+                <th>Cheque</th>
+                {% if uni_or_college %}
+                <th>Update</th>                     
+                <th>Cover Letter</th>                    
+                {% endif %}                    
+                </tr>
+          </thead>
+          <tbody>
+
+              {% for application in applicants %}
+
+               <tr>
+                  <td>{{ forloop.counter}}</td>
+                  <td>{{ application.school_name}}</td>
+                  <td>{{ application.first_name}} {% if applicant.last_name %}{{applicant.last_name}}{% endif %}</td>
+                  <td>{{ application.adm_number}}</td>
+                  <td>{{ application.school_type.amount_allocated|intcomma }}</td>
+                   <td>{{application.cheque_number}}</td>
+                  {% if uni_or_college %}
+                  <td>
+                    {% if application.cheque_number.cheque_number %}
+
+                      <button class="cheque-btn btn btn-sm btn-primary" type="button" name="button" data-id="{% url 'edit-cheque-for-uni-or-college' application.school_name application.cheque_number.id %}" data-toggle="tooltip" data-placement="auto" title="Edit Cheque Number">
+                        <span class="fa fa-pencil mr-2"></span>                                
+                      </button>
+                      {% else %}
+                      <button class="cheque-btn btn btn-sm btn-primary" type="button" name="button" data-id="{% url 'add-cheque-for-uni-or-college' application.school_name application.id %}" data-toggle="tooltip" data-placement="auto" title="Add Cheque Number">
+                        <span class=" fa fa-pencil mr-2"></span>                                
+                      </button>
+                    {% endif %}
+                  </td>
+                  <td><a href="{% url 'generate-cover-letter-for-uni-or-college' ward.id application.school_name application.cheque_number application.id %}" class="btn btn-success">Generate Cover Letter</a></td>                     
+                  {% endif %}
+                </tr>
+
+              {% endfor %}
+              
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="{% if uni_or_college %}7{% else %}5{% endif %}">Total Amount to be allocated</th>
+              <td class="{% if uni_or_college %}text-center{% endif %}">{{total_amount.total|intcomma}}</td>                   
+            </tr>
+          </tfoot>
+      </table>
+    </div>
+  </div>
+  <script>
+    $('#disbursements').addClass("active");
+    $(".ward-cheque-btn, .cheque-btn").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });  
+  </script>
+{% endblock content %}
+<!-- </div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div> -->

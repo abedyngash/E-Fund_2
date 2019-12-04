@@ -1,0 +1,58 @@
+[
+  {
+    "model": "applications.Subcounty",
+    "pk":1,
+    "fields": {
+       "name":"Kieni East"
+      }
+  },
+  {
+    "model": "applications.Subcounty",
+    "pk":2,
+    "fields": {
+       "name":"Kieni West"
+      }
+  },
+  {
+    "model": "applications.Subcounty",
+    "pk":3,
+    "fields": {
+       "name":"Nyeri Central"
+      }
+  },
+  {
+    "model": "applications.Subcounty",
+    "pk":4,
+    "fields": {
+       "name":"Tetu"
+      }
+  },
+  {
+    "model": "applications.Subcounty",
+    "pk":5,
+    "fields": {
+       "name":"Othaya"
+      }
+  },
+  {
+    "model": "applications.Subcounty",
+    "pk":6,
+    "fields": {
+       "name":"Mathira East"
+      }
+  },
+  {
+    "model": "applications.Subcounty",
+    "pk":7,
+    "fields": {
+       "name":"Mathira West"
+      }
+  },
+  {
+    "model": "applications.Subcounty",
+    "pk":8,
+    "fields": {
+       "name":"Mukurwe-ini"
+      }
+  }
+]

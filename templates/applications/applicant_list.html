@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% include "_modal.html" %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item active">Applicants</li>      
+    </ol>
+  </nav>
+  <h5 class="border-bottom">All Applicants</h5>
+  <div class="card">
+    <div class="card-body">
+      <form method="get" class="">
+            <div class="row">
+                <div class="col-md-3">                      
+                  {{ applicants.form.subcounty|as_crispy_field }}                       
+                </div>
+                <div class="col-md-3">
+                  {{ applicants.form.ward|as_crispy_field }}
+                </div>
+                <div class="col-md-3">
+                  {{ applicants.form.sublocation|as_crispy_field }}
+                </div>
+                <div class="col-md-3">
+                  {{ applicants.form.school_type|as_crispy_field }}
+                </div>                   
+            </div>
+            <div class="text-center">                    
+                <button type="submit" class="btn btn-sm btn-block btn-outline-primary text-center">Get Applicants</button>
+            </div>
+        </form>
+      <table class="table" id="users_table">
+        <thead class="">
+          <th>
+            #
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            Gender
+          </th>
+          <th>
+            School
+          </th>
+          <th>
+            Subcounty
+          </th>
+          <th>
+            Ward
+          </th>
+          <th>
+            Sublocation
+          </th>
+          <th>Details</th>              
+        </thead>
+        <tbody>
+          {% for applicant in applicants.qs %}
+          <tr >
+            <td class="text-center">{{ forloop.counter}}</td>
+            <td>
+              {{applicant.first_name}} {% if applicant.last_name %}{{applicant.last_name}}{% endif %}
+              <br>
+              <button class="badge badge-success">{{applicant.family_status}}</button>
+            </td>
+            <td>{{applicant.gender}}</td>
+            <td>
+              {{applicant.school_name}}
+              <br>
+              <button class="badge badge-info text-center">{{applicant.school_type}}</button>              
+            </td>
+            <td>{{applicant.subcounty}}</td>
+            <td>{{applicant.ward}}</td>
+            <td>{{applicant.sublocation}}</td>
+            <td>
+              <button class="view-details-btn btn btn-sm btn-primary" type="button" name="button" data-id="{% url 'applicants-detail' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="View details">
+                <span class="fa fa-eye mr-2"></span>                                
+              </button>
+            </td>                
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>    
+
+  <script>
+    document.getElementById("applications").className += " active";
+    $(".view-details-btn").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+  </script>
+{% endblock %}
+
+                

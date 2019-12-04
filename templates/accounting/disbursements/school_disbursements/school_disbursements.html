@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% include "_modal.html" %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'disbursements-home' %}">Disbursements</a></li>
+          <li class="breadcrumb-item active">Disbursements Per School</li>      
+        </ol>
+    </nav>
+    <h5 class="card-title border-bottom">Disbuserments Per School</h5>
+
+    <div class="card">
+        <div class="card-body">
+            <form method="get" class="">
+                <div class="row">
+                    <div class="col-md-3">                      
+                      {{ filter.form.subcounty|as_crispy_field }}                       
+                    </div>
+                    <div class="col-md-3">
+                      {{ filter.form.ward|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                      {{ filter.form.sublocation|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                      {{ filter.form.school_type|as_crispy_field }}
+                    </div>                   
+                </div>
+                <div class="text-center">                    
+                    <button type="submit" class="btn btn-sm btn-block btn-outline-primary text-center">Get Schools</button>
+                </div>
+            </form>
+            <table class="table table-hover" id="disbursement_table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>School</th>
+                        <th>Number of Applicants</th>
+                        
+                        <th>
+                            Details
+                        </th>                      
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for application in filter.qs %}
+
+                     <tr >
+                        <td>{{ forloop.counter}}</td>
+                        <td>{{ application.school_name}}</td>
+                        <td class="text-center">{{ application.name_count }}</td>
+                        
+                        <td class="text-center">
+                            <a href="{% url 'school-disbursements-details' application.school_name %}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="auto" title="View Details"><span class="fa fa-eye mr-2"></span></a>
+                        </td>               
+                     </tr>
+
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+    document.getElementById("disbursements").className += " active";
+
+    $(".cheque-btn").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+    // $(".cheque-btn").modalForm({formURL: $(this).data('id')});
+    
+  </script>
+{% endblock content %}

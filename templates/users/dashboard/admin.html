@@ -1,0 +1,285 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-5 col-md-4">
+                <div class="icon-big text-center icon-warning">
+                  <i class="fa fa-database text-warning"></i>
+                </div>
+              </div>
+              <div class="col-7 col-md-8">
+                <div class="numbers">
+                  <p class="card-category">All Applicants</p>
+                  <p class="card-title">{{total_applicants}}<p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer ">
+            <hr>
+            <div class="stats">
+              <a href="{% url 'applicants-list' %}">View Applications</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-5 col-md-4">
+                <div class="icon-big text-center icon-warning">
+                  <i class="fa fa-address-card-o text-success"></i>
+                </div>
+              </div>
+              <div class="col-7 col-md-8">
+                <div class="numbers">
+                  <p class="card-category">Awarded</p>
+                  <p class="card-title">{{awarded_applicants}}<p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer ">
+            <hr>
+            <div class="stats">
+              <a href="{% url 'awarded-applicants-list' %}">View Awarded Applicants</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-5 col-md-4">
+                <div class="icon-big text-center icon-warning">
+                  <i class="fa fa-users text-danger"></i>
+                </div>
+              </div>
+              <div class="col-7 col-md-8">
+                <div class="numbers">
+                  <p class="card-category">Total Users</p>
+                  <p class="card-title">{{total_users}}<p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer ">
+            <hr>
+            <div class="stats">
+              <a href="{% url 'users-list' %}">View Users</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-5 col-md-4">
+                <div class="icon-big text-center icon-warning">
+                  <i class="fa fa-unlock text-primary"></i>
+                </div>
+              </div>
+              <div class="col-7 col-md-8">
+                <div class="numbers">
+                  <p class="card-category">Admins</p>
+                  <p class="card-title">{{total_admins}}<p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer ">
+            <hr>
+            <div class="stats">
+              <a href="{% url 'admins-list' %}">View System Admins</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">          
+          <div class="card-body ">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="fa fa-money text-success"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Total Money Allocated</p>
+                      <p class="card-title">{{allocation_details.amount_allocated|intword }}<p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <a href="{% url 'allocation-details' %}">View Allocation Details</a>
+                </div>
+              </div>
+            </div>
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="fa fa-money text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Money Per Ward</p>
+                      <p class="card-title">{{money_per_ward|intword}}<p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <a href="{% url 'allocation-details' %}">View Allocation Details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card">
+          
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-map text-success"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-category">Subcounties</p>
+                          <p class="card-title">{{subcounties}}<p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <a href="{% url 'subcounties-list' %}">View Subcounties</a>
+                    </div>
+                  </div>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-folder text-warning"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-category">Wards</p>
+                          <p class="card-title">{{wards}}<p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <a href="{% url 'wards-list' %}">View Wards</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-line-chart text-danger"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-category">Sublocations</p>
+                          <p class="card-title">{{sublocations}}<p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <a href="{% url 'sublocations-list' %}">View Sublocations</a>
+                    </div>
+                  </div>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-graduation-cap text-success"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-category">School Categories</p>
+                          <p class="card-title">{{school_types}}<p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <a href="{% url 'schooltypes-list' %}">View Categories</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            
+            <div class="card-stats">
+              <i class="fa fa-check-circle"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+			document.getElementById("home").className += " active";
+		</script>
+{% endblock %}

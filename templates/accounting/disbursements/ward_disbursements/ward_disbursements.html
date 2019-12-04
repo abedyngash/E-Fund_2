@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% load mathfilters %}
+{% load humanize %}
+
+{% block content %}
+    <div class="modal modal-lg fade" tabindex="-1" role="dialog" id="modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+
+	<nav aria-label="breadcrumb">
+	    <ol class="breadcrumb">
+	      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+	      <li class="breadcrumb-item"><a href="{% url 'disbursements-home' %}">Disbursements</a></li>
+	      <li class="breadcrumb-item active">Disbursements Per Ward</li>      
+	    </ol>
+	</nav>
+	<div class="card">
+		<div class="card-header">
+			<h5 class="card-title border-bottom">Disbuserments Per Ward</h5>
+		</div>
+		<div class="card-body">
+            
+            <table class="table table-hover" id="disbursement_table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ward</th>
+                        <th>Number of Sublocations</th>
+                        <th>Amount per Sublocation</th>
+                        <th>Number of Applicants</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ward in ward_applicants %}
+                    <tr class="clickabe-row" data-target="{% url 'ward-disbursements-details' ward.id %}">
+                        <td>{{ forloop.counter}}</td>
+                        <td>{{ ward.name }}</td>
+                        <td>{{ ward.no_of_sublocations }}</td>
+                        <td id="ammount">{{ money_per_ward|div:ward.no_of_sublocations|floatformat:"0"|intcomma }}</td>
+                        <td>{{ ward.no_of_applicants }}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+        </div>
+	</div>
+
+    <script>
+        $('#disbursements').addClass("active");
+        
+    </script>
+{% endblock content %}

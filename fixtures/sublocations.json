@@ -1,0 +1,2261 @@
+[
+  {
+    "model": "applications.Sublocation",
+    "pk":1,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 2,
+       "name":"Narumoru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":2,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 2,
+       "name":"Ndiriti"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":3,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 2,
+       "name":"Gaturiri"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":4,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 2,
+       "name":"Kamburaini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":5,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 2,
+       "name":"Manyatta"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":6,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 2,
+       "name":"Rongai"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":7,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 2,
+       "name":"Tigithi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":8,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 2,
+       "name":"Murichu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":9,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 2,
+       "name":"Gikamba"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":10,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 2,
+       "name":"Kabendera"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":11,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 1,
+       "name":"Kahurura"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":12,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 1,
+       "name":"Kaaga"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":13,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 1,
+       "name":"Equator"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":14,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 1,
+       "name":"Githima"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":15,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 1,
+       "name":"Gatuanyaga"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":16,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 1,
+       "name":"Burguret"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":17,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 1,
+       "name":"Gathiuru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":18,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 3,
+       "name":"Kimahuri"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":19,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 3,
+       "name":"Ndathi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":20,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 3,
+       "name":"Kairi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":21,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 3,
+       "name":"Mbiriri"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":22,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 3,
+       "name":"Munyu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":23,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 3,
+       "name":"Kirima"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":24,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 3,
+       "name":"Huhoini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":25,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 3,
+       "name":"Jet"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":26,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 4,
+       "name":"Thirigitu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":27,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 4,
+       "name":"Maragima"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":28,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 4,
+       "name":"Gatei"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":29,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 4,
+       "name":"Lusoi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":30,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 4,
+       "name":"Thugari"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":31,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 4,
+       "name":"Karicheni"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":32,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 4,
+       "name":"Chaka"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":33,
+    "fields": {
+       "subcounty_id": 1,
+       "ward_id": 4,
+       "name":"Thigi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":34,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 5,
+       "name":"Mweiga"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":35,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 5,
+       "name":"Bondeni"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":36,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 5,
+       "name":"Amboni"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":37,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 5,
+       "name":"Njengu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":38,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 5,
+       "name":"Kamatongu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":39,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 6,
+       "name":"Karemeno"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":40,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 6,
+       "name":"Kamiruri"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":41,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 6,
+       "name":"Ruirie"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":42,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 6,
+       "name":"Nairutia"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":43,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 6,
+       "name":"Kamariki"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":44,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 6,
+       "name":"Lamuria"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":45,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 6,
+       "name":"Kabendera"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":46,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 7,
+       "name":"Endarasha"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":47,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 7,
+       "name":"Mitero"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":48,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 7,
+       "name":"Kinyaiti"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":49,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 7,
+       "name":"Mwiyogo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":50,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 7,
+       "name":"Muthuini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":51,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 7,
+       "name":"Labura"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":52,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 7,
+       "name":"Honi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":53,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 8,
+       "name":"Kimunyuru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":54,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 8,
+       "name":"Watuka"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":55,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 8,
+       "name":"Kabati"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":56,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 8,
+       "name":"Embaringo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":57,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 8,
+       "name":"Gakanga"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":58,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 8,
+       "name":"Gitegi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":59,
+    "fields": {
+       "subcounty_id": 2,
+       "ward_id": 8,
+       "name":"Charity"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":60,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 9,
+       "name":"Majengo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":61,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 10,
+       "name":"Riamukurwe"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":62,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 10,
+       "name":"Gatitu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":63,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 10,
+       "name":"Thunguma"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":64,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 10,
+       "name":"Githiru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":65,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 10,
+       "name":"Marua"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":66,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 10,
+       "name":"Muruguru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":67,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 11,
+       "name":"Karia"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":68,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 11,
+       "name":"Chorong'i"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":69,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 11,
+       "name":"Ruring'u"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":70,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 12,
+       "name":"Kamakwa"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":71,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 12,
+       "name":"Kihatha"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":72,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 12,
+       "name":"Kinunga"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":73,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 12,
+       "name":"Muthua-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":74,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 12,
+       "name":"Mununga-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":75,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 12,
+       "name":"Gitathi-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":76,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 13,
+       "name":"Mathari"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":77,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 13,
+       "name":"Kiganjo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":78,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 13,
+       "name":"Nyaribo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":79,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 13,
+       "name":"Kirichu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":80,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 13,
+       "name":"Gachika"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":81,
+    "fields": {
+       "subcounty_id": 3,
+       "ward_id": 13,
+       "name":"Kihuto"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":82,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 14,
+       "name":"Gichira"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":83,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 14,
+       "name":"Mung'aria"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":84,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 14,
+       "name":"Thage-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":85,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 14,
+       "name":"Gititu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":86,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 14,
+       "name":"Ithekahuno"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":87,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 14,
+       "name":"Huhoini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":88,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 14,
+       "name":"Gaaki"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":89,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 14,
+       "name":"Mutathi-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":90,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 14,
+       "name":"Kiawaithanji"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":91,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 14,
+       "name":"Gathaithi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":92,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Kigwandi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":93,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Unjiru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":94,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Kihora"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":95,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Kianjogu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":96,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Kariguini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":97,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Mbaaini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":98,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Kaiguri"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":99,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 16,
+       "name":"Gatumbiro"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":100,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 16,
+       "name":"Karaihu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":102,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 16,
+       "name":"Kigogo-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":103,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 16,
+       "name":"Ihururu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":104,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 16,
+       "name":"Thatha"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":105,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 16,
+       "name":"Kirurumi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":106,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 16,
+       "name":"Ichagachiru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":108,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 16,
+       "name":"Kanjora"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":109,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 16,
+       "name":"Karunaini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":110,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 16,
+       "name":"Ngooru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":111,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Kiamutiga"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":112,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Ihithe"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":113,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Ndugamano"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":114,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Mathakwa-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":115,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Hubu-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":116,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Gathuthi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":117,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Karangia"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":118,
+    "fields": {
+       "subcounty_id": 4,
+       "ward_id": 15,
+       "name":"Wandumbi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":119,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 17,
+       "name":"Kagongo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":120,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 17,
+       "name":"Gichiche"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":121,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 17,
+       "name":"Gikigie"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":122,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 17,
+       "name":"Mucharage"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":123,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 17,
+       "name":"Karuthi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":124,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 17,
+       "name":"Kiaguthu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":125,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 17,
+       "name":"Mumbuini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":126,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 17,
+       "name":"Gathera"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":127,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 18,
+       "name":"Gitundu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":128,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 18,
+       "name":"Kiahugu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":129,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 18,
+       "name":"Kairuthi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":130,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 18,
+       "name":"Ihuririo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":131,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 18,
+       "name":"Thuguri"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":132,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 18,
+       "name":"Kiandemi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":133,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 19,
+       "name":"Gura"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":134,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 19,
+       "name":"Itemeini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":135,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 19,
+       "name":"Witima"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":136,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 19,
+       "name":"Kihugiru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":137,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 19,
+       "name":"Thuti"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":138,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 20,
+       "name":"Kamoko"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":139,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 20,
+       "name":"Ugachiku"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":140,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 20,
+       "name":"Gaturuturu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":141,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 20,
+       "name":"Munyange"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":142,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 20,
+       "name":"Gikoe"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":143,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 20,
+       "name":"Rukira"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":144,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 20,
+       "name":"Kagonye"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":145,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 20,
+       "name":"Gitugi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":146,
+    "fields": {
+       "subcounty_id": 5,
+       "ward_id": 20,
+       "name":"Kihome"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":147,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Mathaithi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":148,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Gathugu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":149,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Gikairu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":150,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Commercial"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":151,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Market"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":152,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Cheru/Kiangararu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":153,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Jambo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":154,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Githima"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":155,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Ragati"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":156,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Mungui"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":157,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Itiati"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":158,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Kihuro"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":159,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Gathu-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":160,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Kiawarigi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":161,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Baricho"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":162,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 21,
+       "name":"Unjiru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":163,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Kahuru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":164,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Kiamwangi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":165,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Kiaguthu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":166,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Gatundu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":167,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Gatura"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":168,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Kaguyu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":169,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Gikororo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":170,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Gathaithi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":171,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Thegenge"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":172,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Kariki"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":173,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Chehe"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":174,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Kairia"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":175,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 22,
+       "name":"Ihwagi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":176,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 23,
+       "name":"Gathugu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":177,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 23,
+       "name":"Mukore"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":178,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 23,
+       "name":"Gathaithi_Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":179,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 23,
+       "name":"Gachuku"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":180,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 23,
+       "name":"Peter Ciira"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":181,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 23,
+       "name":"Karindundu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":182,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 23,
+       "name":"Gaturiri"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":183,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 23,
+       "name":"Gakuyu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":184,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 23,
+       "name":"Gatina"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":185,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 24,
+       "name":"Gitunduti"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":186,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 24,
+       "name":"Gaikuyu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":187,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 24,
+       "name":"Gitimaini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":188,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 24,
+       "name":"Gatei"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":189,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 24,
+       "name":"Kagochi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":190,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 24,
+       "name":"Kanjuri"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":191,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 24,
+       "name":"Gathehu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":192,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 24,
+       "name":"Giakaibei"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":193,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 24,
+       "name":"Ndumanu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":194,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 24,
+       "name":"Gikumbo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":195,
+    "fields": {
+       "subcounty_id": 6,
+       "ward_id": 24,
+       "name":"Karura"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":196,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Ngaini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":197,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Kianjogu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":198,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Thaithi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":199,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Mutathiini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":200,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Ngandu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":201,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Kaiyaba"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":202,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Ritiri"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":203,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Mbogo-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":204,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Thiu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":205,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Kirima"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":206,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Giaituu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":207,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Kiria"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":208,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Githima"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":209,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 25,
+       "name":"Gachuiro"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":210,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Kiamariga"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":211,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Ruturu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":212,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Kahiga"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":213,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Karibuini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":214,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Sagana"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":215,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Iruri"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":216,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Ndundu-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":217,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Karuthi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":218,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Hiriga"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":219,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Gatung'ang'a"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":220,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Chieni"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":221,
+    "fields": {
+       "subcounty_id": 7,
+       "ward_id": 26,
+       "name":"Maganjo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":222,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 27,
+       "name":"Mbiuni"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":223,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 27,
+       "name":"Wanjithi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":224,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 27,
+       "name":"Gikanduini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":225,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 27,
+       "name":"Gaikundo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":226,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 27,
+       "name":"Ruthanji"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":227,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 27,
+       "name":"Njiruini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":228,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 27,
+       "name":"Muyu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":229,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 27,
+       "name":"Gatura"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":230,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 28,
+       "name":"Karindi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":231,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 28,
+       "name":"Kiirungi"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":232,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 28,
+       "name":"Thimu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":233,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 28,
+       "name":"Muthuithi-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":234,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 28,
+       "name":"Kibutio"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":235,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 28,
+       "name":"Kaharo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":236,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 28,
+       "name":"Karaba"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":237,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 29,
+       "name":"Kariara"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":238,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 29,
+       "name":"Ngamwa"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":239,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 29,
+       "name":"Igana"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":240,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 29,
+       "name":"Mweru"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":241,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 29,
+       "name":"Mihuti"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":242,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 29,
+       "name":"Gathea"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":243,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 29,
+       "name":"Karundu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":244,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 29,
+       "name":"Kangurwe"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":245,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 30,
+       "name":"Thiha"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":246,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 30,
+       "name":"Gaturia"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":247,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 30,
+       "name":"Murundu-Ini"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":248,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 30,
+       "name":"Ichamara"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":249,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 30,
+       "name":"Kirerema"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":250,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 30,
+       "name":"Thanji"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":251,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 30,
+       "name":"Kiharo"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":252,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 30,
+       "name":"Mutundu"
+      }
+  },
+  {
+    "model": "applications.Sublocation",
+    "pk":253,
+    "fields": {
+       "subcounty_id": 8,
+       "ward_id": 30,
+       "name":"Karicheni"
+      }
+  }
+]

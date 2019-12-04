@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item active">School Types</li>      
+    </ol>
+  </nav>
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="border-bottom">School Types To be Awarded</h5>
+      <div class="card">
+        <div class="card-body">
+          <table class="table" id="users_table">
+            <thead class="">
+              <th>
+                #
+              </th>
+              <th>
+                Type
+              </th>
+              <th>
+                Amount Allocated In This Financial Year
+              </th>             
+                           
+            </thead>
+            <tbody>
+              {% for schooltype in schooltypes %}
+              <tr class="clickabe-row" data-target="">
+                <td class="text-center">{{ forloop.counter}}</td>
+                <td>{{schooltype.name}}</td>
+                <td>{{schooltype.amount_allocated|intword|intcomma}}</td>
+                
+                              
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>          
+  </div>
+
+  <script>
+    document.getElementById("allocation").className += " active";
+    
+  </script>
+{% endblock %}
+
+                

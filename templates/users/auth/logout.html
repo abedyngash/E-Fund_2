@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-center ">
+	<div class="col-md-6">
+		<div class="card card-user">
+            <div class="card-header">
+                <h5 class="card-title">Logout</h5>
+                <hr>
+            </div>
+            <div class="card-body">
+            	<div class="text-center">
+            		<p>You have been logged out</p>
+
+            		<img src="{% static 'img/logo.png' %}" class="image" alt="">
+            	</div>
+            </div>
+            <div class="card-footer">
+            	<hr>
+            	<small class="text-muted"><a href="{% url 'login' %}">Login Again</a></small>
+            </div>
+        </div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+	<nav aria-label="breadcrumb">
+	    <ol class="breadcrumb">
+	      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+	      <li class="breadcrumb-item active">Accounting</li>      
+	    </ol>
+	</nav>
+	<div class="card">
+		<div class="card-header"><h5 class="card-title border-bottom text-center">For Financial Year {{current_year_allocation.financial_year}}</h5></div>
+		<div class="card-body">
+			<div class="row">				
+				<div class="col-md-6">
+					<div>
+	                  <p class="numbers card-category">Application Start Date</p>
+	                  <p class="card-title">{{current_year_allocation.application_start_date}} ({{current_year_allocation.application_start_date|naturaltime}})<p>
+	                </div>
+				</div>
+				<div class="col-md-6">
+					<div>
+	                  <p class="numbers card-category">Application End Date</p>
+	                  <p class="card-title">{{current_year_allocation.application_end_date}} ({{current_year_allocation.application_end_date|naturaltime}})<p>
+	                </div>
+				</div>
+			</div>
+		</div>
+		{% if user.is_superuser %}
+			
+		<div class="card-footer">
+			<a href="{% url 'edit-allocations' current_year_allocation.id %}" class="btn btn-block btn-outline-info">Edit Allocation Details</a>
+		</div>
+		{% endif %}
+	</div>		
+	<div class="row">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="card-title border-bottom">Allocation Details</h5>
+				</div>
+				<div class="card-body">
+					<div class="card card-stats">
+			          <div class="card-body ">
+			            <div class="row">
+			              <div class="col-5 col-md-4">
+			                <div class="icon-big text-center icon-warning">
+			                  <i class="fa fa-calendar text-info"></i>
+			                </div>
+			              </div>
+			              <div class="col-7 col-md-8">
+			                <div class="numbers">
+			                  <p class="card-category">Financial Year</p>
+			                  <p class="card-title">{{current_year_allocation.financial_year}}<p>
+			                </div>
+			              </div>
+			            </div>
+			          </div>			          
+			        </div>
+		        	<div class="card card-stats">
+			          <div class="card-body ">
+			            <div class="row">
+			              <div class="col-5 col-md-4">
+			                <div class="icon-big text-center icon-warning">
+			                  <i class="fa fa-money text-secondary"></i>
+			                </div>
+			              </div>
+			              <div class="col-7 col-md-8">
+			                <div class="numbers">
+			                  <p class="card-category">Money Allocated</p>
+			                  <p class="">{{current_year_allocation.amount_allocated|intword}}</p>
+			                </div>
+			              </div>
+			            </div>
+			          </div>			          
+				    </div>
+			        <div class="card card-stats">
+			          <div class="card-body ">
+			            <div class="row">
+			              <div class="col-5 col-md-4">
+			                <div class="icon-big text-center icon-warning">
+			                  <i class="fa fa-money text-warning"></i>
+			                </div>
+			              </div>
+			              <div class="col-7 col-md-8">
+			                <div class="numbers">
+			                  <p class="card-category">Money per ward</p>
+			                  <p class="card-title">{{money_per_ward|intword|intcomma}}<p>
+			                </div>
+			              </div>
+			            </div>
+			          </div>			          
+			        </div>
+					<div class="card card-stats">
+			          <div class="card-body ">
+			            <div class="row">
+			              <div class="col-5 col-md-4">
+			                <div class="icon-big text-center icon-warning">
+			                  <i class="fa fa-map text-success"></i>
+			                </div>
+			              </div>
+			              <div class="col-7 col-md-8">
+			                <div class="numbers">
+			                  <p class="card-category">Number of Subcounties</p>
+			                  <p class="card-title">{{subcounties}}<p>
+			                </div>
+			              </div>
+			            </div>
+			          </div>			          
+			        </div>
+			        <div class="card card-stats">
+			          <div class="card-body ">
+			            <div class="row">
+			              <div class="col-5 col-md-4">
+			                <div class="icon-big text-center icon-warning">
+			                  <i class="fa fa-folder text-warning"></i>
+			                </div>
+			              </div>
+			              <div class="col-7 col-md-8">
+			                <div class="numbers">
+			                  <p class="card-category">Number of wards</p>
+			                  <p class="card-title">{{wards}}<p>
+			                </div>
+			              </div>
+			            </div>
+			          </div>			          
+			        </div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="card-title border-bottom">School Type Allocations</h5>
+				</div>
+				<div class="card-body">
+					{% for school, tag in schooltypes_with_tags %}						
+			        	<div class="card card-stats">
+				          <div class="card-body ">
+				            <div class="row">
+				              <div class="col-5 col-md-4">
+				                <div class="icon-big text-center icon-warning">
+				                  <i class="fa fa-graduation-cap text-{{tag}}"></i>
+				                </div>
+				              </div>
+				              <div class="col-7 col-md-8">
+				                <div class="numbers">
+				                  <p class="card-category">{{school.name}}</p>
+				                  <p class="">{{school.amount_allocated|intword|intcomma}}</p>
+				                </div>
+				              </div>
+				            </div>
+				          </div>			          
+				        </div>
+					{% endfor %}					
+					
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<script>
+    	document.getElementById("allocation").className += " active";    
+  	</script>
+{% endblock %}

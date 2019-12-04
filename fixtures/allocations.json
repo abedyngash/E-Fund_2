@@ -1,0 +1,22 @@
+[
+	{
+	    "model": "accounting.FinancialYear",
+	    "pk": 1,
+	    "fields": {
+	      "start_date": "2019",
+	      "end_date": "2020"
+	    }
+	},
+	{
+	    "model": "accounting.AllocationDetail",
+	    "pk": 1,
+	    "fields": {
+	      "financial_year": 1,
+	      "amount_allocated": 85000000,
+	      "application_start_date" : "2019-01-16 05:59:47",
+	      "application_end_date" : "2019-11-30 06:00:05"
+	    }
+	}
+]
+
+

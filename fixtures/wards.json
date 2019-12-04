@@ -1,0 +1,242 @@
+[
+  {
+    "model": "applications.Ward",
+    "pk":1,
+    "fields": {
+       "subcounty_id": 1,
+       "name":"Gakawa"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":2,
+    "fields": {
+       "subcounty_id": 1,
+       "name":"Narumoru/Kiamathaga"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":3,
+    "fields": {
+       "subcounty_id": 1,
+       "name":"Kabaru"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":4,
+    "fields": {
+       "subcounty_id": 1,
+       "name":"Thegu-River"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":5,
+    "fields": {
+       "subcounty_id": 2,
+       "name":"Mweiga"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":6,
+    "fields": {
+       "subcounty_id": 2,
+       "name":"Mugunda"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":7,
+    "fields": {
+       "subcounty_id": 2,
+       "name":"Endarasha/Mwiyogo"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":8,
+    "fields": {
+       "subcounty_id": 2,
+       "name":"Gatarakwa"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":9,
+    "fields": {
+       "subcounty_id": 3,
+       "name":"Rware"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":10,
+    "fields": {
+       "subcounty_id": 3,
+       "name":"Gatitu/Muruguru"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":11,
+    "fields": {
+       "subcounty_id": 3,
+       "name":"Ruring'u"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":12,
+    "fields": {
+       "subcounty_id": 3,
+       "name":"Kamakwa/Mukaro"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":13,
+    "fields": {
+       "subcounty_id": 3,
+       "name":"Kiganjo/Mathari"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":14,
+    "fields": {
+       "subcounty_id": 4,
+       "name":"Aguthi/Gaaki"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":15,
+    "fields": {
+       "subcounty_id": 4,
+       "name":"Wamagana"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":16,
+    "fields": {
+       "subcounty_id": 4,
+       "name":"Dedan Kimathi"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":17,
+    "fields": {
+       "subcounty_id": 5,
+       "name":"Chinga"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":18,
+    "fields": {
+       "subcounty_id": 5,
+       "name":"Iriaini(Othaya)"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":19,
+    "fields": {
+       "subcounty_id": 5,
+       "name":"Karima"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":20,
+    "fields": {
+       "subcounty_id": 5,
+       "name":"Mahiga"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":21,
+    "fields": {
+       "subcounty_id": 6,
+       "name":"Karatina"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":22,
+    "fields": {
+       "subcounty_id": 6,
+       "name":"Iriaini(Mathira)"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":23,
+    "fields": {
+       "subcounty_id": 6,
+       "name":"Konyu"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":24,
+    "fields": {
+       "subcounty_id": 6,
+       "name":"Magutu"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":25,
+    "fields": {
+       "subcounty_id": 7,
+       "name":"Kirimukuyu"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":26,
+    "fields": {
+       "subcounty_id": 7,
+       "name":"Ruguru"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":27,
+    "fields": {
+       "subcounty_id": 8,
+       "name":"Mukurweini West"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":28,
+    "fields": {
+       "subcounty_id": 8,
+       "name":"Gikondi"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":29,
+    "fields": {
+       "subcounty_id": 8,
+       "name":"Rugi"
+      }
+  },
+  {
+    "model": "applications.Ward",
+    "pk":30,
+    "fields": {
+       "subcounty_id": 8,
+       "name":"Mukurweini Central"
+      }
+  }
+]

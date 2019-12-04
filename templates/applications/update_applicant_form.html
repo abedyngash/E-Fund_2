@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% load mathfilters %}
+
+{% block content %}
+{% include "_modal.html" %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'applicants-list' %}">Applicants</a></li>
+        <li class="breadcrumb-item view-details" data-id="{% url 'applicants-detail' object.id %}">
+            <a>{{object.first_name}}</a>          
+        </li>
+        <li class="breadcrumb-item active">Update</li>
+    </ol>
+  </nav>
+  
+<h5 class="border-bottom">Update Applicant</h5>
+<div class="card">
+<div class="card-body">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <div>
+                {{form.award_status|as_crispy_field}}
+                <div class="border-bottom border-top pt-2 pb-2"> 
+                    <h6 >Amount remaining to be awarded in this applicant's sublocation: 
+                        <button class="{% if money_per_ward|div:sublocations_count|sub:amount_so_far.total < 10000 %}
+                            badge badge-danger
+                            {% else %}
+                            badge badge-success
+                        {% endif %}">
+                            {{money_per_ward|div:sublocations_count|sub:amount_so_far.total|intword|intcomma}}
+                        </button>
+                    </h6>
+                </div>
+                <h6 class="border-bottom mb-4">PART 1 : Personal Details</h6>
+                <div class="">                                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.gender|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.family_status|as_crispy_field }}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.name_of_gurdian|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.contact_of_gurdian|as_crispy_field }}
+                        </div>
+                    </div> 
+                    {{ form.disability_status|as_crispy_field }}                                
+                    {{ form.disability_desc|as_crispy_field }}                      
+                
+                </div>
+            </div>
+            <div>                                    
+                <h6 class="border-bottom border-top pt-2 pb-2 mt-4 mb-4">Part 2 : School Details</h6>
+                {{ form.school_type|as_crispy_field }}
+                {{ form.school_name|as_crispy_field }}
+                {{ form.school_email|as_crispy_field }}
+                <div class="row">
+                    <div class="col-md-6">                                            
+                        {{form.adm_number|as_crispy_field}}
+                    </div>
+                    <div class="col-md-6">                                            
+                        {{form.class_of_study|as_crispy_field}}
+                    </div>
+                </div>
+                
+            </div>
+            <div>                                    
+                <h6 class="border-bottom border-top pt-2 pb-2 mt-4 mb-4">PART 3: Location Details</h6>
+                <div class="row">
+                    <div class="col-md-4">
+                        
+                        {{ form.subcounty|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        
+                        {{ form.ward|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        
+                        {{ form.sublocation|as_crispy_field }}
+                    </div>
+                </div>
+                            
+
+            </div>
+        </div>                            
+        <div class="form-group">
+            <button class="btn btn-block btn-outline-info" name="submit" type="submit">                
+                Update Details                
+            </button>
+        </div>
+    </form>
+</div>
+</div>
+    
+
+  <script>
+    document.getElementById("applications").className += " active";
+    $(".view-details").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });    
+  </script>
+{% endblock %}
+
+                

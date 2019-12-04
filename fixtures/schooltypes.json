@@ -1,0 +1,50 @@
+[
+	{
+		"model": "applications.SchoolType",
+	    "pk": 1,
+	    "fields": {
+	      "name": "University",
+	      "amount_allocated": 6000
+	    }
+	},
+	{
+		"model": "applications.SchoolType",
+	    "pk": 2,
+	    "fields": {
+	      "name": "College",
+	      "amount_allocated": 5000
+	    }
+	},
+	{
+		"model": "applications.SchoolType",
+	    "pk": 3,
+	    "fields": {
+	      "name": "High School Boarding",
+	      "amount_allocated": 9000
+	    }
+	},
+	{
+		"model": "applications.SchoolType",
+	    "pk": 4,
+	    "fields": {
+	      "name": "Polytechnic",
+	      "amount_allocated": 5000
+	    }
+	},
+	{
+		"model": "applications.SchoolType",
+	    "pk": 5,
+	    "fields": {
+	      "name": "Special School",
+	      "amount_allocated": 6000
+	    }
+	},
+	{
+		"model": "applications.SchoolType",
+	    "pk": 6,
+	    "fields": {
+	      "name": "High School Day",
+	      "amount_allocated": 6000
+	    }
+	}
+]

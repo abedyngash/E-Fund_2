@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item active">Disbursements</li>      
+    </ol>
+</nav>
+<div class="container">
+	<div class="card">          
+		<div class="card-header">
+	      <h5 class="card-title border-bottom">Disbuserments</h5>
+	    </div>
+        <div class="card-body">
+            <div class="row">
+              
+              <div class="col-md-12">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-folder text-warning"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-title">Disbursements Per Ward</p>                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <a href="{% url 'ward-disbursements' %}">View disbursements per ward</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-line-chart text-danger"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-title">Per Sublocation</p>                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <a href="{% url 'sublocation-disbursements' %}">View disbursements per sublocation</a>
+                    </div>
+                  </div>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-graduation-cap text-success"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="numbers">
+                          <p class="card-title">Per School</p>                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <a href="{% url 'school-disbursements' %}">View disbursements per school</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<script>
+    document.getElementById("disbursements").className += " active";
+  </script>
+{% endblock content %}
+

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item active">Wards</li>      
+    </ol>
+  </nav>
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="border-bottom">Wards List</h5>
+      <div class="card">
+        <div class="card-body">
+          <table class="table" id="users_table">
+            <thead class="">
+              <th>
+                #
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Subcounty
+              </th>
+              <th>
+                Number of Sublocations
+              </th>
+                           
+            </thead>
+            <tbody>
+              {% for ward in wards %}
+              <tr class="clickabe-row" data-target="">
+                <td class="text-center">{{ forloop.counter}}</td>
+                <td>{{ward.name}}</td>
+                <td>{{ward.subcounty}}</td>
+                <td>{{ward.sublocations.count}}</td>
+                              
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>          
+  </div>
+
+  <script>
+    document.getElementById("allocation").className += " active";
+    
+  </script>
+{% endblock %}
+
+                

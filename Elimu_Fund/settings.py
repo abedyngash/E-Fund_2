@@ -33,7 +33,7 @@ SECRET_KEY = 'y2w(0xwg89mof2j^w9w!v9m4$*b=i(h()=fu3eg%dhbw@)39pn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['192.168.43.150', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['197.232.78.114', '197.232.78.113', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -90,6 +90,25 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Elimu_Fund.wsgi.application'
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+    'select2': {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+SELECT2_CACHE_BACKEND = 'select2'
 
 
 # Database

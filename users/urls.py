@@ -34,6 +34,7 @@ urlpatterns = [
     ),
 
     path('register/', SignUpView.as_view(), name='register'),
+    path('signup/', register, name='signup'),
     path('password_change/', change_password, name='change_password'),
 
     path('users-list/', UserListView.as_view(), name='users-list'),

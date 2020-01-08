@@ -54,7 +54,7 @@ class ApplicationForm(forms.ModelForm):
     # 'award_status',
     'first_name', 'last_name', 'gender', 'family_status', 
     'name_of_gurdian', 'contact_of_gurdian', 'disability_status', 'disability_desc',
-    'school_type', 'school_name', 'school_email', 'adm_number', 'class_of_study', 'death_cert_father', 'death_cert_mother',
+    'school_type', 'school_name', 'adm_number', 'class_of_study', 'death_cert_father', 'death_cert_mother',
     'subcounty', 'ward', 'sublocation'
     ]
 

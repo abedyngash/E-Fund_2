@@ -18,7 +18,7 @@
     </div>
 
     {% for field in form %}
-      <div class="form-group">
+      <div class="form-group{% if field.errors %} invalid{% endif %}" id="div_{{ field.id_for_label }}">
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
         {% render_field field class="form-control" %}
         <small class="text-muted">{{ field.help_text }}</small>
@@ -38,12 +38,10 @@
 </form>
 
 <script>
-  // $('#id_is_entity').removeClass("form-control");
-  $('#id_is_entity').addClass("custom-control custom-radio custom-control-inline");
-  $('#id_is_entity_0, #id_is_entity_1').addClass("radio-inline");
-
-  $("#id_email").keyup(function(){
-    $("#id_password1, #id_password2").val(this.value);
-
-  });
+ $(document).ready(function() {
+    $("#id_email").keyup(function(){
+        $("#id_password1, #id_password2").val(this.value);
+    });
+    $("#div_id_password1, #div_id_password2").hide();
+});
 </script>

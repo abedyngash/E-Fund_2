@@ -8,7 +8,8 @@
 	      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
 	      <li class="breadcrumb-item"><a href="{% url 'disbursements-home' %}">Disbursements</a></li>
           <li class="breadcrumb-item"><a href="{% url 'ward-disbursements' %}">Disbursements Per Ward</a></li>
-	      <li class="breadcrumb-item active">{{ward.name}}</li>      
+          <li class="breadcrumb-item"><a href="{% url 'ward-disbursements-details' ward.id %}">{{ward.name}}</a></li>
+	      <li class="breadcrumb-item active">{{school_type}}</li>      
 	    </ol>
 	</nav>
 	<div class="card">

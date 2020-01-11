@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include "_modal.html" %}
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'disbursements-home' %}">Disbursements</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'ward-disbursements' %}">Disbursements Per Ward</a></li>
+        <li class="breadcrumb-item active">{{ward.name}}</li>      
+      </ol>
+  </nav>
+  <div class="row">    
+    <div class="col-md-12">
+      <h5 class="border-bottom">Select A school Type below</h5>
+      <div class="card">
+        <div class="card-body">
+          
+            <table class="table" id="users_table">
+              <thead class="">
+                <th>
+                  S/No
+                </th>
+                <th>
+                  School Type
+                </th>                                
+              </thead>
+              <tbody>
+                {% for type in school_types %}
+                <tr class="clickabe-row" data-target="{% url 'ward-school-types-details' ward.id type.id %}">
+                  <td>{{ forloop.counter}}</td>
+                  
+                  <td>{{ type.name }}</td>
+                  
+                  
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>          
+  </div>
+{% endblock %}
+
+                

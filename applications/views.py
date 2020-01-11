@@ -255,23 +255,36 @@ def ward_disbursements(request):
 
 	return render(request, 'accounting/disbursements/ward_disbursements/ward_disbursements.html', context)
 
-def ward_disbursements_details(request, ward_id):
-	schools_with_applicants = Applicant.objects.all().filter(
-		award_status="awarded", ward_id=ward_id).values('school_name', 'ward_id', 'school_type', 'cheque_number__cheque_number','cheque_number__id').order_by(
+def ward_school_types_details(request, ward_id, school_cat_id):
+	schools_in_category = Applicant.objects.all().filter(
+			award_status="awarded", ward_id=ward_id, school_type_id=school_cat_id
+		).values('school_name', 'ward_id', 'school_type', 'cheque_number__cheque_number','cheque_number__id').order_by(
 		'school_name').annotate(
 		name_count=Count('school_name'))
 
-	school_filter = SchoolFilter(request.GET, queryset=schools_with_applicants)
-
+	school_filter = SchoolFilter(request.GET, queryset=schools_in_category)
 	ward = Ward.objects.get(id=ward_id)
+	school_type = SchoolType.objects.get(id=school_cat_id)
 
 	context = {
 		# 'schools': schools_with_applicants,
 		'filter' : school_filter,
 		'ward': ward,
+		'school_type': school_type
 	}
 
 	return render(request, 'accounting/disbursements/ward_disbursements/ward_disbursements_details.html', context)
+
+def ward_disbursements_details(request, ward_id):
+	schooltypes = SchoolType.objects.all()
+	ward = Ward.objects.get(id=ward_id)
+	context = {
+		# 'schools': schools_with_applicants,
+		'school_types' : schooltypes,
+		'ward': ward,
+	}
+
+	return render(request, 'accounting/disbursements/ward_disbursements/ward_school_types.html', context)
 
 def schools_in_ward_details(request, ward_id, school_name):
 	school_applicants = Applicant.objects.filter(school_name=school_name, ward_id=ward_id, award_status='awarded')

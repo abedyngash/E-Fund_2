@@ -37,11 +37,6 @@
                         {{form.password2|as_crispy_field}}
                       </div>
                     </div>
-
-                    <div class="row">                      
-                      <div class="col-md-12 border-top border-bottom pt-2">
-                        {{form.is_entity|as_crispy_field}}
-                      </div>
                       <div class="col-md-12">
                         {{form.phone|as_crispy_field}}
                       </div>
@@ -59,12 +54,12 @@
   	</div>
   </div>
 
-  <script>
-    document.getElementById("users").className += " active";
-    $(document).ready(function () {
-      $("#id_email").keyup(function(){
+ <script>
+ $(document).ready(function() {
+    $("#id_email").keyup(function(){
         $("#id_password1, #id_password2").val(this.value);
-      });
     });
-  </script>
+    $('#div_id_password1, #div_id_password2').hide();
+});
+</script>
 {% endblock %}

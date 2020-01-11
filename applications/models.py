@@ -70,7 +70,7 @@ class SchoolType(models.Model):
 
 class School(models.Model):
     name = models.CharField(max_length=200)
-    email = models.EmailField(default='school@test.com')
+    #email = models.EmailField(default='school@test.com')
 
     def __str__(self):
         return self.name

@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from accounting.models import AllocationDetail
 from bootstrap_modal_forms.mixins import PopRequestMixin, CreateUpdateAjaxMixin
 
-class UserRegisterForm(PopRequestMixin, CreateUpdateAjaxMixin, UserCreationForm):
+class UserRegisterForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
         for field in ['password1', 'password2']:
@@ -12,28 +12,21 @@ class UserRegisterForm(PopRequestMixin, CreateUpdateAjaxMixin, UserCreationForm)
         self.fields['password2'].label='CONFIRM PASSWORD'
         self.fields['password1'].label='PASSWORD'
 
-    is_entity = forms.TypedChoiceField(
-                   coerce=lambda x: x == 'True',
-                   choices=((False, 'No'), (True, 'Yes')),
-                   widget=forms.RadioSelect,
-                   label='IS THIS A SCHOOL ENTITY?',
-                   # help_text='Check this Box if the user is not a staff user'
-                   )
     class Meta:
         model = User
-        fields = ['login_id', 'email', 'is_entity', 'phone', 'password1', 'password2']
+        fields = ['login_id', 'email', 'phone', 'password1', 'password2']
 
         labels = {
             'login_id': 'LOGIN ID',
             'email': 'EMAIL ADDRESS',
-            'is_entity' : 'IS THIS A SCHOOL ENTITY?',
+            # 'is_entity' : 'IS THIS A SCHOOL ENTITY?',
             'phone': 'PHONE NUMBER',
             'password2': 'CONFIRM PASSWORD'
         }
 
         help_texts ={
             
-            'is_entity': 'Check this Box if the user is not a staff user'
+            # 'is_entity': 'Check this Box if the user is not a staff user'
         }
 
 

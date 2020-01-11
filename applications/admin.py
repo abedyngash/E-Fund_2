@@ -29,5 +29,5 @@ class ApplicantAdminView(ImportExportModelAdmin):
 	search_fields = ['first_name', 'last_name', 'financial_year']
 
 @admin.register(School)
-class SchoolAdminView(admin.ModelAdmin):
+class SchoolAdminView(ImportExportModelAdmin):
 	search_fields = ['name']

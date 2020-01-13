@@ -23,7 +23,7 @@ import io
 import os
 import tempfile
 # Create your views here.
-class ApplicationCreateView(UserPassesTestMixin, SuccessMessageMixin, CreateView):
+class ApplicationCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, CreateView):
 	def test_func(self):
 		current_year_allocation_details = AllocationDetail.objects.get(
 			financial_year__start_date=datetime.date.today().year,

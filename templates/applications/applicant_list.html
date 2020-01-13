@@ -10,12 +10,14 @@
     </ol>
   </nav>
   <h5 class="border-bottom">All Applicants</h5>
+      {% if not user.is_executive or user.is_superuser %}
       <div>
         <a class="btn btn-primary" href="{% url 'apply' %}">
           <span class="fa fa-plus-circle mr-2"></span>
           Add new Applicant
         </a>
       </div>
+      {% endif %}
   <div class="card">
     <div class="card-body">
       <form method="get" class="applicants_form">
@@ -83,10 +85,12 @@
                 <span class="fa fa-eye mr-2"></span>                                
               </button>
 
+              {% if not user.is_executive %}
               <a class="btn btn-sm btn-primary" type="button" name="button" href="{% url 'applicants-update' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Edit record">
                 <span class="fa fa-pencil mr-2"></span>                                
               </a>
-              
+              {% endif %}
+
             </td>                
           </tr>
           {% endfor %}

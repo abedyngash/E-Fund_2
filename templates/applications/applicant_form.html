@@ -1,27 +1,16 @@
-{% extends "layout_unauth_2.html" %}
+{% extends "layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
 {% load mathfilters %}
 {% load humanize %}
-{% load crispy_forms_tags %}
-{% block guest_content %}
+{% include "_modal.html" %}
 <div class="container">   
-  <div class="content-section-card">
-    <div class="d-flex justify-content-center mt-5">
+  <div class="">
+    <div class=" mt-5">
         <div class="card">
             <div class="card-body">
-                <div class="container">
-                  {% for message in messages %}
-                    {% if message.tags == 'error' %}
-                      <div class="alert alert-danger">
-                     {% else %}
-                    <div class="alert alert-{{ message.tags }}">
-                    {% endif %}
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    {{ message }}
-                    </div>
-                  {% endfor %}
-                </div>
+                
                 <div class="container">                    
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -151,12 +140,102 @@
   </div>
 
   <script>
-    document.getElementById("applications").className += " active";
-    $(document).ready(function() {
+      function myFunction(x) {
+        if (x.matches) { // If media query matches
+          $('.btn').removeClass('btn-block');
+        } else {
+         
+        }
+      }
+
+      var x = window.matchMedia("(max-width: 600px)")
+      myFunction(x) // Call listener function at run time
+      x.addListener(myFunction) // Attach listener function on state
+      
+      $(document).ready(function() {
+
+        // $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+        //       $(".alert").slideUp(500);
+        //   });
         
+        // $('#div_id_disability_desc').hide();
+        $("#id_family_status").change(function() {
+          if ($(this).val() == "orphan") {
+            $('#death_certs').show();
+            $('#div_select_dead_parent').hide();
+            $('#id_death_cert_father').attr('required', '');
+            $('#id_death_cert_father').attr('data-error', 'Please upload your father\'s death certificate.');
+            $('#id_death_cert_mother').attr('required', '');
+            $('#id_death_cert_mother').attr('data-error', 'Please upload your mother\'s death certificate.');
+          }
+          else if ($(this).val() == "partial_orphan") {
+            $('#death_certs').hide();
+            $('#div_select_dead_parent').show();
+            $('#div_select_dead_parent').attr('required', '');
+            $('#div_select_dead_parent').attr('data-error', 'Please select an option on this field')
+
+          }
+          else {
+            
+            $('#death_certs').hide();
+            $('#div_select_dead_parent').hide();
+            $('#id_death_cert_father').removeAttr('required');
+            $('#id_death_cert_father').removeAttr('data-error');
+            $('#id_death_cert_mother').removeAttr('required');
+            $('#id_death_cert_mother').removeAttr('data-error');
+          }
+        });
+        $("#id_family_status").trigger("change");
+
+        $("input[name=disability_status]").change(function(){
+            $('#div_id_disability_desc').hide();
+            // alert($(this).val());
+            if ($(this).val() == "True") {
+              // alert("I am for true");
+              $('#div_id_disability_desc').show();
+            }
+            else if ($(this).val() == "False"){
+              $('#div_id_disability_desc').hide();
+            }
+
+            else {
+              $('#div_id_disability_desc').hide();
+            }
+        });
+        $("input[name=disability_status]").trigger("change");
+
+      });
+    </script>
+
+    <script>
+      function checkParent(){
+
+        var value = $("#select_dead_parent").val();
+
+        if ( value == "father") {
+          $('#death_certs').show();
+          $('#div_death_cert_father').hide();
+          $('#div_death_cert_mother').show();
+          // $('#div_death_cert_mother').removeClass("col-md-6");
+          // $('#div_death_cert_mother').addClass("col-md-12");
+          $('#id_death_cert_mother').attr('required', '');
+        }
+        else if(value == "mother"){
+          $('#death_certs').show();
+          $('#div_death_cert_mother').hide();
+          $('#div_death_cert_father').show();
+          // $('#div_death_cert_father').removeClass("col-md-6");
+          // $('#div_death_cert_father').addClass("col-md-12");
+          $('#id_death_cert_father').attr('required', '');
+        }
+        else {
+          $('#death_certs').hide();
+        }
+
+        $("#select_dead_parent").trigger("change")
         
-    });
-  </script>
+      }
+    </script>
 </div>
 
 {% endblock %}

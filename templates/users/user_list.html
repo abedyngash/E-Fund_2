@@ -18,8 +18,9 @@
           <div class="float-left">
             <a class="btn btn-primary" href="{% url 'signup' %}">
             <span class="fa fa-plus-circle mr-2"></span>
-            Add new user
-        </a>
+            Add New Staff User
+            </a>
+            <a class="btn btn-danger" href="{% url 'register-executive' %}"><span class="fa fa-plus-circle mr-2"></span>Add New Executive User</a>
           </div>
             <table class="table" id="users_table">
               <thead class="">
@@ -73,12 +74,10 @@
                   <td>
                       {% if user.is_superuser %}
                           <span class="badge badge-danger"><i class="fa fa-user"></i>&nbsp;Admin</span>
+                          {% elif user.is_executive %}
+                          <span class="badge badge-warning"><i class="fa fa-user"></i>&nbsp;Executive</span>
                           {% else %}
-                          {% if user.is_entity %}
-                            <span class="badge badge-success"><i class="fa fa-user"></i>&nbsp;School</span>
-                            {% else %}                            
-                            <span class="badge badge-primary"><i class="fa fa-user"></i>&nbsp;Staff</span>
-                          {% endif %}
+                          <span class="badge badge-info"><i class="fa fa-user"></i>&nbsp;Staff</span>
                       {% endif %}
                   </td>
                 </tr>

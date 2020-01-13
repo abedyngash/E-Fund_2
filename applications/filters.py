@@ -1,6 +1,7 @@
 from .models import Applicant, Subcounty, Ward, Sublocation, SchoolType
 import django_filters
 from django_select2.forms import *
+from applications.models import HistoricalApplicant
 
 class SubcountyWidget(ModelSelect2Widget):
     model = Subcounty
@@ -92,3 +93,10 @@ class ApplicantFilter(django_filters.FilterSet):
 		model = Applicant
 		fields = ['subcounty', 'ward', 'sublocation', 'school_type']
 		
+class LogFilter(django_filters.FilterSet):
+	class Meta:
+		model = HistoricalApplicant
+		fields = ['history_user', 'history_type']
+		labels = {
+			'history_user': 'Select a user to view their logs'
+		}

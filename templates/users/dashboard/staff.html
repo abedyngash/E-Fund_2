@@ -3,7 +3,7 @@
 {% load humanize %}
 {% block content %}
     <div class="row">
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-6 col-sm-6">
         <div class="card card-stats">
           <div class="card-body ">
             <div class="row">
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-6 col-sm-6">
         <div class="card card-stats">
           <div class="card-body ">
             <div class="row">
@@ -52,31 +52,6 @@
             </div>
           </div>
         </div> 
-      </div>
-      <div class="col-md-4 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-body ">
-            <div class="row">
-              <div class="col-5 col-md-4">
-                <div class="icon-big text-center icon-warning">
-                  <i class="fa fa-database text-warning"></i>
-                </div>
-              </div>
-              <div class="col-7 col-md-8">
-                <div class="numbers">
-                  <p class="card-category">Money allocated</p>
-                  <p class="card-title">{{allocation_details.amount_allocated|intword }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer ">
-            <hr>
-            <div class="stats">
-              <a href="{% url 'allocation-details' %}">View Allocations</a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="row">

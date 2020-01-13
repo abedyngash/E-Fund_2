@@ -34,9 +34,15 @@ class ApplicationCreateView(UserPassesTestMixin, SuccessMessageMixin, CreateView
 
 		if application_start_date.date() < datetime.datetime.today().date() and application_end_date.date() > datetime.datetime.today().date():
 			return True
+			if request.user.is_authenticated:
+				return True
+			return False
 		return False
 
 	def handle_no_permission(self):
+		if not self.request.user.is_authenticated:
+			messages.error(self.request, f'You are not authorized to access that')
+			return redirect('home')
 		messages.error(self.request, f'Whoops! Applications are closed for now')
 		return redirect('home')
 

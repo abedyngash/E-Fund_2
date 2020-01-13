@@ -34,7 +34,7 @@ def get_current_financial_year():
 
 def allocationdetails(request):
 	schooltypes = applications_models.SchoolType.objects.all()
-	tags = ['success', 'danger', 'warning', 'secondary', 'primary']
+	tags = ['info', 'success', 'danger', 'warning', 'secondary', 'primary']
 	schooltypes_with_tags =zip(schooltypes, tags)
 	context = {
 		'title': 'Allocations',

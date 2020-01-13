@@ -97,7 +97,7 @@ class Applicant(models.Model):
     disability_status = models.BooleanField(default=False)
     disability_desc = models.TextField(null=True, blank=True)
 
-    school_type = models.ForeignKey(SchoolType, on_delete=models.CASCADE)
+    school_type = models.ForeignKey(SchoolType, on_delete=models.CASCADE, related_name='applicants')
     school_name = models.CharField(max_length=250)
     school_email = models.EmailField()
     adm_number = models.CharField(max_length=100)
@@ -169,6 +169,6 @@ class Applicant(models.Model):
         super(Applicant , self).save(*args, **kwargs)
 
     
-    def get_absolute_url(self):
-        return reverse('home')
+    # def get_absolute_url(self):
+    #     return reverse('home')
 

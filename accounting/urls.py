@@ -15,6 +15,7 @@ from applications.views import (school_disbursements,
 								cover_letter,
 								cover_letter_for_uni_or_college,
 								ward_school_types_details,
+								bulk_cover_letter,
 							)
 
 urlpatterns = [
@@ -38,5 +39,6 @@ urlpatterns = [
 	path('school/edit_cheque/<str:school_name>/<int:pk>', UpdateChequeForUniOrCollege.as_view(), name='edit-cheque-for-uni-or-college'),
 
 	path('school/<int:ward_id>/<str:school_name>/<cheque_number>/', cover_letter, name='generate-cover-letter'),
+	path('school/<int:ward_id>/<int:school_cat_id>', bulk_cover_letter, name='generate-bulk-cover-letter'),
 	path('school/<int:ward_id>/<str:school_name>/<cheque_number>/<int:pk>', cover_letter_for_uni_or_college, name='generate-cover-letter-for-uni-or-college')
 ]

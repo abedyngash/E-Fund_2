@@ -29,11 +29,25 @@ class SchoolFilter(django_filters.FilterSet):
     )
 	ward = django_filters.ModelChoiceFilter(
 	    queryset=Ward.objects.all(),
-	    widget= WardWidget
+	    label='Ward',
+	    widget=ModelSelect2Widget(
+	  queryset=Ward.objects.all(),
+	    search_fields=['name__icontains'],
+	    dependent_fields={'subcounty': 'subcounty'},
+	    max_results=500,
+	    attrs={'data-minimum-input-length': 0},
+	)
 	)
 	sublocation = django_filters.ModelChoiceFilter(
 	    queryset=Sublocation.objects.all(),
-	    widget= SublocationWidget
+	    label='Sublocation',
+	    widget=ModelSelect2Widget(
+	  queryset=Sublocation.objects.all(),
+	    search_fields=['name__icontains'],
+	    dependent_fields={'subcounty': 'subcounty', 'ward': 'ward'},
+	    max_results=500,
+	    attrs={'data-minimum-input-length': 0},
+	)
 	)
 	school_type = django_filters.ModelChoiceFilter(
 		queryset = SchoolType.objects.all(),
@@ -42,9 +56,6 @@ class SchoolFilter(django_filters.FilterSet):
 	class Meta:
 		model = Applicant
 		fields = ['subcounty', 'ward', 'sublocation', 'school_type']
-	def __init__(self, *args, **kwargs):
-	    super(SchoolFilter, self).__init__(*args, **kwargs)
-	    # self.filters['school_type'].label="School"
 
 class ApplicantFilter(django_filters.FilterSet):
 	subcounty = django_filters.ModelChoiceFilter(
@@ -53,11 +64,25 @@ class ApplicantFilter(django_filters.FilterSet):
     )
 	ward = django_filters.ModelChoiceFilter(
 	    queryset=Ward.objects.all(),
-	    widget= WardWidget
+	    label='Ward',
+	    widget=ModelSelect2Widget(
+	  queryset=Ward.objects.all(),
+	    search_fields=['name__icontains'],
+	    dependent_fields={'subcounty': 'subcounty'},
+	    max_results=500,
+	    attrs={'data-minimum-input-length': 0},
+	)
 	)
 	sublocation = django_filters.ModelChoiceFilter(
 	    queryset=Sublocation.objects.all(),
-	    widget= SublocationWidget
+	    label='Sublocation',
+	    widget=ModelSelect2Widget(
+	  queryset=Sublocation.objects.all(),
+	    search_fields=['name__icontains'],
+	    dependent_fields={'subcounty': 'subcounty', 'ward': 'ward'},
+	    max_results=500,
+	    attrs={'data-minimum-input-length': 0},
+	)
 	)
 	school_type = django_filters.ModelChoiceFilter(
 		queryset = SchoolType.objects.all(),

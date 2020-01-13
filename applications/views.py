@@ -18,6 +18,10 @@ from django.utils.text import slugify, format_lazy
 from django.template.loader import get_template
 from Elimu_Fund.utils import render_to_pdf, link_callback
 from xhtml2pdf import pisa
+import zipfile
+import io
+import os
+import tempfile
 # Create your views here.
 class ApplicationCreateView(UserPassesTestMixin, SuccessMessageMixin, CreateView):
 	def test_func(self):
@@ -255,25 +259,6 @@ def ward_disbursements(request):
 
 	return render(request, 'accounting/disbursements/ward_disbursements/ward_disbursements.html', context)
 
-def ward_school_types_details(request, ward_id, school_cat_id):
-	schools_in_category = Applicant.objects.all().filter(
-			award_status="awarded", ward_id=ward_id, school_type_id=school_cat_id
-		).values('school_name', 'ward_id', 'school_type', 'cheque_number__cheque_number','cheque_number__id').order_by(
-		'school_name').annotate(
-		name_count=Count('school_name'))
-
-	school_filter = SchoolFilter(request.GET, queryset=schools_in_category)
-	ward = Ward.objects.get(id=ward_id)
-	school_type = SchoolType.objects.get(id=school_cat_id)
-
-	context = {
-		# 'schools': schools_with_applicants,
-		'filter' : school_filter,
-		'ward': ward,
-		'school_type': school_type
-	}
-
-	return render(request, 'accounting/disbursements/ward_disbursements/ward_disbursements_details.html', context)
 
 def ward_disbursements_details(request, ward_id):
 	schooltypes = SchoolType.objects.all()
@@ -285,6 +270,75 @@ def ward_disbursements_details(request, ward_id):
 	}
 
 	return render(request, 'accounting/disbursements/ward_disbursements/ward_school_types.html', context)
+
+def ward_school_types_details(request, ward_id, school_cat_id):
+	schools_in_category = Applicant.objects.all().filter(
+			award_status="awarded", ward_id=ward_id, school_type_id=school_cat_id
+		).values('school_name', 'ward_id', 'school_type', 'cheque_number__cheque_number','cheque_number__id').order_by(
+		'school_name').annotate(
+		name_count=Count('school_name'))
+
+	school_filter = SchoolFilter(request.GET, queryset=schools_in_category)
+	ward = Ward.objects.get(id=ward_id)
+	school_type = SchoolType.objects.get(id=school_cat_id)
+	cheque_number = schools_in_category.values_list('cheque_number__cheque_number', flat=True).distinct()
+
+	context = {
+		# 'schools': schools_with_applicants,
+		'filter' : school_filter,
+		'ward': ward,
+		'school_type': school_type,
+		'cheque_number': cheque_number
+	}
+
+	return render(request, 'accounting/disbursements/ward_disbursements/ward_disbursements_details.html', context)
+
+def bulk_cover_letter(request, ward_id, school_cat_id):
+	reports = tempfile.TemporaryDirectory()
+	report_files = {}
+	school_type = SchoolType.objects.get(id=school_cat_id)
+	ward = Ward.objects.get(id=ward_id)
+
+	schools_in_school_type = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by().values_list('school_name', flat=True).distinct()
+
+
+	for school in schools_in_school_type:
+		# cheque_number = 1114
+		cheque_number = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded', school_name=school).values_list('cheque_number__cheque_number', flat=True).distinct()
+		beneficiaries = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded', school_name=school)
+		total_amount_to_beneficiaries = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded', school_name=school).aggregate(total=Sum('school_type__amount_allocated'))
+		print(cheque_number[0])
+		context = {
+			'school_name' : school,
+			'beneficiaries' : beneficiaries,
+			'total_amount_to_beneficiaries' : total_amount_to_beneficiaries,
+			'title' : school + ' Disbursement Details',
+			'cheque_number': cheque_number[0]
+		}
+
+		response = HttpResponse('<title>Cover Letter</title>', content_type='application/pdf')
+		filename = "%s.pdf" %(cheque_number[0])
+		content = "inline; filename=%s" %(filename)
+		response['Content-Disposition'] = content
+		template = get_template('cover_letter.html')
+		html = template.render(context)
+		# result = io.BytesIO()
+		mem_fp = io.BytesIO()
+		pdf = pisa.CreatePDF(
+       		html, dest=mem_fp, link_callback=link_callback)
+		resp = HttpResponse(mem_fp.getvalue(), content_type='application/pdf')
+		resp['Content-Disposition'] = "attachment; filename=%s" %(filename)
+		report_files[filename] = resp
+
+	# print(bulk_pdfs)
+
+	mem_zip = io.BytesIO()
+	with zipfile.ZipFile(mem_zip, mode="w") as zf:
+		for filename, content in report_files.items():
+			zf.write(filename, content)
+	response = HttpResponse(mem_zip, content_type='application/force-download')
+	response['Content-Disposition'] = 'attachment; filename="{}"'.format(f'{ward}_cover_letters.zip')
+
 
 def schools_in_ward_details(request, ward_id, school_name):
 	school_applicants = Applicant.objects.filter(school_name=school_name, ward_id=ward_id, award_status='awarded')
@@ -335,10 +389,11 @@ class AddChequeForWard(BSModalCreateView):
 	form_class = ChequeForm
 	template_name = 'accounting/add_cheque_form.html'
 	success_message = 'Success: Cheque Added'
-	# success_url = reverse_lazy()
+	success_url = reverse_lazy('ward-school-types-details')
 
 	def get_success_url(self):
-		return reverse('ward-disbursements')
+		ward_id = self.kwargs['ward_id']
+		return reverse('ward-school-types-details', kwargs={'ward_id': ward_id, 'school_cat_id':5 })
 
 	def form_valid(self, form):
 

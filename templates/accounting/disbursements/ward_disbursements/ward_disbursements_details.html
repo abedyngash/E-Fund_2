@@ -14,9 +14,10 @@
 	</nav>
 	<div class="card">
 		<div class="card-header">
-			<h5 class="card-title border-bottom">Awarded Schools in <b>{{ward.name}}</b> Ward</h5>
+			<h5 class="card-title border-bottom">Awarded - {{school_type}} - in <b>{{ward.name}}</b> Ward</h5>
 		</div>
 		<div class="card-body">
+            <a href="{% url 'generate-bulk-cover-letter' ward.id school_type.id %}">Generate Bulk</a>
             <form method="get" class="">
                 <div class="row">
                     <div class="col-md-3">                      
@@ -75,7 +76,7 @@
                                     </button>
                                     {% else %}
                             
-                                        <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'add-cheque-for-ward' ward.id application.school_name %}" data-toggle="tooltip" data-placement="auto" title="Add Cheque">
+                                        <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'add-cheque-for-ward' ward.id  application.school_name %}" data-toggle="tooltip" data-placement="auto" title="Add Cheque">
                                             <span class="fa fa-pencil"></span>
                                         </button>
                                 {% endif %} 

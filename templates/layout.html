@@ -78,6 +78,7 @@
 			    <div class="sidebar-wrapper">
 			        <ul class="nav">
 			        	{% if user.is_authenticated %}
+			        	{% if not user.is_executive %}
 			        		
 				          <li id="home">
 				            <a href="{% url 'home' %}">
@@ -85,6 +86,7 @@
 				              <p>Dashboard</p>
 				            </a>
 				          </li>
+			        	{% endif %}
 				          
 				          	
 				          <li id="profile">
@@ -113,6 +115,9 @@
 					              <p>Applications</p>
 					            </a>
 				          	</li>
+				          {% endif %}
+			        	{% endif %}
+				        {% if user.is_superuser %}
 				          	<li id="disbursements">
 					            <a href="{% url 'disbursements-home' %}">
 					              <i class="fa fa-money"></i>
@@ -125,17 +130,22 @@
 					              <p>Allocations</p>
 					            </a>
 					        </li>
-				          {% endif %}
-			        	{% endif %}
-				        {% if user.is_superuser %}
 				         
 				          <li id="users">
 				            <a href="{% url 'users-list' %}">
 				              <i class="fa fa-address-card-o"></i>
 				              <p>Users</p>
 				            </a>
+				          </li>
+				        {% endif %}	 
+				        {% if user.is_superuser or user.is_executive %}				                 	
+				          <li id="logs">
+				            <a href="{% url 'applicants-logs' %}">
+				              <i class="fa fa-history"></i>
+				              <p>System Logs</p>
+				            </a>
 				          </li>				          			          	          	
-				        {% endif %}	          
+				        {% endif %}         
 			        </ul>
 			    </div>
 		    </div>

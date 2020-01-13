@@ -10,10 +10,11 @@ from applications.models import Applicant, Subcounty, Sublocation, Ward, SchoolT
 from accounting.views import get_current_financial_year, get_money_per_ward
 from accounting.models import AllocationDetail
 import datetime
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.forms.models import modelformset_factory
 from applications.forms import SchoolTypeUpdateForm
+from applications.filters import LogFilter
 
 from bootstrap_modal_forms.generic import BSModalCreateView
 
@@ -48,6 +49,17 @@ def home(request):
 			if not request.user.schoolprofile.name:
 				messages.warning(request, f'Welcome user {request.user.login_id}, please update your profile to continue')
 				return redirect('profile')
+
+	if request.user.is_executive:
+		# applicants = Applicant.objects.all().filter(award_status='awarded')
+		logs = Applicant.history.all()
+		logs_filter = LogFilter(request.GET, queryset=logs)
+		users = User.objects.all()
+		context = {
+			'logs': logs_filter,
+			'users': users,
+		}
+		return render(request, 'users/dashboard/executive.html', context)
 
 	if request.user.is_superuser:
 
@@ -127,7 +139,7 @@ def staff_profile(request):
 			u_form.save()
 			p_form.save()
 			messages.success(request, f'Your profile has been updated!')
-			return redirect('staff_profile')
+			return redirect('home')
 	else:
 		u_form = UserUpdateForm(instance=request.user)
 		p_form = StaffProfileUpdateForm(instance=request.user.staffprofile)
@@ -168,7 +180,7 @@ def register(request):
 			form.save()
 			login_id = form.cleaned_data.get('login_id')
 			messages.success(request, f'User {login_id} registered successfully')
-			return redirect('home')
+			return redirect('users-list')
 
 	else:
 		form = UserRegisterForm()
@@ -185,6 +197,16 @@ class SignUpView(BSModalCreateView):
     template_name = 'users/auth/signup.html'
     success_message = 'Success: Sign up succeeded. '
     success_url = reverse_lazy('home')
+
+class ExecutiveSignUp(SuccessMessageMixin, CreateView):
+	form_class = UserRegisterForm
+	template_name = 'users/auth/register.html'
+	success_message = 'Success: Executive member added successfully'
+	success_url = reverse_lazy('users-list')
+
+	def form_valid(self, form):
+		form.instance.is_executive = True
+		return super(ExecutiveSignUp, self).form_valid(form)
 
 class UserListView(ListView):
 	model = User

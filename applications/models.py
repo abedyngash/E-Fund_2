@@ -2,6 +2,7 @@ from django.db import models
 from accounting.models import FinancialYear, Cheque
 from django.shortcuts import reverse
 from accounting.views import get_current_financial_year
+from simple_history.models import HistoricalRecords
 
 # Create your models here.
 FAMILY_STATUS = (
@@ -103,7 +104,7 @@ class Applicant(models.Model):
     adm_number = models.CharField(max_length=100)
     class_of_study = models.IntegerField()
 
-    award_status = models.CharField(max_length=200, choices=AWARD_STATUS, default='not_set')
+    award_status = models.CharField(max_length=200, choices=AWARD_STATUS, default='awarded')
     discipline = models.CharField(max_length=250, choices=DISCIPLINE, blank=True, null=True)
 
     subcounty = models.ForeignKey('Subcounty', related_name="applicants", on_delete=models.CASCADE)
@@ -111,7 +112,8 @@ class Applicant(models.Model):
     sublocation = models.ForeignKey('Sublocation', related_name='applicants', on_delete=models.CASCADE)
 
     cheque_number = models.ForeignKey(Cheque, on_delete=models.SET_NULL, null=True, blank=True) 
-
+    history = HistoricalRecords()
+    
     @property
     def score(self):
         first_score = 0

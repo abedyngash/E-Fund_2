@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% include "_modal.html" %}
+  <h5 class="border-bottom">History Logs</h5>
+  <div class="card">
+    <div class="card-body">
+    	<form method="get" class="logs_form border-bottom mb-2">
+    		<div class="row">
+                <div class="col-md-6">                      
+                  {{ logs.form.history_user|as_crispy_field }}                       
+                </div>
+                <div class="col-md-6">
+                  {{ logs.form.history_type|as_crispy_field }}
+                </div>                                   
+            </div>            
+        </form>
+      <table class="table" id="users_table">
+        <thead class="">
+          <th>
+            #
+          </th>
+          <th>
+            User
+          </th>              
+          <th>
+            Action
+          </th>
+          <th>
+            Record
+          </th>
+          <th>
+            Date / Time
+          </th>
+        </thead>
+        <tbody>
+          {% for record in logs.qs %}
+          <tr >
+            <td class="text-center">{{ forloop.counter}}</td>
+            <td>{{record.history_user}} ({{record.history_user.staffprofile.first_name}} {{record.history_user.staffprofile.last_name}})</td>             
+            <td>{{record.get_history_type_display}}</td>
+            <td>{{record.first_name}} {{record.last_name}}</td>
+            <td>{{record.history_date|naturaltime}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>    
+
+  <script>
+  	$("label[for='id_history_user']").html("<span class='font-weight-bold'>Select a user to view their logs</span>");
+  	$("label[for='id_history_type']").html("<span class='font-weight-bold'>Choose the nature of action</span>");
+    document.getElementById("logs").className += " active";
+    $(".view-details-btn").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+    $('.logs_form').find(':input').each(function(){
+	  $(this).change(function(){
+	    $('.logs_form').submit();
+	  });
+	});
+	
+  </script>
+{% endblock	%}

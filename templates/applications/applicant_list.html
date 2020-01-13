@@ -10,9 +10,15 @@
     </ol>
   </nav>
   <h5 class="border-bottom">All Applicants</h5>
+      <div>
+        <a class="btn btn-primary" href="{% url 'apply' %}">
+          <span class="fa fa-plus-circle mr-2"></span>
+          Add new Applicant
+        </a>
+      </div>
   <div class="card">
     <div class="card-body">
-      <form method="get" class="">
+      <form method="get" class="applicants_form">
             <div class="row">
                 <div class="col-md-3">                      
                   {{ applicants.form.subcounty|as_crispy_field }}                       
@@ -27,9 +33,7 @@
                   {{ applicants.form.school_type|as_crispy_field }}
                 </div>                   
             </div>
-            <div class="text-center">                    
-                <button type="submit" class="btn btn-sm btn-block btn-outline-primary text-center">Get Applicants</button>
-            </div>
+            
         </form>
       <table class="table" id="users_table">
         <thead class="">
@@ -74,10 +78,15 @@
             <td>{{applicant.subcounty}}</td>
             <td>{{applicant.ward}}</td>
             <td>{{applicant.sublocation}}</td>
-            <td>
-              <button class="view-details-btn btn btn-sm btn-primary" type="button" name="button" data-id="{% url 'applicants-detail' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="View details">
+            <td class="row">
+              <button class="view-details-btn btn btn-sm btn-primary mr-2" type="button" name="button" data-id="{% url 'applicants-detail' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="View details">
                 <span class="fa fa-eye mr-2"></span>                                
               </button>
+
+              <a class="btn btn-sm btn-primary" type="button" name="button" href="{% url 'applicants-update' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Edit record">
+                <span class="fa fa-pencil mr-2"></span>                                
+              </a>
+              
             </td>                
           </tr>
           {% endfor %}
@@ -91,6 +100,12 @@
     $(".view-details-btn").each(function () {
         $(this).modalForm({formURL: $(this).data('id')});
       });
+
+    $('.applicants_form').find(':input').each(function(){
+    $(this).change(function(){
+      $('.applicants_form').submit();
+    });
+  });
   </script>
 {% endblock %}
 

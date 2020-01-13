@@ -13,5 +13,7 @@ urlpatterns = [
     path('schooltypes-list/', SchoolTypeListView.as_view(), name='schooltypes-list'),
     path('school-applicants-list', school_applicants_view, name='school-applicants-list'),
     path('reviewed-school-applicants-list', reviewed_school_applicants_view, name='reviewed-school-applicants-list'),
-    path('school-applicants-update', applicants_from_school_update, name='school-applicants-update')
+    path('school-applicants-update', applicants_from_school_update, name='school-applicants-update'),
+
+    path('logs/', ApplicantHistoryView.as_view(), name='applicants-logs')
 ]

@@ -24,18 +24,6 @@
         {% csrf_token %}
         <div>
             <div>
-                {{form.award_status|as_crispy_field}}
-                <div class="border-bottom border-top pt-2 pb-2"> 
-                    <h6 >Amount remaining to be awarded in this applicant's sublocation: 
-                        <button class="{% if money_per_ward|div:sublocations_count|sub:amount_so_far.total < 10000 %}
-                            badge badge-danger
-                            {% else %}
-                            badge badge-success
-                        {% endif %}">
-                            {{money_per_ward|div:sublocations_count|sub:amount_so_far.total|intword|intcomma}}
-                        </button>
-                    </h6>
-                </div>
                 <h6 class="border-bottom mb-4">PART 1 : Personal Details</h6>
                 <div class="">                                    
                     <div class="row">
@@ -72,7 +60,7 @@
                 <h6 class="border-bottom border-top pt-2 pb-2 mt-4 mb-4">Part 2 : School Details</h6>
                 {{ form.school_type|as_crispy_field }}
                 {{ form.school_name|as_crispy_field }}
-                {{ form.school_email|as_crispy_field }}
+                
                 <div class="row">
                     <div class="col-md-6">                                            
                         {{form.adm_number|as_crispy_field}}

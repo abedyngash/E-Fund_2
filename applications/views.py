@@ -9,7 +9,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.forms.models import modelformset_factory
-from .filters import SchoolFilter, ApplicantFilter
+from .filters import SchoolFilter, ApplicantFilter, LogFilter
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalReadView
 from django.db.models import Count, Sum
 import datetime
@@ -49,6 +49,7 @@ class ApplicationCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMess
 	model = Applicant
 	form_class = ApplicationForm
 	success_message = "Application sent successfully"
+	success_url=reverse_lazy('applicants-list')
 
 	def get_form_kwargs(self):
 		kwargs = super(ApplicationCreateView, self).get_form_kwargs()
@@ -137,17 +138,7 @@ class ApplicantUpdateView(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
 		return redirect('home')
 
 	def form_valid(self, form):
-		current_ward = self.get_object().ward
-		current_sublocation = self.get_object().sublocation
-		money_per_ward = get_money_per_ward()
-		sublocations_count = Sublocation.objects.all().filter(ward=current_ward).count()
-		total_amount = Applicant.objects.filter(ward=current_ward, sublocation=current_sublocation, award_status='awarded').aggregate(total=Sum('school_type__amount_allocated'))
-		money_remaining = money_per_ward/sublocations_count-total_amount['total']
-		if form.instance.award_status == "awarded":
-			if form.instance.school_type.amount_allocated > money_remaining:
-				form.add_error('award_status', "No more awards can be made for this Applicant's category")
-				messages.error(self.request, f'Award limits already reached')
-				return self.form_invalid(form)
+		
 		return super(ApplicantUpdateView, self).form_valid(form)
 
 
@@ -508,3 +499,16 @@ def cover_letter_for_uni_or_college(request, school_name, ward_id, cheque_number
        )
 
 	return response
+
+class ApplicantHistoryView(ListView):
+	template_name = "applications/applicant_history_list.html"
+	def get_queryset(self):
+		history = Applicant.history.all()
+		return history
+
+	def get_context_data(self, **kwargs):
+	    context = super(ApplicantHistoryView, self).get_context_data(**kwargs)
+	    logs = Applicant.history.all()
+	    logs_filter = LogFilter(self.request.GET, queryset=logs)
+	    context['logs'] = logs_filter
+	    return context

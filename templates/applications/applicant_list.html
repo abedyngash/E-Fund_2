@@ -90,7 +90,7 @@
               {% endif %}
 
 	      {% if user.is_superuser %}
-	      <button class="delete-btn btn btn-sm btn-danger mr-2" type="button" name="button" data-id="{% url 'applicants-delete' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="View details">
+	      <button class="delete-btn btn btn-sm btn-danger mr-2" type="button" name="button" data-id="{% url 'applicants-delete' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Delete Record">
                 <span class="fa fa-trash mr-2"></span>
               </button>
 	      {% endif %}

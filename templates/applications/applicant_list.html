@@ -79,21 +79,30 @@
             <td>{{applicant.ward}}</td>
             <td>{{applicant.sublocation}}</td>
             <td class="row">
-              <button class="view-details-btn btn btn-sm btn-primary mr-2" type="button" name="button" data-id="{% url 'applicants-detail' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="View details">
+              <div class="col-md-4">
+                <button class="view-details-btn btn btn-sm btn-primary mr-2" type="button" name="button" data-id="{% url 'applicants-detail' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="View details">
                 <span class="fa fa-eye mr-2"></span>                                
-              </button>
-
+                </button>
+              </div>
               {% if not user.is_executive %}
-              <a class="btn btn-sm btn-primary" type="button" name="button" href="{% url 'applicants-update' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Edit record">
+              <div class="col-md-4">
+                <a class="btn btn-sm btn-primary" type="button" name="button" href="{% url 'applicants-update' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Edit record">
                 <span class="fa fa-pencil mr-2"></span>                                
               </a>
+              </div>
               {% endif %}
+      	      {% if user.is_superuser %}
+              <div class="col-md-4">
+                <button class="delete-btn btn btn-sm btn-danger mr-2" type="button" name="button" data-id="{% url 'applicants-delete' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Delete Record">
+                      <span class="fa fa-trash mr-2"></span>
+                    </button>
+              </div>
+      	      {% endif %}
+              
 
-	      {% if user.is_superuser %}
-	      <button class="delete-btn btn btn-sm btn-danger mr-2" type="button" name="button" data-id="{% url 'applicants-delete' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Delete Record">
-                <span class="fa fa-trash mr-2"></span>
-              </button>
-	      {% endif %}
+              
+
+      	      
 
             </td>                
           </tr>

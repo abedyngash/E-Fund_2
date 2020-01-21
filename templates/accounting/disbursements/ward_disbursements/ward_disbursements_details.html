@@ -71,12 +71,12 @@
                                 </button>
                             {% else %}
                                 {% if application.cheque_number__cheque_number %}                         
-                                    <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'edit-cheque-for-ward' ward.id application.school_name application.cheque_number__id  %}" data-toggle="tooltip" data-placement="auto" title="Edit Cheque">
+                                    <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'edit-cheque-for-ward' ward.id application.school_type application.school_name application.cheque_number__id  %}" data-toggle="tooltip" data-placement="auto" title="Edit Cheque">
                                         <span class="fa fa-pencil"></span>
                                     </button>
                                     {% else %}
                             
-                                        <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'add-cheque-for-ward' ward.id  application.school_name %}" data-toggle="tooltip" data-placement="auto" title="Add Cheque">
+                                        <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'add-cheque-for-ward' ward.id application.school_type application.school_name %}" data-toggle="tooltip" data-placement="auto" title="Add Cheque">
                                             <span class="fa fa-pencil"></span>
                                         </button>
                                 {% endif %} 

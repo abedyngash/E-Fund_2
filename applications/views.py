@@ -382,11 +382,12 @@ class AddChequeForWard(BSModalCreateView):
 	form_class = ChequeForm
 	template_name = 'accounting/add_cheque_form.html'
 	success_message = 'Success: Cheque Added'
-	success_url = reverse_lazy('ward-school-types-details')
+	# success_url = reverse_lazy('ward-school-types-details')
 
 	def get_success_url(self):
 		ward_id = self.kwargs['ward_id']
-		return reverse('ward-school-types-details', kwargs={'ward_id': ward_id, 'school_cat_id':5 })
+		school_cat_id = self.kwargs['school_cat_id']
+		return reverse('ward-school-types-details', kwargs={'ward_id': ward_id, 'school_cat_id':school_cat_id })
 
 	def form_valid(self, form):
 
@@ -422,8 +423,13 @@ class UpdateChequeForWard(BSModalUpdateView):
 	template_name = 'accounting/edit_cheque_form.html'
 	form_class = ChequeForm
 	success_message = 'Success: Cheque was updated.'
-	success_url = reverse_lazy('ward-disbursements')
+	# success_url = reverse_lazy('ward-disbursements')
 	extra_content = {'title': 'Edit Cheque'}
+
+	def get_success_url(self):
+		ward_id = self.kwargs['ward_id']
+		school_cat_id = self.kwargs['school_cat_id']
+		return reverse('ward-school-types-details', kwargs={'ward_id': ward_id, 'school_cat_id':school_cat_id })
 
 	def form_valid(self, form):
 		instance = form.save()

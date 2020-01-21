@@ -32,8 +32,8 @@ urlpatterns = [
 	path('disbursements/ward/<int:ward_id>/<str:school_name>/', schools_in_ward_details, name='schools-in-ward-details'),
 	path('disbursements/sublocation/', sublocation_disbursements, name='sublocation-disbursements'),
 
-	path('ward/<int:ward_id>/school/<str:school_name>/', AddChequeForWard.as_view(), name='add-cheque-for-ward'),
-	path('ward/<int:ward_id>/school/<str:school_name>/edit-cheque/<int:pk>', UpdateChequeForWard.as_view(), name='edit-cheque-for-ward'),
+	path('ward/<int:ward_id>/school/<int:school_cat_id>/<str:school_name>/', AddChequeForWard.as_view(), name='add-cheque-for-ward'),
+	path('ward/<int:ward_id>/school/<int:school_cat_id>/<str:school_name>/edit-cheque/<int:pk>', UpdateChequeForWard.as_view(), name='edit-cheque-for-ward'),
 
 	path('school/<str:school_name>/<int:pk>/add_cheque', AddChequeForUniOrCollege.as_view(), name='add-cheque-for-uni-or-college'),
 	path('school/edit_cheque/<str:school_name>/<int:pk>', UpdateChequeForUniOrCollege.as_view(), name='edit-cheque-for-uni-or-college'),

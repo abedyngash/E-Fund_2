@@ -178,10 +178,12 @@ class ApplicantDetailView(BSModalReadView):
 def get_duplicate_applicants(request):
 	first_names = Applicant.objects.values('first_name').annotate(Count('id')).order_by().filter(id__count__gt=1)
 	last_names = Applicant.objects.values('last_name').annotate(Count('id')).order_by().filter(id__count__gt=1)
+	school_names = Applicant.objects.values('school_name').annotate(Count('id')).order_by().filter(id__count__gt=1)
 
 	duplicate_records = Applicant.objects.filter(
 	first_name__in=[item['first_name'] for item in first_names],
 	last_name__in=[item['last_name'] for item in last_names],
+	school_name__in=[item['school_name'] for item in school_names],
 	)
 	applicants_filter = DuplicatesFilter(request.GET, queryset=duplicate_records)
 

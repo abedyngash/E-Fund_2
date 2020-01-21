@@ -97,17 +97,17 @@ class ApplicationListView(UserPassesTestMixin, ListView):
 	    return context
 
 class ApplicantDeleteView(UserPassesTestMixin, BSModalDeleteView):
-    	def test_func(self):
+	def test_func(self):
 	    if self.request.user.is_superuser:
 	    	return True
 	    return False
-    	def handle_no_permission(self):
+	def handle_no_permission(self):
 	    messages.error(self.request, "You don't have the required rights to access that")
 	    return redirect('applicants-list')
-    	model = Applicant
-    	template_name = 'applications/delete_applicant.html'
-    	success_message = 'Success: Applicant Record was deleted.'
-    	success_url = reverse_lazy('applicants-list')
+	model = Applicant
+	template_name = 'applications/delete_applicant.html'
+	success_message = 'Success: Applicant Record was deleted.'
+	success_url = reverse_lazy('applicants-list')
 
 def get_awarded_applicants(request):
 	awarded_applicants = Applicant.objects.filter(award_status="awarded")

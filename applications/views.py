@@ -177,14 +177,14 @@ class ApplicantDetailView(BSModalReadView):
     model = Applicant
 
 def get_duplicate_applicants(request):
-	school_names = Applicant.objects.values('school_name').annotate(Count('id')).order_by('school_name').filter(id__count__gt=1)
+	school_names = Applicant.objects.values('school_name').annotate(Count('id')).order_by().filter(id__count__gt=1)
 	qs = Applicant.objects.annotate(
             dupe_id=Concat(
                         F('first_name')
                         , F('last_name')
                         , output_field=CharField()
             )
-        ).filter(school_name__in=[item['school_name'] for item in school_names]).order_by('first_name')
+        ).filter(school_name__in=[item['school_name'] for item in school_names]).order_by('first_name', 'last_name')
 
 	dupes = qs.values('dupe_id').annotate(dupe_count=Count('dupe_id')).filter(dupe_count__gt=1)
 	dupe_keys = []

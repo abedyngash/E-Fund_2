@@ -9,7 +9,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.forms.models import modelformset_factory
-from .filters import SchoolFilter, ApplicantFilter, LogFilter
+from .filters import SchoolFilter, ApplicantFilter, LogFilter, DuplicatesFilter
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalReadView, BSModalDeleteView
 from django.db.models import Count, Sum
 import datetime
@@ -183,9 +183,10 @@ def get_duplicate_applicants(request):
 	first_name__in=[item['first_name'] for item in first_names],
 	last_name__in=[item['last_name'] for item in last_names],
 	)
+	applicants_filter = DuplicatesFilter(request.GET, queryset=duplicate_records)
 
 	context = {
-		'duplicate_records': duplicate_records,
+		'duplicate_records': applicants_filter,
 		'dup_first_names': first_names,
 		'dup_last_names': last_names,
 	}

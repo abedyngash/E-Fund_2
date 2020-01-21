@@ -6,20 +6,39 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-      <li class="breadcrumb-item active">Applicants</li>      
+      <li class="breadcrumb-item"><a href="{% url 'applicants-list' %}">Applicants</a></li>
+      <li class="breadcrumb-item active">Duplicates</li>      
     </ol>
   </nav>
-  <h5 class="border-bottom">All Applicants</h5>
-      {% if not user.is_executive or user.is_superuser %}
-      <div>
-        <a class="btn btn-primary" href="{% url 'apply' %}">
-          <span class="fa fa-plus-circle mr-2"></span>
-          Add new Applicant
-        </a>
-      </div>
-      {% endif %}
+  <h5 class="border-bottom">Duplicate Records</h5>
+  
   <div class="card">
-    <div class="card-body">      
+    <div class="card-body">
+       <form method="get" class="applicants_form">
+            <div class="row">
+                <div class="col-md-6">
+                  {{ duplicate_records.form.first_name|as_crispy_field }}
+                </div>
+                <div class="col-md-6">
+                  {{ duplicate_records.form.last_name|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">                      
+                  {{ duplicate_records.form.subcounty|as_crispy_field }}                       
+                </div>
+                <div class="col-md-3">
+                  {{ duplicate_records.form.ward|as_crispy_field }}
+                </div>
+                <div class="col-md-3">
+                  {{ duplicate_records.form.sublocation|as_crispy_field }}
+                </div>
+                <div class="col-md-3">
+                  {{ duplicate_records.form.school_type|as_crispy_field }}
+                </div>                   
+            </div>            
+            <button type="submit" class="btn btn-block btn-sm btn-outline-primary">Get Applicants</button>
+        </form>
       <table class="table" id="users_table">
         <thead class="">
           <th>
@@ -46,7 +65,7 @@
           <th>Details</th>              
         </thead>
         <tbody>
-          {% for applicant in duplicate_records %}
+          {% for applicant in duplicate_records.qs %}
           <tr >
             <td class="text-center">{{ forloop.counter}}</td>
             <td>
@@ -97,6 +116,8 @@
 
   <script>
     document.getElementById("applications").className += " active";
+    $("label[for='id_first_name']").html("<span>First Two Names</span>");
+    $("label[for='id_last_name']").html("<span>Third Name (If exists)</span>");
     $(".view-details-btn").each(function () {
         $(this).modalForm({formURL: $(this).data('id')});
       });

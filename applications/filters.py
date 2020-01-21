@@ -132,6 +132,8 @@ class DuplicatesFilter(django_filters.FilterSet):
 		queryset = SchoolType.objects.all(),
 		widget=Select2Widget
 		)
+	first_name = django_filters.CharFilter(lookup_expr='icontains')
+	last_name = django_filters.CharFilter(lookup_expr='icontains')
 	class Meta:
 		model = Applicant
 		fields = ['first_name', 'last_name', 'subcounty', 'ward', 'sublocation', 'school_type']

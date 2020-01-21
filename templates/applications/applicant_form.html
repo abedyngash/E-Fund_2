@@ -36,27 +36,8 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 {{ form.gender|as_crispy_field }}
-                                            </div>
-                                            <div class="col-md-6">
-                                                {{ form.family_status|as_crispy_field }}
-                                            </div>
-                                        </div>
-                                        <div class="form-group" id="div_select_dead_parent">
-                                            <label for="select_dead_parent">Which parent is alive?</label>
-                                            <select class="form-control" id="select_dead_parent" onchange="checkParent()">
-                                                <option value="">---------</option>
-                                                <option value="father">Father</option>
-                                                <option value="mother">Mother</option>
-                                            </select>
-                                        </div>
-                                        <div class="row" id="death_certs">
-                                            <div class="col-md-6" id="div_death_cert_father">
-                                                {{ form.death_cert_father|as_crispy_field }}
-                                            </div>
-                                            <div class="col-md-6" id="div_death_cert_mother">
-                                                {{ form.death_cert_mother|as_crispy_field }}
                                             </div>
                                         </div>
                                         <div class="row">
@@ -67,9 +48,6 @@
                                                 {{ form.contact_of_gurdian|as_crispy_field }}
                                             </div>
                                         </div> 
-                                        {{ form.disability_status|as_crispy_field }}                                
-                                        {{ form.disability_desc|as_crispy_field }}                      
-                                    
                                     </div>
                                 </div>
                                 <div>                                    

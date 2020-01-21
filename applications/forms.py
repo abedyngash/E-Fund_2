@@ -28,12 +28,6 @@ class SublocationWidget(ModelSelect2Widget):
 
 
 class ApplicationForm(forms.ModelForm):
-  disability_status = forms.TypedChoiceField(
-                   coerce=lambda x: x == 'True',
-                   choices=((False, 'No'), (True, 'Yes')),
-                   widget=forms.RadioSelect,
-                   label='Are you disabled?'
-                )
   def __init__(self, *args, **kwargs):
     # award_period_is_active = getattr(
     #   AllocationDetail.objects.get(
@@ -52,9 +46,9 @@ class ApplicationForm(forms.ModelForm):
 
     fields = [
     # 'award_status',
-    'first_name', 'last_name', 'gender', 'family_status', 
-    'name_of_gurdian', 'contact_of_gurdian', 'disability_status', 'disability_desc',
-    'school_type', 'school_name', 'adm_number', 'class_of_study', 'death_cert_father', 'death_cert_mother',
+    'first_name', 'last_name', 'gender', 
+    'name_of_gurdian', 'contact_of_gurdian',
+    'school_type', 'school_name', 'adm_number', 'class_of_study',
     'subcounty', 'ward', 'sublocation'
     ]
 
@@ -62,19 +56,12 @@ class ApplicationForm(forms.ModelForm):
       'subcounty': SubcountyWidget,
       'ward': WardWidget,
       'sublocation': SublocationWidget,
-      'death_cert_father' : forms.FileInput(attrs={'class': 'form-control'}),
-      'death_cert_mother' : forms.FileInput(attrs={'class': 'form-control'})
     }
 
     help_texts = {
-      'disability_status' : "Check the box if you are disabled"
     }
 
-    labels = {
-      'disability_desc' : 'Describe your disability here',
-      # 'disability_status' : "Are you disabled?",
-      'death_cert_father' : "Father's Death Certificate",
-      'death_cert_mother' : "Mother's Death Certificate"
+    labels ={
     }
 
 class SchoolTypeUpdateForm(forms.ModelForm):

@@ -10,7 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.forms.models import modelformset_factory
 from .filters import SchoolFilter, ApplicantFilter, LogFilter
-from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalReadView
+from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalReadView, BSModalDeleteView
 from django.db.models import Count, Sum
 import datetime
 from django.http import HttpResponse
@@ -59,29 +59,10 @@ class ApplicationCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMess
 		return kwargs
 
 	def form_valid(self, form):
+		form.instance.user = self.request.user
 		form.instance.financial_year = get_current_financial_year()
-		# form.instance.financial_year = FinancialYear.objects.get(
-		# 	start_date=datetime.date.today().year, 
-		# 	end_date=datetime.date.today().year+1
-		# 	)
-		school = form.cleaned_data.get('school_name')
-		adm = form.cleaned_data.get('adm_number')
-		contact_of_gurdian = form.cleaned_data.get('contact_of_gurdian')
-
-		if len(contact_of_gurdian) != 10 and not contact_of_gurdian.isdigit():
-			form.add_error('contact_of_gurdian', 'This field only takes 10 digits')
-			messages.error(self.request, 'This field only takes 10 digits')
-			return self.form_invalid(form)
-
-		school_exists = Applicant.objects.all().filter(school_name=school).exists()
-		adm_in_school_exists = Applicant.objects.all().filter(adm_number=adm).exists()
-
-		if school_exists:
-			if adm_in_school_exists:
-				form.add_error('adm_number', 'An application from your school with that admission number already exists')
-				messages.error(self.request, 'An application from your school with that admission number already exists')
-				return self.form_invalid(form)
-
+		form.instance.family_status = 'both_parents'
+		form.instance.disability_status = False
 		return super(ApplicationCreateView, self).form_valid(form)
 
 	def get_context_data(self, **kwargs):
@@ -110,8 +91,23 @@ class ApplicationListView(UserPassesTestMixin, ListView):
 	    context = super(ApplicationListView, self).get_context_data(**kwargs)
 	    # context['me'] = self.get_queryset()
 	    applicants_filter = ApplicantFilter(self.request.GET, queryset=self.get_queryset())
+	    if not self.request.user.is_superuser or self.request.user.is_executive:
+	    	applicants_filter = ApplicantFilter(self.request.GET, queryset=Applicant.objects.all().filter(user=self.request.user))
 	    context['applicants'] = applicants_filter
 	    return context
+
+class ApplicantDeleteView(UserPassesTestMixin, BSModalDeleteView):
+    	def test_func(self):
+	    if self.request.user.is_superuser:
+	    	return True
+	    return False
+    	def handle_no_permission(self):
+	    messages.error(self.request, "You don't have the required rights to access that")
+	    return redirect('applicants-list')
+    	model = Applicant
+    	template_name = 'applications/delete_applicant.html'
+    	success_message = 'Success: Applicant Record was deleted.'
+    	success_url = reverse_lazy('applicants-list')
 
 def get_awarded_applicants(request):
 	awarded_applicants = Applicant.objects.filter(award_status="awarded")
@@ -138,7 +134,7 @@ class ApplicantUpdateView(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
 		return redirect('home')
 
 	def form_valid(self, form):
-		
+		form.instance.user = self.request.user
 		return super(ApplicantUpdateView, self).form_valid(form)
 
 

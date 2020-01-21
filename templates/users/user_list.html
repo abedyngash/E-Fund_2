@@ -28,7 +28,7 @@
                   #
                 </th>
                 <th>
-                  Image
+                  Phone
                 </th>
                 <th>
                   Login ID
@@ -50,11 +50,7 @@
                 {% for user in users %}
                 <tr class="clickabe-row" data-target="">
                   <td class="text-center">{{ forloop.counter}}</td>
-                  {% if user.is_entity %}                    
-                    <td><img src="{{ user.schoolprofile.avatar.url}}" class="inset"></td>
-                    {% else %}
-                    <td><img src="{{ user.staffprofile.avatar.url}}" class="inset"></td>
-                  {% endif %}
+                  <td>{{user.phone}}</td>
                   <td>{{ user.login_id }}</td>
                   <td>{{user.email}}</td>                  
                   <td>

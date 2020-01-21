@@ -3,6 +3,7 @@ from accounting.models import FinancialYear, Cheque
 from django.shortcuts import reverse
 from accounting.views import get_current_financial_year
 from simple_history.models import HistoricalRecords
+from users.models import User
 
 # Create your models here.
 FAMILY_STATUS = (
@@ -84,7 +85,7 @@ class Applicant(models.Model):
     # is_active = models.BooleanField(default=False)
     financial_year = models.CharField(max_length=200, default=current_financial_year)
     # financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
-
+    user = models.ForeignKey('users.User', related_name='applicant_records', on_delete=models.SET_NULL, null=True, blank=True)
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200, null=True, blank=True)
     gender = models.CharField(max_length=200, choices=GENDER)
@@ -165,7 +166,7 @@ class Applicant(models.Model):
         school_exists = School.objects.all().filter(name=self.school_name).exists()
 
         if not school_exists:            
-            new_school = School.objects.create(name=self.school_name, email = self.school_email)
+            new_school = School.objects.create(name=self.school_name)
             new_school.save()
 
         super(Applicant , self).save(*args, **kwargs)

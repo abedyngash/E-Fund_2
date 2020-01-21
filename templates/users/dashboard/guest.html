@@ -48,13 +48,7 @@
             </ul>
           </div>
         </div>
-        <div class="text-center">
-          {% if application_period_is_active %}            
-            <a href="{% url 'apply' %}" class="mt-5 btn btn-primary btn-lg wow fadeIn" data-wow-duration="3s" data-wow-delay="2s">Apply For Bursary</a>
-          {% else %}
-            <span class="mt-5 btn btn-danger btn-lg">Applications are closed for now</span>
-          {% endif %}
-        </div>
+        
       </div>
     </div>
 {% endblock %}

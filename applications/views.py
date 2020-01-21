@@ -182,9 +182,10 @@ def get_duplicate_applicants(request):
             dupe_id=Concat(
                         F('first_name')
                         , F('last_name')
+                        , F('school_name')
                         , output_field=CharField()
             )
-        ).filter(school_name__in=[item['school_name'] for item in school_names]).order_by('first_name', 'last_name')
+        ).order_by('first_name', 'last_name')
 
 	dupes = qs.values('dupe_id').annotate(dupe_count=Count('dupe_id')).filter(dupe_count__gt=1)
 	dupe_keys = []

@@ -11,7 +11,8 @@ from django.contrib import messages
 from django.forms.models import modelformset_factory
 from .filters import SchoolFilter, ApplicantFilter, LogFilter, DuplicatesFilter
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalReadView, BSModalDeleteView
-from django.db.models import Count, Sum
+from django.db.models import Count, Sum, F, CharField
+from django.db.models.functions import Concat
 import datetime
 from django.http import HttpResponse
 from django.utils.text import slugify, format_lazy
@@ -176,21 +177,25 @@ class ApplicantDetailView(BSModalReadView):
     model = Applicant
 
 def get_duplicate_applicants(request):
-	first_names = Applicant.objects.values('first_name').annotate(Count('id')).order_by('first_name').filter(id__count__gt=1)
-	last_names = Applicant.objects.values('last_name').annotate(Count('id')).order_by('last_name').filter(id__count__gt=1)
 	school_names = Applicant.objects.values('school_name').annotate(Count('id')).order_by('school_name').filter(id__count__gt=1)
+	qs = Applicant.objects.annotate(
+            dupe_id=Concat(
+                        F('first_name')
+                        , F('last_name')
+                        , output_field=CharField()
+            )
+        ).filter(school_name__in=[item['school_name'] for item in school_names]).order_by('first_name')
 
-	duplicate_records = Applicant.objects.order_by('first_name').filter(
-	first_name__in=[item['first_name'] for item in first_names],
-	last_name__in=[item['last_name'] for item in last_names],
-	school_name__in=[item['school_name'] for item in school_names],
-	)
-	applicants_filter = DuplicatesFilter(request.GET, queryset=duplicate_records)
+	dupes = qs.values('dupe_id').annotate(dupe_count=Count('dupe_id')).filter(dupe_count__gt=1)
+	dupe_keys = []
+	for dupe in dupes:
+		dupe_keys.append(dupe['dupe_id'])
+
+	# applicants_filter = DuplicatesFilter(request.GET, queryset=duplicate_records)
 
 	context = {
-		'duplicate_records': applicants_filter,
-		'dup_first_names': first_names,
-		'dup_last_names': last_names,
+		'duplicate_records': qs,
+		'dupe_keys': dupe_keys,
 	}
 
 	return render(request, 'applications/duplicate_records.html', context)

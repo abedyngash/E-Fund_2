@@ -12,10 +12,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RemoveField(
-            model_name='applicant',
-            name='is_active',
-        ),
-        migrations.RemoveField(
             model_name='school',
             name='email',
         )

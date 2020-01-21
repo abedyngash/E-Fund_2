@@ -4,9 +4,11 @@ from .views import *
 urlpatterns = [   
     path('apply', ApplicationCreateView.as_view(), name='apply'),
     path('applicants-list/', ApplicationListView.as_view(), name='applicants-list'),
+    path('duplicates/', get_duplicate_applicants, name='duplicates'),
     path('applicants/<int:pk>', ApplicantDetailView.as_view(), name='applicants-detail'),
     path('applicants/<int:pk>/update', ApplicantUpdateView.as_view(), name='applicants-update'),
     path('applicants/<int:pk>/delete', ApplicantDeleteView.as_view(), name='applicants-delete'),
+    path('applicants/<int:pk>/duplicate/delete', DuplicateDeleteView.as_view(), name='duplicates-delete'),
     path('awarded-applicants-list/', get_awarded_applicants, name='awarded-applicants-list'),
     path('subcounties-list/', SubcountyListView.as_view(), name='subcounties-list'),
     path('wards-list/', WardListView.as_view(), name='wards-list'),

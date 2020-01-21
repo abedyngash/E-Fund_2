@@ -109,6 +109,19 @@ class ApplicantDeleteView(UserPassesTestMixin, BSModalDeleteView):
 	success_message = 'Success: Applicant Record was deleted.'
 	success_url = reverse_lazy('applicants-list')
 
+class DuplicateDeleteView(UserPassesTestMixin, BSModalDeleteView):
+	def test_func(self):
+	    if self.request.user.is_superuser:
+	    	return True
+	    return False
+	def handle_no_permission(self):
+	    messages.error(self.request, "You don't have the required rights to access that")
+	    return redirect('applicants-list')
+	model = Applicant
+	template_name = 'applications/delete_applicant.html'
+	success_message = 'Success: Duplicate Record was deleted.'
+	success_url = reverse_lazy('duplicates')
+
 def get_awarded_applicants(request):
 	awarded_applicants = Applicant.objects.filter(award_status="awarded")
 	applicants_filter = ApplicantFilter(request.GET, queryset=awarded_applicants)
@@ -161,6 +174,24 @@ class ApplicantUpdateView(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
 
 class ApplicantDetailView(BSModalReadView):
     model = Applicant
+
+def get_duplicate_applicants(request):
+	first_names = Applicant.objects.values('first_name').annotate(Count('id')).order_by().filter(id__count__gt=1)
+	last_names = Applicant.objects.values('last_name').annotate(Count('id')).order_by().filter(id__count__gt=1)
+
+	duplicate_records = Applicant.objects.filter(
+	first_name__in=[item['first_name'] for item in first_names],
+	last_name__in=[item['last_name'] for item in last_names],
+	)
+
+	context = {
+		'duplicate_records': duplicate_records,
+		'dup_first_names': first_names,
+		'dup_last_names': last_names,
+	}
+
+	return render(request, 'applications/duplicate_records.html', context)
+
 
 class SubcountyListView(ListView):
 	model = Subcounty

@@ -86,14 +86,18 @@ class ApplicationListView(UserPassesTestMixin, ListView):
 			return redirect('home')
 
 	model = Applicant
-	# context_object_name = 'applicants'
+	
 
 	def get_context_data(self, **kwargs):
 	    context = super(ApplicationListView, self).get_context_data(**kwargs)
 	    # context['me'] = self.get_queryset()
-	    applicants_filter = ApplicantFilter(self.request.GET, queryset=self.get_queryset())
-	    if not self.request.user.is_superuser or self.request.user.is_executive:
+	    applicants_filter = None
+	    if self.request.user.is_superuser or self.request.user.is_executive:
+	    	applicants_filter = ApplicantFilter(self.request.GET, queryset=self.get_queryset())
+	    else:
 	    	applicants_filter = ApplicantFilter(self.request.GET, queryset=Applicant.objects.all().filter(user=self.request.user))
+	    # if not self.request.user.is_superuser or self.request.user.is_executive:
+	    # 	applicants_filter = ApplicantFilter(self.request.GET, queryset=Applicant.objects.all().filter(user=self.request.user))
 	    context['applicants'] = applicants_filter
 	    return context
 

@@ -36,6 +36,7 @@
           </th>
         </thead>
         <tbody>
+          <div id="stream-list">
           {% for record in logs.qs %}
           <tr >
             <td class="text-center">{{ forloop.counter}}</td>
@@ -45,6 +46,8 @@
             <td>{{record.history_date|naturaltime}}</td>
           </tr>
           {% endfor %}
+            
+          </div>
         </tbody>
       </table>
     </div>

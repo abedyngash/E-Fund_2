@@ -18,5 +18,8 @@ urlpatterns = [
     path('reviewed-school-applicants-list', reviewed_school_applicants_view, name='reviewed-school-applicants-list'),
     path('school-applicants-update', applicants_from_school_update, name='school-applicants-update'),
 
-    path('logs/', ApplicantHistoryView.as_view(), name='applicants-logs')
+    path('logs/', ApplicantHistoryView.as_view(), name='applicants-logs'),
+
+    path('schools/', SchoolListView.as_view(), name='schools-list'),
+    path('schools/<int:pk>/update', SchoolUpdateView.as_view(), name='school-update'),
 ]

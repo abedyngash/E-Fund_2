@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from .models import *
-from .forms import ApplicationForm, SchoolTypeUpdateForm, ApplicantSchoolUpdateForm, ChequeForm
+from .forms import ApplicationForm, SchoolTypeUpdateForm, ApplicantSchoolUpdateForm, ChequeForm, SchoolForm
 from accounting.models import FinancialYear, AllocationDetail
 from accounting.views import get_current_financial_year, get_money_per_ward
 from django.contrib.messages.views import SuccessMessageMixin
@@ -558,3 +558,39 @@ class ApplicantHistoryView(ListView):
 	    logs_filter = LogFilter(self.request.GET, queryset=logs)
 	    context['logs'] = logs_filter
 	    return context
+
+class SchoolListView(ListView):
+	model = School
+	context_object_name = 'schools'
+	queryset = School.objects.all().order_by('name')
+
+class SchoolUpdateView(BSModalUpdateView):
+	model = School
+	template_name = 'applications/edit_school_form.html'
+	form_class = SchoolForm
+	success_message = 'Success: School was updated.'
+	success_url = reverse_lazy('schools-list')
+	extra_content = {'title': 'Edit School'}
+
+	def form_valid(self, form):
+		current_name = self.initial
+		print(current_name)
+		instance = form.cleaned_data.get('name')
+		# instance.save()
+		school_name = instance
+		print(school_name)
+		# print(current_name)
+
+		applicants = Applicant.objects.all().filter(
+			school_name=current_name
+			)
+		new_applicants = Applicant.objects.all().filter(
+			school_name=school_name
+			)
+		print(applicants)
+		print(new_applicants)
+		# applicants.update(
+		# 	)
+
+		# self.object.applicant_set.update(cheque_number=instance)
+		return super(SchoolUpdateView, self).form_valid(form)

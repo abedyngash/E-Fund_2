@@ -93,3 +93,8 @@ class ChequeForm(BSModalForm):
   class Meta:
     model = Cheque
     fields = ['cheque_number']
+
+class SchoolForm(BSModalForm):
+  class Meta:
+    model = School
+    fields = ['name']

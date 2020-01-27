@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include "_modal.html" %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item active">Institutions</li>      
+    </ol>
+  </nav>
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="border-bottom">Institutions List</h5>
+      <div class="card">
+        <div class="card-body">
+          <table class="table" id="users_table">
+            <thead class="">
+              <th>
+                #
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Action
+              </th>                           
+            </thead>
+            <tbody>
+              {% for school in schools %}
+              <tr>
+                <td class="text-center">{{ forloop.counter}}</td>
+                <td>{{school.name}}</td>
+                <td>
+                  <button class="edit-school-btn btn btn-sm btn-primary" type="button" data-id="{% url 'school-update' school.id  %}" data-toggle="tooltip" data-placement="auto" title="Edit School">
+                    <span class="fa fa-edit"></span>
+                  </button>
+
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>          
+  </div>
+
+  <script>
+    document.getElementById("allocation").className += " active";
+    $(".edit-school-btn").each(function () {
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+  </script>
+{% endblock %}
+
+                

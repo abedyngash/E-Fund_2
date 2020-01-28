@@ -300,8 +300,13 @@ def ward_disbursements(request):
 def ward_disbursements_details(request, ward_id):
 	schooltypes = SchoolType.objects.all()
 	ward = Ward.objects.get(id=ward_id)
+	amount_so_far = Applicant.objects.all().filter(ward_id=ward_id).aggregate(amount=Sum('school_type__amount_allocated'))
+	money_per_ward = get_money_per_ward()
+	amount_remaining = money_per_ward - amount_so_far['amount']
 	context = {
 		# 'schools': schools_with_applicants,
+		'amount_so_far': amount_so_far['amount'],
+		'amount_remaining': amount_remaining,
 		'school_types' : schooltypes,
 		'ward': ward,
 	}

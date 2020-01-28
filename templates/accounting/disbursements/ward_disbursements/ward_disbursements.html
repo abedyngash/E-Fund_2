@@ -30,6 +30,7 @@
                         <th>Number of Sublocations</th>
                         <th>Amount per Sublocation</th>
                         <th>Number of Applicants</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -37,9 +38,9 @@
                     <tr class="clickabe-row" data-target="{% url 'ward-disbursements-details' ward.id %}">
                         <td>{{ forloop.counter}}</td>
                         <td>{{ ward.name }}</td>
-                        <td>{{ ward.no_of_sublocations }}</td>
-                        <td id="ammount">{{ money_per_ward|div:ward.no_of_sublocations|floatformat:"0"|intcomma }}</td>
-                        <td>{{ ward.no_of_applicants }}</td>
+                        <td>{{ ward.sublocations.count }}</td>
+                        <td>{{ money_per_ward|div:ward.no_of_sublocations|floatformat:"0"|intcomma }}</td>
+                        <td>{{ ward.applicants.count }}</td>
                         
                     </tr>
                     {% endfor %}

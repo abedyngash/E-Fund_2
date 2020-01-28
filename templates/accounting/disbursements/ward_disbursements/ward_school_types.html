@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load humanize %}
 
 {% block content %}
 {% include "_modal.html" %}
@@ -14,10 +15,14 @@
   </nav>
   <div class="row">    
     <div class="col-md-12">
-      <h5 class="border-bottom">Select A school Type below</h5>
+      <h5> <span class="font-weight-bold">{{ward.name}} Ward Tallies: </span> Amount Given So Far: <button class="badge badge-success">{{amount_so_far|intword|intcomma}}</button> <span class="font-weight-bold">||</span> Amount Remaining: <button class="badge badge-danger">{{amount_remaining|intword|intcomma}}</button></h5>
       <div class="card">
-        <div class="card-body">
+        <div class="card-header">
+          <h5 class="border-bottom">Select A school Type below</h5>
           
+        </div>
+        <div class="card-body">
+            
             <table class="table" id="users_table">
               <thead class="">
                 <th>

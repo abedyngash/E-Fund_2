@@ -54,7 +54,7 @@ class ApplicationCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMess
 
 	def get_form_kwargs(self):
 		kwargs = super(ApplicationCreateView, self).get_form_kwargs()
-		school_list = School.objects.all()
+		school_list = School.objects.all().order_by('name').distinct('name')
 
 		kwargs['data_list'] = school_list
 		return kwargs
@@ -170,7 +170,7 @@ class ApplicantUpdateView(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
 
 	def get_form_kwargs(self):
 		kwargs = super(ApplicantUpdateView, self).get_form_kwargs()
-		school_list = School.objects.all()
+		school_list = School.objects.all().order_by('name').distinct('name')
 
 		kwargs['data_list'] = school_list
 		return kwargs
@@ -562,7 +562,7 @@ class ApplicantHistoryView(ListView):
 class SchoolListView(ListView):
 	model = School
 	context_object_name = 'schools'
-	queryset = School.objects.all().order_by('name')
+	queryset = School.objects.all().order_by('name').distinct('name')
 
 class SchoolUpdateView(BSModalUpdateView):
 	model = School
@@ -571,26 +571,3 @@ class SchoolUpdateView(BSModalUpdateView):
 	success_message = 'Success: School was updated.'
 	success_url = reverse_lazy('schools-list')
 	extra_content = {'title': 'Edit School'}
-
-	def form_valid(self, form):
-		current_name = self.initial
-		print(current_name)
-		instance = form.cleaned_data.get('name')
-		# instance.save()
-		school_name = instance
-		print(school_name)
-		# print(current_name)
-
-		applicants = Applicant.objects.all().filter(
-			school_name=current_name
-			)
-		new_applicants = Applicant.objects.all().filter(
-			school_name=school_name
-			)
-		print(applicants)
-		print(new_applicants)
-		# applicants.update(
-		# 	)
-
-		# self.object.applicant_set.update(cheque_number=instance)
-		return super(SchoolUpdateView, self).form_valid(form)

@@ -1,6 +1,14 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from .models import Applicant, School
+
+@receiver(pre_save, sender=School)
+def check_names(sender, instance, **kwargs):
+	if not instance._state.adding:
+		new_name = instance.name
+		old_name = School.objects.get(pk=instance.id)
+		if old_name:
+			Applicant.objects.filter(school_name=old_name).update(school_name=new_name)
 
 @receiver(post_save, sender=Applicant)
 def create_school(sender, instance, created, **kwargs):

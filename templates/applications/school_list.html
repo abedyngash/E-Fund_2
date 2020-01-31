@@ -38,6 +38,10 @@
                     <span class="fa fa-edit"></span>
                   </button>
 
+                  <button class="delete-school-btn btn btn-sm btn-danger" type="button" data-id="{% url 'school-delete' school.id  %}" data-toggle="tooltip" data-placement="auto" title="Delete School">
+                    <span class="fa fa-trash"></span>
+                  </button>
+
                 </td>
               </tr>
               {% endfor %}
@@ -51,6 +55,9 @@
   <script>
     document.getElementById("allocation").className += " active";
     $(".edit-school-btn").each(function () {
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+    $(".delete-school-btn").each(function () {
       $(this).modalForm({formURL: $(this).data('id')});
     });
   </script>

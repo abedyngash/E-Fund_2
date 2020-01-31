@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% load static %}
+{% load mathfilters %}
 {% load crispy_forms_tags %}
+{% load my_tags %}
 {% block content %}
 {% include "_modal.html" %}
   <nav aria-label="breadcrumb">
@@ -32,26 +34,28 @@
     {% endif %}
   <div class="card">
     <div class="card-body">
+      <!--
       <form method="get" class="applicants_form">
-            <div class="row">
-                <div class="col-md-3">                      
-                  {{ applicants.form.subcounty|as_crispy_field }}                       
-                </div>
-                <div class="col-md-3">
-                  {{ applicants.form.ward|as_crispy_field }}
-                </div>
-                <div class="col-md-3">
-                  {{ applicants.form.sublocation|as_crispy_field }}
-                </div>
-                <div class="col-md-3">
-                  {{ applicants.form.school_type|as_crispy_field }}
-                </div>                   
+        <div class="row">
+            <div class="col-md-3">                      
+              {{ applicants.form.subcounty|as_crispy_field }}                       
             </div>
-            <button type="submit" class="btn btn-block btn-sm btn-outline-primary">Get Applicants</button>
-        </form>
-        <div>
-          
-        <table class="table" id="users_table">
+            <div class="col-md-3">
+              {{ applicants.form.ward|as_crispy_field }}
+            </div>
+            <div class="col-md-3">
+              {{ applicants.form.sublocation|as_crispy_field }}
+            </div>
+            <div class="col-md-3">
+              {{ applicants.form.school_type|as_crispy_field }}
+            </div>                   
+        </div>
+        <button type="submit" class="btn btn-block btn-sm btn-outline-primary">Get Applicants</button>
+      </form>
+    -->
+        
+        <div>          
+        <table class="table" id="app_table">
           <thead class="">
             <th>
               #
@@ -76,45 +80,66 @@
             </th>
             <th>Details</th>              
           </thead>
-          <tbody>
-            {% for applicant in applicants.qs %}
-            <tr >
-              <td class="text-center">{{ forloop.counter}}</td>
-              <td>
-                {{applicant.first_name}} {% if applicant.last_name %}{{applicant.last_name}}{% endif %}
-              </td>
-              <td>{{applicant.gender}}</td>
-              <td>
-                {{applicant.school_name}}
-                <br>
-                <button class="badge badge-info text-center">{{applicant.school_type}}</button>              
-              </td>
-              <td>{{applicant.subcounty}}</td>
-              <td>{{applicant.ward}}</td>
-              <td>{{applicant.sublocation}}</td>
-              <td class="row">
-                <div class="col-md-4">
-                  <button class="view-details-btn btn btn-sm btn-primary" type="button" name="button" data-id="{% url 'applicants-detail' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="View details">
-                  <span class="fa fa-eye mr-2"></span>                                
-                  </button>
-                </div>
-                <div class="col-md-4">
-                {% if not user.is_executive %}
-                  <a class="btn btn-sm btn-primary" type="button" name="button" href="{% url 'applicants-update' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Edit record">
-                  <span class="fa fa-pencil mr-2"></span>                                
-                </a>
-                {% endif %}
-                </div>
-                <div class="col-md-4">
-        	      {% if user.is_superuser %}
-                  <button class="delete-btn btn btn-sm btn-danger" type="button" name="button" data-id="{% url 'applicants-delete' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Delete Record">
-                        <span class="fa fa-trash mr-2"></span>
+          <tbody class="applicants-table-body">
+            <div class="applicants-table">              
+              {% for applicant in page_obj %}
+                <tr >
+                  <td class="text-center">{{ forloop.counter|add:page_obj.start_index|sub:1}}</td>
+                  <td>
+                    {{applicant.first_name}} {% if applicant.last_name %}{{applicant.last_name}}{% endif %}
+                  </td>
+                  <td>{{applicant.gender}}</td>
+                  <td>
+                    {{applicant.school_name}}
+                    <br>
+                    <button class="badge badge-info text-center">{{applicant.school_type}}</button>              
+                  </td>
+                  <td>{{applicant.subcounty}}</td>
+                  <td>{{applicant.ward}}</td>
+                  <td>{{applicant.sublocation}}</td>
+                  <td class="row">
+                    <div class="col-md-4">
+                      <button class="view-details-btn btn btn-sm btn-primary" type="button" name="button" data-id="{% url 'applicants-detail' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="View details">
+                      <span class="fa fa-eye mr-2"></span>                                
                       </button>
-        	      {% endif %}
-                </div>
-              </td>                
-            </tr>
-            {% endfor %}
+                    </div>
+                    <div class="col-md-4">
+                    {% if not user.is_executive %}
+                      <a class="btn btn-sm btn-primary" type="button" name="button" href="{% url 'applicants-update' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Edit record">
+                      <span class="fa fa-pencil mr-2"></span>                                
+                    </a>
+                    {% endif %}
+                    </div>
+                    <div class="col-md-4">
+            	      {% if user.is_superuser %}
+                      <button class="delete-btn btn btn-sm btn-danger" type="button" name="button" data-id="{% url 'applicants-delete' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Delete Record">
+                            <span class="fa fa-trash mr-2"></span>
+                          </button>
+            	      {% endif %}
+                    </div>
+                  </td>                
+                </tr>
+              {% endfor %}
+              <div class="pagination">
+                  <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a class="btn btn-sm btn-danger" href="?page=1">&laquo; first</a>
+                        <a class="btn btn-sm btn-primary" href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page <span class="font-weight-bold">{{ page_obj.number }}</span> of <span class="font-weight-bold">{{ page_obj.paginator.num_pages }}</span>
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a class="btn btn-sm btn-primary" href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a class="btn btn-sm btn-danger" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                    <span class="ml-5 font-weight-bold">Applicants Records - From Number: {{ page_obj.start_index }} - {{ page_obj.end_index }}
+                    </span>
+                  </span>
+              </div>
+            </div>
           </tbody>
         </table>
         </div>
@@ -123,12 +148,19 @@
 
   <script>
     document.getElementById("applications").className += " active";
+    $(document).ready(function(){
+
+    $('#users_table_info,#users_table_paginate').style.display = "none";
     $(".view-details-btn").each(function () {
         $(this).modalForm({formURL: $(this).data('id')});
       });
     $(".delete-btn").each(function () {
         $(this).modalForm({formURL: $(this).data('id')});
       });
+
+      });
+
+
   </script>
 {% endblock %}
 

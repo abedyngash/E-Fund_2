@@ -22,4 +22,5 @@ urlpatterns = [
 
     path('schools/', SchoolListView.as_view(), name='schools-list'),
     path('schools/<int:pk>/update', SchoolUpdateView.as_view(), name='school-update'),
+    path('schools/<int:pk>/delete', SchoolDeleteView.as_view(), name='school-delete'),
 ]

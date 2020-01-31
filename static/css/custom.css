@@ -197,3 +197,10 @@ ul {
   cursor: pointer;
 } 
 
+#app_table_paginate, #app_table_info {
+  display: none;
+}
+
+.step-links {
+  margin: 5px;
+}

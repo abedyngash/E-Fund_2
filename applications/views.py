@@ -23,7 +23,27 @@ import zipfile
 import io
 import os
 import tempfile
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
+class FilteredListView(ListView):
+    filterset_class = None
+
+    def get_queryset(self):
+        # Get the queryset however you usually would.  For example:
+        queryset = super().get_queryset()
+        # Then use the query parameters and the queryset to
+        # instantiate a filterset and save it as an attribute
+        # on the view instance for later.
+        self.filterset = self.filterset_class(self.request.GET, queryset=queryset)
+        # Return the filtered queryset
+        return self.filterset.qs.distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Pass the filterset to the template - it provides the form.
+        context['filterset'] = self.filterset
+        return context
+
 class ApplicationCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, CreateView):
 	def test_func(self):
 		current_year_allocation_details = AllocationDetail.objects.get(
@@ -86,6 +106,8 @@ class ApplicationListView(UserPassesTestMixin, ListView):
 			return redirect('home')
 
 	model = Applicant
+	queryset = Applicant.objects.all()
+	paginate_by = 200
 	
 
 	def get_context_data(self, **kwargs):
@@ -96,8 +118,7 @@ class ApplicationListView(UserPassesTestMixin, ListView):
 	    	applicants_filter = ApplicantFilter(self.request.GET, queryset=self.get_queryset())
 	    else:
 	    	applicants_filter = ApplicantFilter(self.request.GET, queryset=Applicant.objects.all().filter(user=self.request.user))
-	    # if not self.request.user.is_superuser or self.request.user.is_executive:
-	    # 	applicants_filter = ApplicantFilter(self.request.GET, queryset=Applicant.objects.all().filter(user=self.request.user))
+	    
 	    context['applicants'] = applicants_filter
 	    return context
 
@@ -336,7 +357,7 @@ def ward_school_types_details(request, ward_id, school_cat_id):
 	return render(request, 'accounting/disbursements/ward_disbursements/ward_disbursements_details.html', context)
 
 def bulk_cover_letter(request, ward_id, school_cat_id):
-	reports = tempfile.TemporaryDirectory()
+	# reports = tempfile.TemporaryDirectory()
 	report_files = {}
 	school_type = SchoolType.objects.get(id=school_cat_id)
 	ward = Ward.objects.get(id=ward_id)
@@ -377,9 +398,10 @@ def bulk_cover_letter(request, ward_id, school_cat_id):
 	mem_zip = io.BytesIO()
 	with zipfile.ZipFile(mem_zip, mode="w") as zf:
 		for filename, content in report_files.items():
-			zf.write(filename, content)
-	response = HttpResponse(mem_zip, content_type='application/force-download')
+			zf.writestr(filename, content)
+	response = HttpResponse(mem_zip, content_type='application/zip')
 	response['Content-Disposition'] = 'attachment; filename="{}"'.format(f'{ward}_cover_letters.zip')
+	return response
 
 
 def schools_in_ward_details(request, ward_id, school_name):
@@ -576,3 +598,16 @@ class SchoolUpdateView(BSModalUpdateView):
 	success_message = 'Success: School was updated.'
 	success_url = reverse_lazy('schools-list')
 	extra_content = {'title': 'Edit School'}
+
+class SchoolDeleteView(UserPassesTestMixin, BSModalDeleteView):
+	def test_func(self):
+	    if self.request.user.is_superuser:
+	    	return True
+	    return False
+	def handle_no_permission(self):
+	    messages.error(self.request, "You don't have the required rights to access that")
+	    return redirect('schools-list')
+	model = School
+	template_name = 'applications/delete_school.html'
+	success_message = 'Success: SCHOOL was deleted.'
+	success_url = reverse_lazy('applicants-list')

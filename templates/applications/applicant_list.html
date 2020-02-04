@@ -2,6 +2,7 @@
 {% load static %}
 {% load mathfilters %}
 {% load crispy_forms_tags %}
+{% load bootstrap4 %}
 {% load my_tags %}
 {% block content %}
 {% include "_modal.html" %}
@@ -33,124 +34,134 @@
       </div>
     {% endif %}
   <div class="card">
-    <div class="card-body">
-      <!--
+    <div class="card-body">      
       <form method="get" class="applicants_form">
         <div class="row">
             <div class="col-md-3">                      
-              {{ applicants.form.subcounty|as_crispy_field }}                       
+              {{ filter.form.subcounty|as_crispy_field }}                       
             </div>
             <div class="col-md-3">
-              {{ applicants.form.ward|as_crispy_field }}
+              {{ filter.form.ward|as_crispy_field }}
             </div>
             <div class="col-md-3">
-              {{ applicants.form.sublocation|as_crispy_field }}
+              {{ filter.form.sublocation|as_crispy_field }}
             </div>
             <div class="col-md-3">
-              {{ applicants.form.school_type|as_crispy_field }}
+              {{ filter.form.school_type|as_crispy_field }}
             </div>                   
         </div>
         <button type="submit" class="btn btn-block btn-sm btn-outline-primary">Get Applicants</button>
-      </form>
-    -->
-        
-        <div>          
-        <table class="table" id="app_table">
-          <thead class="">
-            <th>
-              #
-            </th>
-            <th>
-              Name
-            </th>
-            <th>
-              Gender
-            </th>
-            <th>
-              School
-            </th>
-            <th>
-              Subcounty
-            </th>
-            <th>
-              Ward
-            </th>
-            <th>
-              Sublocation
-            </th>
-            <th>Details</th>              
-          </thead>
-          <tbody class="applicants-table-body">
-            <div class="applicants-table">              
-              {% for applicant in page_obj %}
-                <tr >
-                  <td class="text-center">{{ forloop.counter|add:page_obj.start_index|sub:1}}</td>
-                  <td>
-                    {{applicant.first_name}} {% if applicant.last_name %}{{applicant.last_name}}{% endif %}
-                  </td>
-                  <td>{{applicant.gender}}</td>
-                  <td>
-                    {{applicant.school_name}}
-                    <br>
-                    <button class="badge badge-info text-center">{{applicant.school_type}}</button>              
-                  </td>
-                  <td>{{applicant.subcounty}}</td>
-                  <td>{{applicant.ward}}</td>
-                  <td>{{applicant.sublocation}}</td>
-                  <td class="row">
-                    <div class="col-md-4">
-                      <button class="view-details-btn btn btn-sm btn-primary" type="button" name="button" data-id="{% url 'applicants-detail' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="View details">
-                      <span class="fa fa-eye mr-2"></span>                                
-                      </button>
-                    </div>
-                    <div class="col-md-4">
-                    {% if not user.is_executive %}
-                      <a class="btn btn-sm btn-primary" type="button" name="button" href="{% url 'applicants-update' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Edit record">
-                      <span class="fa fa-pencil mr-2"></span>                                
-                    </a>
-                    {% endif %}
-                    </div>
-                    <div class="col-md-4">
-            	      {% if user.is_superuser %}
-                      <button class="delete-btn btn btn-sm btn-danger" type="button" name="button" data-id="{% url 'applicants-delete' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Delete Record">
-                            <span class="fa fa-trash mr-2"></span>
-                          </button>
-            	      {% endif %}
-                    </div>
-                  </td>                
-                </tr>
-              {% endfor %}
-              <div class="pagination">
-                  <span class="step-links">
-                    {% if page_obj.has_previous %}
-                        <a class="btn btn-sm btn-danger" href="?page=1">&laquo; first</a>
-                        <a class="btn btn-sm btn-primary" href="?page={{ page_obj.previous_page_number }}">previous</a>
-                    {% endif %}
-
-                    <span class="current">
-                        Page <span class="font-weight-bold">{{ page_obj.number }}</span> of <span class="font-weight-bold">{{ page_obj.paginator.num_pages }}</span>
-                    </span>
-
-                    {% if page_obj.has_next %}
-                        <a class="btn btn-sm btn-primary" href="?page={{ page_obj.next_page_number }}">next</a>
-                        <a class="btn btn-sm btn-danger" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                    {% endif %}
-                    <span class="ml-5 font-weight-bold">Applicants Records - From Number: {{ page_obj.start_index }} - {{ page_obj.end_index }}
-                    </span>
-                  </span>
-              </div>
-            </div>
-          </tbody>
-        </table>
+      </form>         
+      {# <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search For Records Here.." title="Type in a name"> #}
+      <table class="table" id="myTable">
+        <thead class="">
+          <th>
+            #
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            Gender
+          </th>
+          <th>
+            School
+          </th>
+          <th>
+            Subcounty
+          </th>
+          <th>
+            Ward
+          </th>
+          <th>
+            Sublocation
+          </th>
+          <th>Details</th>              
+        </thead>
+        <tbody class="applicants-table-body">
+          <div class="applicants-table">              
+            {% for applicant in object_list %}
+              <tr >
+                <td class="text-center">{{ forloop.counter|add:page_obj.start_index|sub:1}}</td>
+                <td>
+                  {{applicant.first_name}} {% if applicant.last_name %}{{applicant.last_name}}{% endif %}
+                </td>
+                <td>{{applicant.gender}}</td>
+                <td>
+                  {{applicant.school_name}}
+                  <br>
+                  <button class="badge badge-info text-center">{{applicant.school_type}}</button>              
+                </td>
+                <td>{{applicant.subcounty}}</td>
+                <td>{{applicant.ward}}</td>
+                <td>{{applicant.sublocation}}</td>
+                <td class="row">
+                  <div class="col-md-4">
+                    <button class="view-details-btn btn btn-sm btn-primary" type="button" name="button" data-id="{% url 'applicants-detail' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="View details">
+                    <span class="fa fa-eye mr-2"></span>                                
+                    </button>
+                  </div>
+                  <div class="col-md-4">
+                  {% if not user.is_executive %}
+                    <a class="btn btn-sm btn-primary" type="button" name="button" href="{% url 'applicants-update' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Edit record">
+                    <span class="fa fa-pencil mr-2"></span>                                
+                  </a>
+                  {% endif %}
+                  </div>
+                  <div class="col-md-4">
+          	      {% if user.is_superuser %}
+                    <button class="delete-btn btn btn-sm btn-danger" type="button" name="button" data-id="{% url 'applicants-delete' applicant.id %}" data-toggle="tooltip" data-placement="auto" title="Delete Record">
+                          <span class="fa fa-trash mr-2"></span>
+                        </button>
+          	      {% endif %}
+                  </div>
+                </td>                
+              </tr>
+            {% endfor %}
+            
+          </div>
+        </tbody>
+      </table>
+      <div class="border-top">        
+        <div class="row mt-3">
+          <div class="col-md-6">
+            {% bootstrap_pagination page_obj %}          
+          </div>
+          <div class="col-md-6">
+            <p class="text-right">Showing <span class="font-weight-bold">{{page_obj.start_index}}</span> to <span class="font-weight-bold">{{page_obj.end_index}}</span> of <span class="font-weight-bold">{{total_filter}}</span> Applicants {% if has_filter %} - Filtered from <span class="font-weight-bold">{{total_applicants}}</span> Total Applicants{% endif %}</p>
+          </div>
         </div>
+      </div>
     </div>
   </div>    
+  <script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
 
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>
   <script>
     document.getElementById("applications").className += " active";
     $(document).ready(function(){
 
-    $('#users_table_info,#users_table_paginate').style.display = "none";
+    // $('#users_table_info,#users_table_paginate').style.display = "none";
     $(".view-details-btn").each(function () {
         $(this).modalForm({formURL: $(this).data('id')});
       });
@@ -162,6 +173,7 @@
 
 
   </script>
+
 {% endblock %}
 
                 

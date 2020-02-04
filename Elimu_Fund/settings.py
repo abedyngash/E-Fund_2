@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'django_filters',
     'simple_history',
+    'bootstrap4',
 
     'users.apps.UsersConfig',
     'accounting.apps.AccountingConfig',

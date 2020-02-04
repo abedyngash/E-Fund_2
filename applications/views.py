@@ -23,26 +23,8 @@ import zipfile
 import io
 import os
 import tempfile
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django_filters.views import FilterView
 # Create your views here.
-class FilteredListView(ListView):
-    filterset_class = None
-
-    def get_queryset(self):
-        # Get the queryset however you usually would.  For example:
-        queryset = super().get_queryset()
-        # Then use the query parameters and the queryset to
-        # instantiate a filterset and save it as an attribute
-        # on the view instance for later.
-        self.filterset = self.filterset_class(self.request.GET, queryset=queryset)
-        # Return the filtered queryset
-        return self.filterset.qs.distinct()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Pass the filterset to the template - it provides the form.
-        context['filterset'] = self.filterset
-        return context
 
 class ApplicationCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, CreateView):
 	def test_func(self):
@@ -91,7 +73,7 @@ class ApplicationCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMess
 	    context['title'] = 'Apply'
 	    return context
 
-class ApplicationListView(UserPassesTestMixin, ListView):
+class ApplicationListView(UserPassesTestMixin, FilterView):
 	def test_func(self):
 		if self.request.user.is_authenticated and not self.request.user.is_entity:
 			return True
@@ -106,21 +88,34 @@ class ApplicationListView(UserPassesTestMixin, ListView):
 			return redirect('home')
 
 	model = Applicant
-	queryset = Applicant.objects.all()
 	paginate_by = 200
-	
+	filterset_class = ApplicantFilter
+	template_name = 'applications/applicant_list.html'
 
 	def get_context_data(self, **kwargs):
 	    context = super(ApplicationListView, self).get_context_data(**kwargs)
-	    # context['me'] = self.get_queryset()
-	    applicants_filter = None
-	    if self.request.user.is_superuser or self.request.user.is_executive:
-	    	applicants_filter = ApplicantFilter(self.request.GET, queryset=self.get_queryset())
-	    else:
-	    	applicants_filter = ApplicantFilter(self.request.GET, queryset=Applicant.objects.all().filter(user=self.request.user))
-	    
-	    context['applicants'] = applicants_filter
+	    context['total_filter'] = ApplicantFilter(self.request.GET, queryset=self.get_queryset()).qs.count()
+	    context['total_applicants'] = Applicant.objects.all().count()
+	    context['has_filter'] = any(field in self.request.GET for field in set(self.filterset_class.get_fields()))
 	    return context
+	
+	def get_queryset(self):
+		qs = super(ApplicationListView, self).get_queryset()
+		if self.request.user.is_superuser:
+			return qs
+		return qs.filter(user=self.request.user)
+
+	# def get_context_data(self, **kwargs):
+	#     context = super(ApplicationListView, self).get_context_data(**kwargs)
+	#     # context['me'] = self.get_queryset()
+	#     applicants_filter = None
+	#     if self.request.user.is_superuser or self.request.user.is_executive:
+	#     	applicants_filter = ApplicantFilter(self.request.GET, queryset=self.get_queryset())
+	#     else:
+	#     	applicants_filter = ApplicantFilter(self.request.GET, queryset=Applicant.objects.all().filter(user=self.request.user))
+	    
+	#     context['applicants'] = applicants_filter
+	#     return context
 
 class ApplicantDeleteView(UserPassesTestMixin, BSModalDeleteView):
 	def test_func(self):

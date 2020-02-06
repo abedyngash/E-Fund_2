@@ -352,51 +352,33 @@ def ward_school_types_details(request, ward_id, school_cat_id):
 	return render(request, 'accounting/disbursements/ward_disbursements/ward_disbursements_details.html', context)
 
 def bulk_cover_letter(request, ward_id, school_cat_id):
-	# reports = tempfile.TemporaryDirectory()
-	report_files = {}
+	
 	school_type = SchoolType.objects.get(id=school_cat_id)
 	ward = Ward.objects.get(id=ward_id)
 
 	schools_in_school_type = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by().values_list('school_name', flat=True).distinct()
+	cheque_number = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').values_list('cheque_number__cheque_number', flat=True).distinct()
+	beneficiaries = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded')
 
 
-	for school in schools_in_school_type:
-		# cheque_number = 1114
-		cheque_number = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded', school_name=school).values_list('cheque_number__cheque_number', flat=True).distinct()
-		beneficiaries = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded', school_name=school)
-		total_amount_to_beneficiaries = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded', school_name=school).aggregate(total=Sum('school_type__amount_allocated'))
-		print(cheque_number[0])
-		context = {
-			'school_name' : school,
-			'beneficiaries' : beneficiaries,
-			'total_amount_to_beneficiaries' : total_amount_to_beneficiaries,
-			'title' : school + ' Disbursement Details',
-			'cheque_number': cheque_number[0]
-		}
+	context = {
+		'schools_in_school_type' : schools_in_school_type,
+		'beneficiaries' : beneficiaries,
+		'ward': ward,
+		'school_type': school_type,
+	}
 
-		response = HttpResponse('<title>Cover Letter</title>', content_type='application/pdf')
-		filename = "%s.pdf" %(cheque_number[0])
-		content = "inline; filename=%s" %(filename)
-		response['Content-Disposition'] = content
-		template = get_template('cover_letter.html')
-		html = template.render(context)
-		# result = io.BytesIO()
-		mem_fp = io.BytesIO()
-		pdf = pisa.CreatePDF(
-       		html, dest=mem_fp, link_callback=link_callback)
-		resp = HttpResponse(mem_fp.getvalue(), content_type='application/pdf')
-		resp['Content-Disposition'] = "attachment; filename=%s" %(filename)
-		report_files[filename] = resp
-
+	response = HttpResponse('<title>Cover Letter</title>', content_type='application/pdf')
+	filename = "%s.pdf" %(cheque_number[0])
+	content = "inline; filename=%s" %(filename)
+	response['Content-Disposition'] = content
+	template = get_template('cover_letter_bulk.html')
+	html = template.render(context)
+	pdf = pisa.CreatePDF(
+   		html, dest=response, link_callback=link_callback)
+	return response
 	# print(bulk_pdfs)
 
-	mem_zip = io.BytesIO()
-	with zipfile.ZipFile(mem_zip, mode="w") as zf:
-		for filename, content in report_files.items():
-			zf.writestr(filename, content)
-	response = HttpResponse(mem_zip, content_type='application/zip')
-	response['Content-Disposition'] = 'attachment; filename="{}"'.format(f'{ward}_cover_letters.zip')
-	return response
 
 
 def schools_in_ward_details(request, ward_id, school_name):

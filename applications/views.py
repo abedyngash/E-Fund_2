@@ -101,7 +101,7 @@ class ApplicationListView(UserPassesTestMixin, FilterView):
 	
 	def get_queryset(self):
 		qs = super(ApplicationListView, self).get_queryset()
-		if self.request.user.is_superuser:
+		if self.request.user.is_superuser or self.request.user.is_executive:
 			return qs
 		return qs.filter(user=self.request.user)
 
@@ -191,8 +191,6 @@ class ApplicantUpdateView(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
 		kwargs['data_list'] = school_list
 		return kwargs
 
-
-
 class ApplicantDetailView(BSModalReadView):
     model = Applicant
 
@@ -220,7 +218,6 @@ def get_duplicate_applicants(request):
 	}
 
 	return render(request, 'applications/duplicate_records.html', context)
-
 
 class SubcountyListView(ListView):
 	model = Subcounty
@@ -312,7 +309,6 @@ def ward_disbursements(request):
 
 	return render(request, 'accounting/disbursements/ward_disbursements/ward_disbursements.html', context)
 
-
 def ward_disbursements_details(request, ward_id):
 	schooltypes = SchoolType.objects.all()
 	ward = Ward.objects.get(id=ward_id)
@@ -378,8 +374,6 @@ def bulk_cover_letter(request, ward_id, school_cat_id):
    		html, dest=response, link_callback=link_callback)
 	return response
 	# print(bulk_pdfs)
-
-
 
 def schools_in_ward_details(request, ward_id, school_name):
 	school_applicants = Applicant.objects.filter(school_name=school_name, ward_id=ward_id, award_status='awarded')
@@ -550,18 +544,28 @@ def cover_letter_for_uni_or_college(request, school_name, ward_id, cheque_number
 
 	return response
 
-class ApplicantHistoryView(ListView):
+class ApplicantHistoryView(FilterView):
 	template_name = "applications/applicant_history_list.html"
+	paginate_by = 200
+	filterset_class = LogFilter
+
 	def get_queryset(self):
 		history = Applicant.history.all()
 		return history
 
 	def get_context_data(self, **kwargs):
 	    context = super(ApplicantHistoryView, self).get_context_data(**kwargs)
-	    logs = Applicant.history.all()
-	    logs_filter = LogFilter(self.request.GET, queryset=logs)
-	    context['logs'] = logs_filter
+	    context['total_filter'] = LogFilter(self.request.GET, queryset=self.get_queryset()).qs.count()
+	    context['total_records'] = Applicant.history.all().count()
+	    context['has_filter'] = any(field in self.request.GET for field in set(self.filterset_class.get_fields()))
 	    return context
+
+	# def get_context_data(self, **kwargs):
+	#     context = super(ApplicantHistoryView, self).get_context_data(**kwargs)
+	#     logs = Applicant.history.all()
+	#     logs_filter = LogFilter(self.request.GET, queryset=logs)
+	#     context['logs'] = logs_filter
+	#     return context
 
 class SchoolListView(ListView):
 	model = School

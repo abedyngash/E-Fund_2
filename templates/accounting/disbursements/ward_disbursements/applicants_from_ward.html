@@ -20,14 +20,17 @@
         Applicants From {{ward}}
       </h5>
     </div>
-    <div class="card-body">
+    <div class="card-body table-responsive">
       <table class="table table-hover" id="disbursement_table">
           <thead>
               <tr>
                 <th>#</th>                
                 <th>Name of Applicant</th>
                 <th>Adm/Reg Number</th>
-                <th>Subcounty</th>
+                <th>Institution</th>
+                <th>Category</th>
+                <th>Name of Gurdian</th>
+                <th>Contact</th>
                 <th>Ward</th>
                 <th>Sublocation</th>                   
                 <th>Amount Awarded</th>
@@ -39,7 +42,10 @@
                 <td>{{forloop.counter}}</td>
                 <td>{{applicant.first_name}} {{applicant.last_name}}</td>
                 <td>{{applicant.adm_number}}</td>
-                <td>{{applicant.subcounty}}</td>
+                <td>{{applicant.school_name}}</td>
+                <td>{{applicant.school_type}}</td>
+                <td>{{applicant.name_of_gurdian}}</td>
+                <td>{{applicant.contact_of_gurdian}}</td>
                 <td>{{applicant.ward}}</td>
                 <td>{{applicant.sublocation}}</td>
                 <td>{{applicant.school_type.amount_allocated|intcomma}}</td>
@@ -48,7 +54,7 @@
           </tbody>
           <tfoot>
             <tr>
-              <th colspan="6">Total Amount to be allocated</th>
+              <th colspan="9">Total Amount to be allocated</th>
               <td class="text-left">{{total_amount.total|intcomma}}</td>                   
             </tr>
           </tfoot>

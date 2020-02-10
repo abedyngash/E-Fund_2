@@ -14,7 +14,7 @@ from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, 
 from django.db.models import Count, Sum, F, CharField
 from django.db.models.functions import Concat
 import datetime
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.text import slugify, format_lazy
 from django.template.loader import get_template
 from Elimu_Fund.utils import render_to_pdf, link_callback
@@ -190,6 +190,50 @@ class ApplicantUpdateView(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
 
 		kwargs['data_list'] = school_list
 		return kwargs
+
+class ApplicantUpdateViewFromDisbursements(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+	model = Applicant
+	form_class = ApplicationForm
+	template_name = 'applications/update_applicant_form.html'
+	# success_url =reverse_lazy('')
+	success_message = "Record Updated Successfully"
+
+	def get_success_url(self, **kwargs):
+		return reverse_lazy('applicants-from-ward', kwargs={'ward_id': self.get_object().ward_id})
+
+	def test_func(self):
+		if self.request.user.is_authenticated:
+			return True
+		return False
+
+	def handle_no_permission(self):
+		messages.error(self.request, f'You are not authorized to access that.')
+		return redirect('home')
+
+	def form_valid(self, form):
+		form.instance.user = self.request.user
+		return super(ApplicantUpdateViewFromDisbursements, self).form_valid(form)
+
+
+	def get_context_data(self, **kwargs):
+	    context = super(ApplicantUpdateViewFromDisbursements, self).get_context_data(**kwargs)
+	    context['title'] = "Edit Application Details"
+	    context['money_per_ward'] = get_money_per_ward()
+	    current_ward = self.get_object().ward
+	    current_sublocation = self.get_object().sublocation
+	    amount_so_far = Applicant.objects.filter(ward=current_ward, sublocation=current_sublocation, award_status='awarded').aggregate(total=Sum('school_type__amount_allocated'))
+	    # print(total_price['total'])
+	    context['amount_so_far'] = amount_so_far
+	    context['sublocations_count'] = Sublocation.objects.all().filter(ward=current_ward).count()
+	    return context
+
+	def get_form_kwargs(self):
+		kwargs = super(ApplicantUpdateViewFromDisbursements, self).get_form_kwargs()
+		school_list = School.objects.all().order_by('name').distinct('name')
+
+		kwargs['data_list'] = school_list
+		return kwargs
+
 
 class ApplicantDetailView(BSModalReadView):
     model = Applicant

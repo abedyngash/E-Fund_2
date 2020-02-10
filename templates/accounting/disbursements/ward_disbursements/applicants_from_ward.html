@@ -34,6 +34,7 @@
                 <th>Ward</th>
                 <th>Sublocation</th>                   
                 <th>Amount Awarded</th>
+                <th>Edit</th>
               </tr>
           </thead>
           <tbody>
@@ -49,6 +50,11 @@
                 <td>{{applicant.ward}}</td>
                 <td>{{applicant.sublocation}}</td>
                 <td>{{applicant.school_type.amount_allocated|intcomma}}</td>
+                <td>
+                  <a href="{% url 'update-applicants-from-ward' applicant.ward_id applicant.id %}" class="btn btn-primary btn-sm">
+                    <span class="fa fa-edit"></span>
+                  </a>
+                </td>
               </tr>
             {% endfor %}
           </tbody>

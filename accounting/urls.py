@@ -17,6 +17,7 @@ from applications.views import (school_disbursements,
 								ward_school_types_details,
 								bulk_cover_letter,
 								get_applicants_per_ward,
+								ApplicantUpdateViewFromDisbursements
 							)
 
 urlpatterns = [
@@ -30,6 +31,7 @@ urlpatterns = [
 	path('disbursements/ward/', ward_disbursements, name='ward-disbursements'),
 	path('disbursements/ward/<int:ward_id>/', ward_disbursements_details, name='ward-disbursements-details'),
 	path('disbursements/ward/<int:ward_id>/applicants', get_applicants_per_ward, name='applicants-from-ward'),
+	path('disbursements/ward/<int:ward_id>/applicants/<int:pk>/update', ApplicantUpdateViewFromDisbursements.as_view(), name='update-applicants-from-ward'),
 	path('disbursements/ward/<int:ward_id>/<int:school_cat_id>', ward_school_types_details, name='ward-school-types-details'),
 	path('disbursements/ward/<int:ward_id>/<int:school_cat_id>/<str:school_name>/', schools_in_ward_details, name='schools-in-ward-details'),
 	path('disbursements/sublocation/', sublocation_disbursements, name='sublocation-disbursements'),

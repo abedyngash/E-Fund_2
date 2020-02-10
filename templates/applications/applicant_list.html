@@ -52,7 +52,6 @@
         </div>
         <button type="submit" class="btn btn-block btn-sm btn-outline-primary">Get Applicants</button>
       </form>         
-      <input class="form-control" type="text" id="search" placeholder="Search For Records Here.." title="Type in a name">
       <div class="border-top">
         <div class="row mt-3">
           <div class="col-md-6">
@@ -98,9 +97,7 @@
                 </td>
                 <td>{{applicant.gender}}</td>
                 <td>
-                  {{applicant.school_name}}
-                  <br>
-                  <button class="badge badge-info text-center">{{applicant.school_type}}</button>              
+                  {{applicant.school_name}}              
                 </td>
                 <td>{{applicant.subcounty}}</td>
                 <td>{{applicant.ward}}</td>
@@ -145,15 +142,36 @@
     </div>
   </div>    
   <script>
-    var $rows = $('#mytable tr');
-$('#search').keyup(function() {
-    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+    $(document).ready(function() {
+    $('#mytable').dataTable({
+      dom: 'Blfrtip',
+      buttons: [
+          { extend: 'copy', text: 'Copy to clipboard' },
+          { extend: 'excel', text: 'Export to Sheets', 
+            exportOptions: {
+              columns: 'th:not(:last-child)'
+            } 
+          },
+          { extend: 'pdf', text: 'Export to PDF' },
+          { extend: 'print', text: 'Print' }
+      ],
+      "bPaginate": false,
+      "bLengthChange": false,
+      "bFilter": true,
+      "bInfo": false,
+      "bAutoWidth": false });
+    });
 
-    $rows.show().filter(function() {
-        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-        return !~text.indexOf(val);
-    }).hide();
-});
+
+    var $rows = $('#mytable tr');
+    $('#search').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+        $rows.show().filter(function() {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).hide();
+    });
   </script>
   <script>
     document.getElementById("applications").className += " active";

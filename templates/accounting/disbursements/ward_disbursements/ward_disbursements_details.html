@@ -17,7 +17,7 @@
 			<h5 class="card-title border-bottom">Awarded - {{school_type}} - in <b>{{ward.name}}</b> Ward</h5>
 		</div>
 		<div class="card-body">
-            <a href="{% url 'generate-bulk-cover-letter' ward.id school_type.id %}">Generate Bulk</a>
+            <a href="{% url 'generate-bulk-cover-letter' ward.id school_type.id %}" class="btn btn-primary">Generate Cover Letters For this Category</a>
             <form method="get" class="">
                 <div class="row">
                     <div class="col-md-3">                      
@@ -82,7 +82,7 @@
                                 {% endif %} 
                             {% endif %}
 
-                            <a href="{% url 'schools-in-ward-details' ward.id application.school_name %}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="auto" title="View Details"><span class="fa fa-eye"></span></a>
+                            <a href="{% url 'schools-in-ward-details' ward.id application.school_type application.school_name %}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="auto" title="View Details"><span class="fa fa-eye"></span></a>
                         </td>                            
                     </tr>
                     {% endfor %}

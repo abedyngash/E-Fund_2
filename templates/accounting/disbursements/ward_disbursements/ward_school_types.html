@@ -16,6 +16,8 @@
   <div class="row">    
     <div class="col-md-12">
       <h5> <span class="font-weight-bold">{{ward.name}} Ward Tallies: </span> Amount Given So Far: <button class="badge badge-success">{{amount_so_far|intcomma}}</button> <span class="font-weight-bold">||</span> Amount Remaining: <button class="badge badge-danger">{{amount_remaining|intcomma}}</button></h5>
+
+      <a href="{% url 'applicants-from-ward' ward.id %}" class="btn btn-primary ">Get All Applicants from this ward</a>
       <div class="card">
         <div class="card-header">
           <h5 class="border-bottom">Select A school Type below</h5>

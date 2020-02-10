@@ -1,0 +1,63 @@
+{# {% load widget_tweaks %} #}
+{% extends "layout.html" %}
+{% load humanize %}
+
+{% block content %}
+{% include "_modal.html" %}
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'disbursements-home' %}">Disbursements</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'ward-disbursements' %}">Disbursements Per Ward</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'ward-disbursements-details' ward.id %}">{{ward.name}}</a></li> 
+        <li class="breadcrumb-item active">Applicants</li>      
+      </ol>
+  </nav>
+  
+  <div class="card">
+    <div class="card-header border-bottom">
+      <h5 class="card-title">
+        Applicants From {{ward}}
+      </h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover" id="disbursement_table">
+          <thead>
+              <tr>
+                <th>#</th>                
+                <th>Name of Applicant</th>
+                <th>Adm/Reg Number</th>
+                <th>Subcounty</th>
+                <th>Ward</th>
+                <th>Sublocation</th>                   
+                <th>Amount Awarded</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for applicant in applicants %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{applicant.first_name}} {{applicant.last_name}}</td>
+                <td>{{applicant.adm_number}}</td>
+                <td>{{applicant.subcounty}}</td>
+                <td>{{applicant.ward}}</td>
+                <td>{{applicant.sublocation}}</td>
+                <td>{{applicant.school_type.amount_allocated|intcomma}}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="6">Total Amount to be allocated</th>
+              <td class="text-left">{{total_amount.total|intcomma}}</td>                   
+            </tr>
+          </tfoot>
+      </table>
+    </div>
+  </div>
+{% endblock content %}
+<!-- </div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div> -->

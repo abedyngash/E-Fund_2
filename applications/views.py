@@ -375,10 +375,11 @@ def bulk_cover_letter(request, ward_id, school_cat_id):
 	return response
 	# print(bulk_pdfs)
 
-def schools_in_ward_details(request, ward_id, school_name):
+def schools_in_ward_details(request, ward_id, school_cat_id, school_name):
 	school_applicants = Applicant.objects.filter(school_name=school_name, ward_id=ward_id, award_status='awarded')
 	total_amount = Applicant.objects.filter(school_name=school_name, ward_id=ward_id, award_status='awarded').aggregate(total=Sum('school_type__amount_allocated'))
 	ward = Ward.objects.get(id=ward_id)
+	school_type = SchoolType.objects.get(id=school_cat_id)
 	uni_or_college = Applicant.objects.filter(school_name=school_name, award_status="awarded", school_type__name__in=['University', 'College'])
 	cheque_number = school_applicants.values_list('cheque_number__cheque_number', flat=True).distinct()
 
@@ -387,6 +388,7 @@ def schools_in_ward_details(request, ward_id, school_name):
 		'applicants': school_applicants,
 		'total_amount': total_amount,
 		'ward' : ward,
+		'school_type': school_type,
 		'uni_or_college' : uni_or_college,
 		'cheque_number': cheque_number
 	}
@@ -592,3 +594,15 @@ class SchoolDeleteView(UserPassesTestMixin, BSModalDeleteView):
 	template_name = 'applications/delete_school.html'
 	success_message = 'Success: SCHOOL was deleted.'
 	success_url = reverse_lazy('applicants-list')
+
+
+def get_applicants_per_ward(request, ward_id):
+	applicants = Applicant.objects.all().filter(ward_id=ward_id)
+	total_amount_allocated = Applicant.objects.all().filter(ward_id=ward_id).aggregate(total=Sum('school_type__amount_allocated'))
+	context = {
+		'applicants': applicants,
+		'total_amount': total_amount_allocated,
+		'ward': Ward.objects.get(id=ward_id)
+	}
+
+	return render(request, 'accounting/disbursements/ward_disbursements/applicants_from_ward.html', context)

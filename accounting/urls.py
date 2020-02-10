@@ -16,6 +16,7 @@ from applications.views import (school_disbursements,
 								cover_letter_for_uni_or_college,
 								ward_school_types_details,
 								bulk_cover_letter,
+								get_applicants_per_ward,
 							)
 
 urlpatterns = [
@@ -28,8 +29,9 @@ urlpatterns = [
 	path('disbursements/school/<str:school_name>/', school_disbursements_details, name='school-disbursements-details'),
 	path('disbursements/ward/', ward_disbursements, name='ward-disbursements'),
 	path('disbursements/ward/<int:ward_id>/', ward_disbursements_details, name='ward-disbursements-details'),
+	path('disbursements/ward/<int:ward_id>/applicants', get_applicants_per_ward, name='applicants-from-ward'),
 	path('disbursements/ward/<int:ward_id>/<int:school_cat_id>', ward_school_types_details, name='ward-school-types-details'),
-	path('disbursements/ward/<int:ward_id>/<str:school_name>/', schools_in_ward_details, name='schools-in-ward-details'),
+	path('disbursements/ward/<int:ward_id>/<int:school_cat_id>/<str:school_name>/', schools_in_ward_details, name='schools-in-ward-details'),
 	path('disbursements/sublocation/', sublocation_disbursements, name='sublocation-disbursements'),
 
 	path('ward/<int:ward_id>/school/<int:school_cat_id>/<str:school_name>/', AddChequeForWard.as_view(), name='add-cheque-for-ward'),

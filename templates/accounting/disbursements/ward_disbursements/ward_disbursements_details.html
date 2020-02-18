@@ -43,6 +43,7 @@
                         <th>#</th>
                         <th>School</th>                        
                         <th>Number of Applicants</th>
+                        <th>Total Amount</th>
                         <th>Cheque Number</th>
                         <th>Read/Update</th>                    
                     </tr>
@@ -52,7 +53,8 @@
                     <tr class="" data-target="">
                         <td>{{ forloop.counter}}</td>
                         <td>{{ application.school_name}}</td>                        
-                        <td class="text-center">{{ application.name_count }}</td> 
+                        <td class="text-center">{{ application.name_count }}</td>
+                        <td class="text-center">{{ application.total }}</td> 
                         <td class="text-center">
                             {% if application.school_type == 1 %}
                                <button class="badge badge-danger">This is a University</button>

@@ -374,7 +374,7 @@ def ward_school_types_details(request, ward_id, school_cat_id):
 			award_status="awarded", ward_id=ward_id, school_type_id=school_cat_id
 		).values('school_name', 'ward_id', 'school_type', 'cheque_number__cheque_number','cheque_number__id').order_by(
 		'school_name').annotate(
-		name_count=Count('school_name'))
+		name_count=Count('school_name'), total=Sum('school_type__amount_allocated'))
 
 	school_filter = SchoolFilter(request.GET, queryset=schools_in_category)
 	ward = Ward.objects.get(id=ward_id)

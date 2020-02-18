@@ -26,6 +26,8 @@
             <th>
               Adm Number
             </th>
+            <th>Contact</th>
+            <th>Name of Gurdian</th>
             <th>
               School
             </th>
@@ -50,6 +52,8 @@
                 {{applicant.first_name}} {% if applicant.last_name %}{{applicant.last_name}}{% endif %}
               </td>
               <td>{{applicant.adm_number}}</td>
+              <td>{{applicant.contact_of_gurdian}}</td>
+              <td>{{applicant.name_of_gurdian}}</td>
               <td>{{applicant.school_name}}</td>
               <td>{{applicant.school_type}}</td>
               <td>{{applicant.ward}}</td>

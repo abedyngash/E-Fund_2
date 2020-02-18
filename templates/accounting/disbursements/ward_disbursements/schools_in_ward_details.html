@@ -45,8 +45,8 @@
                 <th>School</th>
                 <th>Name of Applicant</th>
                 <th>Adm/Reg Number</th>
-                <th>Amount</th>
                 <th>Cheque</th>
+                <th>Amount</th>
                 {% if uni_or_college %}
                 <th>Update</th>                     
                 <th>Cover Letter</th>                    
@@ -60,10 +60,10 @@
                <tr>
                   <td>{{ forloop.counter}}</td>
                   <td>{{ application.school_name}}</td>
-                  <td>{{ application.first_name}} {% if applicant.last_name %}{{applicant.last_name}}{% endif %}</td>
+                  <td>{{ application.first_name}} {% if application.last_name %}{{application.last_name}}{% endif %}</td>
                   <td>{{ application.adm_number}}</td>
+                  <td>{{application.cheque_number}}</td>
                   <td>{{ application.school_type.amount_allocated|intcomma }}</td>
-                   <td>{{application.cheque_number}}</td>
                   {% if uni_or_college %}
                   <td>
                     {% if application.cheque_number.cheque_number %}

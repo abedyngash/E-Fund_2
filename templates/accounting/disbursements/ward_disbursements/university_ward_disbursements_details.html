@@ -41,8 +41,9 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>School</th>                        
-                        <th>Number of Applicants</th>
+                        <th>Name</th>                        
+                        <th>Adm Number</th>
+                        <th>School</th>
                         <th>Total Amount</th>
                         <th>Cheque Number</th>
                         <th>Read/Update</th>                    
@@ -52,28 +53,31 @@
                     {% for application in filter.qs %}
                     <tr class="" data-target="">
                         <td>{{ forloop.counter}}</td>
-                        <td>{{ application.school_name}}</td>                        
-                        <td class="text-center">{{ application.name_count }}</td>
-                        <td class="text-center">{{ application.total }}</td> 
+                        <td>
+                            {{ application.first_name }} {% if application.last_name %}{{ application.last_name }}{% endif %}
+                        </td>                
+                        <td class="text-center">{{ application.adm_number }}</td>
+                        <td class="text-center">{{ application.school_name }}</td> 
+                        <td class="text-center">{{ application.total }}</td>
                         <td class="text-center">
-                            {% if application.cheque_number__cheque_number %}
-                                {{application.cheque_number__cheque_number}}
+                            {% if application.cheque_number %}
+                                {{application.cheque_number}}
                             {% else %}
                                 Not Set
                             {% endif %}                           
                         </td>
                         <td>                          
                             {% if application.cheque_number__cheque_number %}                         
-                                <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'edit-cheque-for-ward' ward.id application.school_type application.school_name application.cheque_number__id  %}" data-toggle="tooltip" data-placement="auto" title="Edit Cheque">
+                                <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'edit-cheque-for-uni-or-college' application.ward.id application.school_type.id application.school_name application.cheque_number.id %}" data-toggle="tooltip" data-placement="auto" title="Edit Cheque">
                                     <span class="fa fa-pencil"></span>
                                 </button>
                                 {% else %}
                         
-                                    <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'add-cheque-for-ward' ward.id application.school_type application.school_name %}" data-toggle="tooltip" data-placement="auto" title="Add Cheque">
+                                    <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'add-cheque-for-uni-or-college' application.ward.id application.school_type.id application.school_name application.id %}" data-toggle="tooltip" data-placement="auto" title="Add Cheque">
                                         <span class="fa fa-pencil"></span>
                                     </button>
                             {% endif %}
-                            <a href="{% url 'schools-in-ward-details' ward.id application.school_type application.school_name %}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="auto" title="View Details"><span class="fa fa-eye"></span></a>
+                            <a href="{% url 'schools-in-ward-details' ward.id school_type.id application.school_name %}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="auto" title="View Details"><span class="fa fa-eye"></span></a>
                         </td>                            
                     </tr>
                     {% endfor %}

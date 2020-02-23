@@ -1,0 +1,273 @@
+<!DOCTYPE HTML>
+{% load humanize %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load my_tags %}
+{% load bootstrap4 %}
+<html>
+<head>
+	{% if title %}
+	<title>Elimu Fund | {{title}}</title>
+		{% else %}
+		<title>Elimu Fund</title>
+	{% endif %}
+	
+	<style>
+		a {
+			text-decoration: none;
+		}
+		@page {
+			
+        size: a4 portrait;
+        @frame content_frame {          /* Content Frame */
+            left: 50pt; width: 512pt; top: 200pt; height: 632pt;
+        }
+        @frame header_frame {           /* Another static Frame */
+            -pdf-frame-content: image;
+            left: 275pt; top: 10pt; width: 300pt; height: 200pt;
+        }
+        @frame body_frame {           /* Another static Frame */
+            -pdf-frame-content: title;
+            left: 150pt; top: 90pt; width: 300pt; height: 200pt;
+        }
+        @frame footer_frame {
+        	-pdf-frame-content: breaker;
+        	top: 170pt;
+        }
+    }
+	</style>
+</head>
+<body>
+	{% for applicant in applicants_in_university %}
+		<div id="image">
+			<p style="margin-bottom: 0in;">
+				<div>
+				<img src="{% static 'img/gov_logo.jpg' %}" alt="Hey Me" width="116" height="91" name="1" align="bottom" border="0" />
+					
+				</div>
+			</p>
+		</div>
+		<div id="title">
+			<h5 style="text-indent: 0.5in; margin-bottom: 0in;" align="center">
+					<span style="font-size: medium;">
+							 COUNTY GOVERNMENT OF NYERI		
+					</span>
+			</h5>
+			<h5 style="margin-bottom: 0in;" align="center">
+				<span>
+					<span style="font-size: medium;">
+						<strong>
+							 OFFICE OF THE COUNTY EXECUTIVE COMMITTEE MEMBER
+						</strong>
+					</span>
+				</span>
+			</h5>
+			<h5 style="margin-bottom: 0in;" align="center">
+				<span>
+					<span style="font-size: medium;">
+						<strong>
+							 DEPARTMENT OF EDUCATION &amp; SPORTS
+						</strong>
+					</span>
+				</span>
+			</h5>
+			<h5 style="margin-bottom: 0in; border-top: none; border-left: none; border-right: none; line-height: 100%; padding: 0in 0in 0.01in 0in;" align="center">
+				<span>
+					<strong>
+						 P.O BOX 1112 -10100 Nyeri Tel: 0771 320143, Email:
+					</strong>
+				</span>
+				<a href="mailto:ict@nyeri.go.ke">
+					<span>
+						 education@nyeri.go.ke
+					</span>
+				</a>
+			</h5>
+		</div>
+
+		<div id="breaker">
+			<p style="margin-bottom: 0in; border-top: 1px solid #00000a; ">
+				&nbsp;
+			</p>
+		</div>
+		
+		<p style="margin-bottom: 0in;">
+			<span style="font-family: Arial, serif;">
+				<span style="font-size: medium; font-weight:bolder;">
+					<strong>
+						 CGN/EDU&amp;ICT/FIN/1/1/VOLII/1
+					</strong>
+				</span>
+			</span>
+		</p>
+
+		<p style="margin-bottom: 0in; line-height: 100%;">
+			<span style="font-family: Arial, serif;">			
+				<span style="font-size: medium;">
+					 THE REGISTRAR, &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				</span>			
+			</span>
+			<span style="font-family:  Arial, serif; ">
+				<span style="font-size: medium;">
+					<strong>
+						{% now 'D: d M, Y' %}
+					</strong>
+				</span>
+			</span>
+		</p>
+
+		<p lang="en-GB" style="margin-bottom: 0in; line-height: 100%;">
+			<span style="font-weight:bolder;">
+				{{applicant.school_name}}
+			</span>
+		</p>
+
+		<br>
+
+		<p style="margin-bottom: 0in; line-height: 100%;">
+			<span style="font-family: Arial, serif;">
+				<span style="font-size: medium;">
+					<u>
+						<strong>
+							 NYERI COUNTY ELIMU FUND (BURSARY) CHEQUES
+						</strong>
+					</u>
+				</span>
+			</span>
+		</p>
+
+		<p style="margin-bottom: 0in; line-height: 100%;">
+			<span>
+				<span style="font-size: medium;">
+					 Attached find Cheque No. <b>{{applicant.cheque_number}}</b> amounting to Ksh: <b>{{applicant.school_type.amount_allocated|intcomma}}</b> for fees for the student appended here below:-
+				</span>
+			</span>
+		</p>
+
+		<p style="margin-bottom: 0in; line-height: 100%;">
+			<span style="font-family: Arial, serif;">
+				<span style="font-size: medium;">
+					<strong>
+						 Issue a receipt of the total amount to Nyeri County Elimu Fund.
+					</strong>
+				</span>
+			</span>
+		</p>
+
+		<br>
+
+		<table border="0.5" cellpadding="2">
+			<thead class=" wow fadeInLeft">
+		        <tr>
+		            <th>S.No</th>
+		            <th>School</th>
+		            <th>Name of Applicant</th>
+		            <th>Adm/Reg Number</th>
+		            <th>Contact</th>
+		            <th>Amount</th>	            
+		        </tr>
+	    	</thead>
+	    	<tbody>	    		
+    			<tr>
+    				<td width="5%" align="center">{{forloop.counter}}</td>
+    				<td width="30%">{{applicant.school_name}}</td>
+    				<td width="25%" align="center">{{applicant.first_name}} {{applicant.last_name}}</td>
+    				<td width="15%" align="center">{{applicant.adm_number}}</td>
+    				<td width="15%" align="center">{{applicant.contact_of_gurdian}}</td>
+    				<td width="10%" align="center">{{applicant.school_type.amount_allocated|intcomma}}</td>
+    			</tr>	    		
+	    	</tbody>
+	    	<tfoot>	    		
+	    		<tr>
+	    			<th colspan="2">Total Amount to be allocated</th>
+	    			<td colspan="4" align="right">{{applicant.school_type.amount_allocated|intcomma}}</td>
+	    		</tr>
+	    	</tfoot>
+		</table>
+
+		<p style="margin-bottom: 0in; line-height: 100%;">
+			&nbsp;
+		</p>
+		<p style="margin-bottom: 0in; line-height: 100%;">
+			<span style="font-family: Arial, serif;">
+				<span style="font-size: large;">
+					<strong>
+						 MARGARET W. MACHARIA
+					</strong>
+				</span>
+			</span>
+		</p>
+		<p style="margin-bottom: 0in; line-height: 100%;">
+			<span style="font-family: Arial, serif;">
+				<span style="font-size: large;">
+					<strong>
+						 COUNTY EXECUTIVE SECRETARY
+					</strong>
+				</span>
+			</span>
+		</p>
+		<p style="margin-bottom: 0in; line-height: 100%;">
+			<span style="font-family: Arial, serif;">
+				<span style="font-size: large;">
+					<u>
+						<strong>
+							 EDUCATION &amp; SPORTS
+						</strong>
+					</u>
+				</span>
+			</span>
+		</p>
+		<p style="margin-bottom: 0in; line-height: 100%;">
+			&nbsp;
+		</p>
+		<ul>
+			<li>
+				<p style="margin-bottom: 0in; line-height: 150%;">
+					<span style="font-family: Arial, serif;">
+						<span style="font-size: large;">
+							 Cheque delivered by:&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;
+						</span>
+					</span>
+				</p>
+			</li>
+		</ul>
+		<p style="text-indent: 0.5in; margin-bottom: 0in; line-height: 150%;">
+			<span style="font-family: Arial, serif;">
+				<span style="font-size: large;">
+					 Parent/Guardian to &hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..(Name of student)
+				</span>
+			</span>
+		</p>
+		<p style="text-indent: 0.5in; margin-bottom: 0in; line-height: 150%;">
+			<span style="font-family: Arial, serif;">
+				<span style="font-size: large;">
+					 ID No. &hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;. Tel. No. &hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.
+				</span>
+			</span>
+		</p>
+		<ol start="2">
+			<li>
+				<p style="margin-bottom: 0.14in; line-height: 150%;">
+					<span style="font-family: Arial, serif;">
+						<span style="font-size: large;">
+							 Cheque received by: &hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.
+						</span>
+					</span>
+				</p>
+			</li>
+		</ol>
+		<p style="margin-left: 0.5in; margin-bottom: 0.14in; line-height: 150%;">
+			<span style="font-family: Arial, serif;">
+				<span style="font-size: large;">
+					 Designation &hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip; Tel. No. &hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+				</span>
+			</span>
+		</p>
+
+		<div>
+          <pdf:nextpage />
+        </div>
+	{% endfor %}
+</body>
+</html>
+

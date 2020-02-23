@@ -370,54 +370,91 @@ def ward_disbursements_details(request, ward_id):
 	return render(request, 'accounting/disbursements/ward_disbursements/ward_school_types.html', context)
 
 def ward_school_types_details(request, ward_id, school_cat_id):
-	schools_in_category = Applicant.objects.all().filter(
-			award_status="awarded", ward_id=ward_id, school_type_id=school_cat_id
-		).values('school_name', 'ward_id', 'school_type', 'cheque_number__cheque_number','cheque_number__id').order_by(
-		'school_name').annotate(
-		name_count=Count('school_name'), total=Sum('school_type__amount_allocated'))
+	if school_cat_id == 1:
+		applicants_in_university = Applicant.objects.all().filter(
+				award_status="awarded", ward_id=ward_id, school_type_id=school_cat_id
+			).annotate(total=Sum('school_type__amount_allocated'))
+		school_filter = SchoolFilter(request.GET, queryset=applicants_in_university)
+		ward = Ward.objects.get(id=ward_id)
+		school_type = SchoolType.objects.get(id=school_cat_id)
+		cheque_number = applicants_in_university.values_list('cheque_number__cheque_number', flat=True).distinct()
 
-	school_filter = SchoolFilter(request.GET, queryset=schools_in_category)
-	ward = Ward.objects.get(id=ward_id)
-	school_type = SchoolType.objects.get(id=school_cat_id)
-	cheque_number = schools_in_category.values_list('cheque_number__cheque_number', flat=True).distinct()
+		context = {
+			# 'schools': schools_with_applicants,
+			'filter' : school_filter,
+			'ward': ward,
+			'school_type': school_type,
+			'cheque_number': cheque_number
+		}
 
-	context = {
-		# 'schools': schools_with_applicants,
-		'filter' : school_filter,
-		'ward': ward,
-		'school_type': school_type,
-		'cheque_number': cheque_number
-	}
+		return render(request, 'accounting/disbursements/ward_disbursements/university_ward_disbursements_details.html', context)
 
-	return render(request, 'accounting/disbursements/ward_disbursements/ward_disbursements_details.html', context)
+	else:
+		schools_in_category = Applicant.objects.all().filter(
+				award_status="awarded", ward_id=ward_id, school_type_id=school_cat_id
+			).values('school_name', 'ward_id', 'school_type', 'cheque_number__cheque_number','cheque_number__id').order_by(
+			'school_name').annotate(
+			name_count=Count('school_name'), total=Sum('school_type__amount_allocated'))
+
+		school_filter = SchoolFilter(request.GET, queryset=schools_in_category)
+		ward = Ward.objects.get(id=ward_id)
+		school_type = SchoolType.objects.get(id=school_cat_id)
+		cheque_number = schools_in_category.values_list('cheque_number__cheque_number', flat=True).distinct()
+
+		context = {
+			# 'schools': schools_with_applicants,
+			'filter' : school_filter,
+			'ward': ward,
+			'school_type': school_type,
+			'cheque_number': cheque_number
+		}
+
+		return render(request, 'accounting/disbursements/ward_disbursements/ward_disbursements_details.html', context)
 
 def bulk_cover_letter(request, ward_id, school_cat_id):
-	
 	school_type = SchoolType.objects.get(id=school_cat_id)
 	ward = Ward.objects.get(id=ward_id)
 
-	schools_in_school_type = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by().values_list('school_name', flat=True).distinct()
-	cheque_number = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').values_list('cheque_number__cheque_number', flat=True).distinct()
-	beneficiaries = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded')
+	if school_cat_id == 1:
+		applicants_in_university = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded')
+		context = {
+			'applicants_in_university' : applicants_in_university,
+			# 'beneficiaries' : beneficiaries,
+			'ward': ward,
+			'school_type': school_type,
+		}
+
+		response = HttpResponse('<title>Cover Letter</title>', content_type='application/pdf')
+		filename = "%s_%s.pdf" %(ward, school_type)
+		content = "inline; filename=%s" %(filename)
+		response['Content-Disposition'] = content
+		template = get_template('university_cover_letter_bulk.html')
+		html = template.render(context)
+		pdf = pisa.CreatePDF(
+	   		html, dest=response, link_callback=link_callback)
+		return response
+	else:
+		schools_in_school_type = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by().values_list('school_name', flat=True).distinct()
+		cheque_number = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').values_list('cheque_number__cheque_number', flat=True).distinct()
+		beneficiaries = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded')
 
 
-	context = {
-		'schools_in_school_type' : schools_in_school_type,
-		'beneficiaries' : beneficiaries,
-		'ward': ward,
-		'school_type': school_type,
-	}
+		context = {
+			'schools_in_school_type' : schools_in_school_type,
+			'beneficiaries' : beneficiaries,
+			'ward': ward,
+			'school_type': school_type,
+		}
 
-	response = HttpResponse('<title>Cover Letter</title>', content_type='application/pdf')
-	filename = "%s.pdf" %(cheque_number[0])
-	content = "inline; filename=%s" %(filename)
-	response['Content-Disposition'] = content
-	template = get_template('cover_letter_bulk.html')
-	html = template.render(context)
-	pdf = pisa.CreatePDF(
-   		html, dest=response, link_callback=link_callback)
-	return response
-	# print(bulk_pdfs)
+		response = HttpResponse('<title>Cover Letter</title>', content_type='application/pdf')
+		filename = "%s_%s.pdf" %(ward, school_type)
+		content = "inline; filename=%s" %(filename)
+		response['Content-Disposition'] = content
+		template = get_template('cover_letter_bulk.html')
+		html = template.render(context)
+		pdf = pisa.CreatePDF(
+	   		html, dest=response, link_callback=link_callback)
+		return response
 
 def schools_in_ward_details(request, ward_id, school_cat_id, school_name):
 	school_applicants = Applicant.objects.filter(school_name=school_name, ward_id=ward_id, award_status='awarded')
@@ -493,8 +530,13 @@ class AddChequeForUniOrCollege(BSModalCreateView):
 	form_class = ChequeForm
 	template_name = 'accounting/add_cheque_form.html'
 	success_message = 'Success: Cheque Number Added'
-	success_url = reverse_lazy('school-disbursements')
+	# success_url = reverse_lazy('school-disbursements')
 	extra_content = {'title': 'Add Cheque'}
+
+	def get_success_url(self):
+		ward_id = self.kwargs['ward_id']
+		school_cat_id = self.kwargs['school_cat_id']
+		return reverse('ward-school-types-details', kwargs={'ward_id': ward_id, 'school_cat_id':school_cat_id })
 
 	def form_valid(self, form):
 		pk = self.kwargs['pk']

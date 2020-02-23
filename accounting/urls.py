@@ -39,8 +39,8 @@ urlpatterns = [
 	path('ward/<int:ward_id>/school/<int:school_cat_id>/<str:school_name>/', AddChequeForWard.as_view(), name='add-cheque-for-ward'),
 	path('ward/<int:ward_id>/school/<int:school_cat_id>/<str:school_name>/edit-cheque/<int:pk>', UpdateChequeForWard.as_view(), name='edit-cheque-for-ward'),
 
-	path('school/<str:school_name>/<int:pk>/add_cheque', AddChequeForUniOrCollege.as_view(), name='add-cheque-for-uni-or-college'),
-	path('school/edit_cheque/<str:school_name>/<int:pk>', UpdateChequeForUniOrCollege.as_view(), name='edit-cheque-for-uni-or-college'),
+	path('school/<int:ward_id>/school/<int:school_cat_id>/<str:school_name>/<int:pk>/add_cheque', AddChequeForUniOrCollege.as_view(), name='add-cheque-for-uni-or-college'),
+	path('school/<int:ward_id>/school/<int:school_cat_id>/edit_cheque/<str:school_name>/<int:pk>', UpdateChequeForUniOrCollege.as_view(), name='edit-cheque-for-uni-or-college'),
 
 	path('school/<int:ward_id>/<str:school_name>/<cheque_number>/', cover_letter, name='generate-cover-letter'),
 	path('school/<int:ward_id>/<int:school_cat_id>', bulk_cover_letter, name='generate-bulk-cover-letter'),

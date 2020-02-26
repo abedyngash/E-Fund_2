@@ -115,15 +115,15 @@
 					              <p>Applications</p>
 					            </a>
 				          	</li>
-				          {% endif %}
-			        	{% endif %}
-				        {% if user.is_superuser %}
 				          	<li id="disbursements">
 					            <a href="{% url 'disbursements-home' %}">
 					              <i class="fa fa-money"></i>
 					              <p>Disbursements</p>
 					            </a>
 				          	</li>
+				          {% endif %}
+			        	{% endif %}
+				        {% if user.is_superuser %}
 					        <li id="allocation">
 					            <a href="{% url 'allocation-details' %}">
 					              <i class="fa fa-cogs"></i>

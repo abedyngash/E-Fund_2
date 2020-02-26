@@ -43,9 +43,9 @@
                         <th>#</th>
                         <th>Name</th>                        
                         <th>Adm Number</th>
+                        <th>Cheque Number</th>
                         <th>School</th>
                         <th>Total Amount</th>
-                        <th>Cheque Number</th>
                         <th>Read/Update</th>                    
                     </tr>
                 </thead>
@@ -57,8 +57,6 @@
                             {{ application.first_name }} {% if application.last_name %}{{ application.last_name }}{% endif %}
                         </td>                
                         <td class="text-center">{{ application.adm_number }}</td>
-                        <td class="text-center">{{ application.school_name }}</td> 
-                        <td class="text-center">{{ application.total }}</td>
                         <td class="text-center">
                             {% if application.cheque_number %}
                                 {{application.cheque_number}}
@@ -66,6 +64,8 @@
                                 Not Set
                             {% endif %}                           
                         </td>
+                        <td class="text-center">{{ application.school_name }}</td> 
+                        <td class="text-center">{{ application.total }}</td>
                         <td>                          
                             {% if application.cheque_number__cheque_number %}                         
                                 <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'edit-cheque-for-uni-or-college' application.ward.id application.school_type.id application.school_name application.cheque_number.id %}" data-toggle="tooltip" data-placement="auto" title="Edit Cheque">

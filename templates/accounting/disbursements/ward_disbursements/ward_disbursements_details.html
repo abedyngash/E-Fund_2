@@ -41,10 +41,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Cheque Number</th>
                         <th>School</th>                        
                         <th>Number of Applicants</th>
                         <th>Total Amount</th>
-                        <th>Cheque Number</th>
                         <th>Read/Update</th>                    
                     </tr>
                 </thead>
@@ -52,9 +52,6 @@
                     {% for application in filter.qs %}
                     <tr class="" data-target="">
                         <td>{{ forloop.counter}}</td>
-                        <td>{{ application.school_name}}</td>                        
-                        <td class="text-center">{{ application.name_count }}</td>
-                        <td class="text-center">{{ application.total }}</td> 
                         <td class="text-center">
                             {% if application.cheque_number__cheque_number %}
                                 {{application.cheque_number__cheque_number}}
@@ -62,6 +59,9 @@
                                 Not Set
                             {% endif %}                           
                         </td>
+                        <td>{{ application.school_name}}</td>                        
+                        <td class="text-center">{{ application.name_count }}</td>
+                        <td class="text-center">{{ application.total }}</td> 
                         <td>                          
                             {% if application.cheque_number__cheque_number %}                         
                                 <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'edit-cheque-for-ward' ward.id application.school_type application.school_name application.cheque_number__id  %}" data-toggle="tooltip" data-placement="auto" title="Edit Cheque">

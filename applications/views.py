@@ -392,7 +392,7 @@ def ward_school_types_details(request, ward_id, school_cat_id):
 	else:
 		schools_in_category = Applicant.objects.all().filter(
 				award_status="awarded", ward_id=ward_id, school_type_id=school_cat_id
-			).values('school_name', 'ward_id', 'school_type', 'cheque_number__cheque_number','cheque_number__id').order_by(
+			).order_by('cheque_number').values('school_name', 'ward_id', 'school_type', 'cheque_number__cheque_number','cheque_number__id').order_by(
 			'school_name').annotate(
 			name_count=Count('school_name'), total=Sum('school_type__amount_allocated'))
 
@@ -434,7 +434,7 @@ def bulk_cover_letter(request, ward_id, school_cat_id):
 	   		html, dest=response, link_callback=link_callback)
 		return response
 	else:
-		schools_in_school_type = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by().values_list('school_name', flat=True).distinct()
+		schools_in_school_type = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by('cheque_number').values_list('school_name', flat=True).distinct()
 		cheque_number = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').values_list('cheque_number__cheque_number', flat=True).distinct()
 		beneficiaries = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded')
 

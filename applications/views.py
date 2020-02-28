@@ -373,7 +373,7 @@ def ward_school_types_details(request, ward_id, school_cat_id):
 	if school_cat_id == 1:
 		applicants_in_university = Applicant.objects.all().filter(
 				award_status="awarded", ward_id=ward_id, school_type_id=school_cat_id
-			).order_by('school_name').annotate(total=Sum('school_type__amount_allocated'))
+			).order_by('school_name', 'cheque_number').annotate(total=Sum('school_type__amount_allocated'))
 		school_filter = SchoolFilter(request.GET, queryset=applicants_in_university)
 		ward = Ward.objects.get(id=ward_id)
 		school_type = SchoolType.objects.get(id=school_cat_id)
@@ -416,7 +416,7 @@ def bulk_cover_letter(request, ward_id, school_cat_id):
 	ward = Ward.objects.get(id=ward_id)
 
 	if school_cat_id == 1:
-		applicants_in_university = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by('school_name')
+		applicants_in_university = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by('school_name', 'cheque_number')
 		context = {
 			'applicants_in_university' : applicants_in_university,
 			# 'beneficiaries' : beneficiaries,

@@ -518,11 +518,12 @@ class AddChequeForWard(BSModalCreateView):
 
 		ward_id = self.kwargs['ward_id']
 		school_name = self.kwargs['school_name']
+		school_cat_id = self.kwargs['school_cat_id']
 
 		instance = form.save()
 		instance.save()
 
-		cheque_beneficiaries = Applicant.objects.filter(school_name=school_name, ward_id=ward_id, award_status='awarded')
+		cheque_beneficiaries = Applicant.objects.filter(school_name=school_name, school_type_id=school_cat_id, ward_id=ward_id, award_status='awarded')
 		cheque_beneficiaries.update(cheque_number=instance)
 		return super(AddChequeForWard, self).form_valid(form)
 

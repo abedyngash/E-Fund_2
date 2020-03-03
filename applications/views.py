@@ -373,7 +373,7 @@ def ward_school_types_details(request, ward_id, school_cat_id):
 	if school_cat_id == 1:
 		applicants_in_university = Applicant.objects.all().filter(
 				award_status="awarded", ward_id=ward_id, school_type_id=school_cat_id
-			).order_by('school_name', 'cheque_number').annotate(total=Sum('school_type__amount_allocated'))
+			).order_by('cheque_number__cheque_number', 'school_name').annotate(total=Sum('school_type__amount_allocated'))
 		school_filter = SchoolFilter(request.GET, queryset=applicants_in_university)
 		ward = Ward.objects.get(id=ward_id)
 		school_type = SchoolType.objects.get(id=school_cat_id)
@@ -392,8 +392,7 @@ def ward_school_types_details(request, ward_id, school_cat_id):
 	else:
 		schools_in_category = Applicant.objects.all().filter(
 				award_status="awarded", ward_id=ward_id, school_type_id=school_cat_id
-			).order_by('cheque_number').values('school_name', 'ward_id', 'school_type', 'cheque_number__cheque_number','cheque_number__id').order_by(
-			'school_name').annotate(
+			).order_by('cheque_number__cheque_number', 'school_name').values('school_name', 'ward_id', 'school_type', 'cheque_number', 'cheque_number__cheque_number','cheque_number__id').annotate(
 			name_count=Count('school_name'), total=Sum('school_type__amount_allocated'))
 
 		school_filter = SchoolFilter(request.GET, queryset=schools_in_category)
@@ -416,7 +415,7 @@ def bulk_cover_letter(request, ward_id, school_cat_id):
 	ward = Ward.objects.get(id=ward_id)
 
 	if school_cat_id == 1:
-		applicants_in_university = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by('school_name', 'cheque_number')
+		applicants_in_university = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by('cheque_number__cheque_number', 'school_name')
 		context = {
 			'applicants_in_university' : applicants_in_university,
 			# 'beneficiaries' : beneficiaries,
@@ -434,7 +433,7 @@ def bulk_cover_letter(request, ward_id, school_cat_id):
 	   		html, dest=response, link_callback=link_callback)
 		return response
 	else:
-		schools_in_school_type = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by('cheque_number').values_list('school_name', flat=True).distinct()
+		schools_in_school_type = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').order_by('cheque_number__cheque_number', 'school_name').values_list('school_name', flat=True).distinct()
 		cheque_number = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded').values_list('cheque_number__cheque_number', flat=True).distinct()
 		beneficiaries = Applicant.objects.filter(school_type=school_type, ward_id=ward_id, award_status='awarded')
 
@@ -563,9 +562,15 @@ class UpdateChequeForWard(BSModalUpdateView):
 		return reverse('ward-school-types-details', kwargs={'ward_id': ward_id, 'school_cat_id':school_cat_id })
 
 	def form_valid(self, form):
+		ward_id = self.kwargs['ward_id']
+		school_cat_id = self.kwargs['school_cat_id']
+		school_name = self.kwargs['school_name']
+
 		instance = form.save()
 		instance.save()
-		self.object.applicant_set.update(cheque_number=instance)
+
+		cheque_beneficiaries = Applicant.objects.filter(school_name=school_name, school_type_id=school_cat_id, ward_id=ward_id, award_status='awarded')
+		cheque_beneficiaries.update(cheque_number=instance)
 		return super(UpdateChequeForWard, self).form_valid(form)
 
 class UpdateChequeForUniOrCollege(BSModalUpdateView):
@@ -575,6 +580,11 @@ class UpdateChequeForUniOrCollege(BSModalUpdateView):
 	success_message = 'Success: Cheque was updated.'
 	success_url = reverse_lazy('school-disbursements')
 	extra_content = {'title': 'Edit Cheque'}
+
+	def get_success_url(self):
+		ward_id = self.kwargs['ward_id']
+		school_cat_id = self.kwargs['school_cat_id']
+		return reverse('ward-school-types-details', kwargs={'ward_id': ward_id, 'school_cat_id':school_cat_id })
 
 	def form_valid(self, form):
 		instance = form.save()

@@ -63,7 +63,7 @@
                         <td class="text-center">{{ application.name_count }}</td>
                         <td class="text-center">{{ application.total }}</td> 
                         <td>                          
-                            {% if application.cheque_number__cheque_number %}                         
+                            {% if application.cheque_number %}                         
                                 <button class="ward-cheque-btn btn btn-sm btn-primary" type="button" data-id="{% url 'edit-cheque-for-ward' ward.id application.school_type application.school_name application.cheque_number__id  %}" data-toggle="tooltip" data-placement="auto" title="Edit Cheque">
                                     <span class="fa fa-pencil"></span>
                                 </button>

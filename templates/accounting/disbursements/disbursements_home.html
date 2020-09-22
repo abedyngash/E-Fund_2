@@ -11,6 +11,11 @@
 	<div class="card">          
 		<div class="card-header">
 	      <h5 class="card-title border-bottom">Disbuserments</h5>
+        {% if user.is_superuser %}
+          <div class="float-right">
+            <a class="btn btn-sm btn-primary" href="{% url 'delete-cheques' %}">Delete all Cheques</a>
+          </div>          
+        {% endif %}
 	    </div>
         <div class="card-body">
             <div class="row">

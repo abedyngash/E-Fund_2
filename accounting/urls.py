@@ -22,6 +22,7 @@ from applications.views import (school_disbursements,
 
 urlpatterns = [
 	path('', allocationdetails, name='allocation-details'),
+	path('delete-cheques/', delete_cheques, name='delete-cheques'),
 	path('allocations/<int:id_>/update', AllocationsUpdate, name='edit-allocations'),
 
 	path('disbursements/', disbursements_view, name='disbursements-home'),

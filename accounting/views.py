@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import datetime
 from django.views.generic import ListView, CreateView, UpdateView
 from . import models as accounting_models
 from applications import models as applications_models
 from django.forms import ModelForm
 from django.db.models import Count, Sum
+from django.contrib import messages
 # from applications import filters as applications_filters
 
 
@@ -58,3 +59,9 @@ def disbursements_view(request):
 		'title': 'Disbursements',
 	}
 	return render(request, 'accounting/disbursements/disbursements_home.html', context)
+
+def delete_cheques(request):
+	total_cheques = accounting_models.Cheque.objects.all().count()
+	accounting_models.Cheque.objects.all().delete()
+	messages.success(request, f'{total_cheques} cheques deleted successfully')
+	return redirect('disbursements-home')

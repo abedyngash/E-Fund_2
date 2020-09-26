@@ -62,6 +62,8 @@ def disbursements_view(request):
 
 def delete_cheques(request):
 	total_cheques = accounting_models.Cheque.objects.all().count()
-	accounting_models.Cheque.objects.all().delete()
-	messages.success(request, f'{total_cheques} cheques deleted successfully')
-	return redirect('disbursements-home')
+	if request.method == 'POST':		
+		accounting_models.Cheque.objects.all().delete()
+		messages.success(request, f'{total_cheques} cheques deleted successfully')
+		return redirect('disbursements-home')
+	return render(request, 'accounting/disbursements/cheque_delete_confirm.html', {'total_cheques': total_cheques})

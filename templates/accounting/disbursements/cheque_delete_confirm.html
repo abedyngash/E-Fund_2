@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'disbursements-home' %}">Disbursements</a></li>
+      <li class="breadcrumb-item active">Delete Cheque</li>      
+    </ol>
+</nav>
+<div class="container">
+	<div class="card">
+		<div class="card-header">
+      <h5 class="card-title border-bottom">Delete All Cheques</h5>
+    </div>
+        <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card card-stats">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-warning text-warning"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-md-8">
+                        <div class="">
+                          <h3 class="card-title">Are you sure you want to delete all <strong>{{total_cheques}}</strong> cheques?</h3>                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                    <form method="POST">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger"><i class="fa fa-trash">&nbsp;</i> Delete Cheques</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<script>
+    document.getElementById("disbursements").className += " active";
+  </script>
+{% endblock content %}
+

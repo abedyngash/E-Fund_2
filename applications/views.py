@@ -24,6 +24,8 @@ import io
 import os
 import tempfile
 from django_filters.views import FilterView
+from django.http import HttpRequest, HttpResponse
+from .resources import ApplicantResource
 # Create your views here.
 
 class ApplicationCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, CreateView):
@@ -703,3 +705,10 @@ def get_applicants_per_ward(request, ward_id):
 	}
 
 	return render(request, 'accounting/disbursements/ward_disbursements/applicants_from_ward.html', context)
+
+def export_applicants_to_excel(request: HttpRequest) -> HttpResponse:
+	applicants = Applicant.objects.all()
+	data = ApplicantResource().export(applicants).csv
+	response = HttpResponse(data, content_type='text/csv')
+	response['Content-Disposition'] = 'attachment; filename=export.csv'
+	return response

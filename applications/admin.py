@@ -2,6 +2,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from .models import *
 from import_export.admin import ImportExportModelAdmin
+from .resources import ApplicantResource
 
 # Register your models here.
 @admin.register(Subcounty)
@@ -25,6 +26,7 @@ class SchoolTypeAdminView(admin.ModelAdmin):
 
 @admin.register(Applicant)
 class ApplicantAdminView(ImportExportModelAdmin):
+	resource_class = ApplicantResource
 	list_display = ['first_name', 'last_name', 'financial_year']
 	search_fields = ['first_name', 'last_name', 'financial_year']
 

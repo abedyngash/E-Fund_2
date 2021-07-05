@@ -90,7 +90,7 @@ class ApplicationListView(UserPassesTestMixin, FilterView):
 			return redirect('home')
 
 	model = Applicant
-	paginate_by = 200
+	paginate_by = 1000
 	filterset_class = ApplicantFilter
 	template_name = 'applications/applicant_list.html'
 

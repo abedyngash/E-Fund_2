@@ -712,3 +712,11 @@ def export_applicants_to_excel(request: HttpRequest) -> HttpResponse:
 	response = HttpResponse(data, content_type='text/csv')
 	response['Content-Disposition'] = 'attachment; filename=export.csv'
 	return response
+
+def delete_applications(request):
+	total_applicants = Applicant.objects.all().count()
+	if request.method == 'POST':		
+		Applicant.objects.all().delete()
+		messages.success(request, f'{total_applicants} applicants deleted successfully')
+		return redirect('applicants-list')
+	return render(request, 'applications/applications_delete_confirm.html', {'total_applicants': total_applicants})

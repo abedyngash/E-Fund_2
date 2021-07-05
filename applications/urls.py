@@ -24,5 +24,6 @@ urlpatterns = [
     path('schools/<int:pk>/update', SchoolUpdateView.as_view(), name='school-update'),
     path('schools/<int:pk>/delete', SchoolDeleteView.as_view(), name='school-delete'),
 
-    path('applicants/export-applicants/', export_applicants_to_excel, name='export-applicants')
+    path('export-applicants/', export_applicants_to_excel, name='export-applicants'),
+    path('delete-all-applications/', delete_applications, name='delete-all-applications'),
 ]
